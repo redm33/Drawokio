@@ -1,0 +1,137 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class EndingController : MonoBehaviour {
+
+	public static EndingController instance;
+
+	public bool runAtStartup = false;
+
+	public TextMesh text;
+
+	[System.Serializable]
+	public class Step {
+		public float duration = 1;
+		[HideInInspector]
+		public float elapsed = 0;
+
+		public CameraFollowable followable;
+		public Animation animation;
+
+		public GameObject[] gameObjectsToEnable;
+
+		public bool skipStop = false;
+
+		public void Reset()
+		{
+			elapsed = 0;
+
+			if( animation != null ) {
+				animation.Rewind();
+				animation.Stop();
+			}
+
+			foreach( GameObject obj in gameObjectsToEnable )
+				obj.SetActive(false);
+		}
+
+		public void Start()
+		{
+			if( followable != null ) {
+				CameraController.instance.Reset();
+				CameraController.instance.AddToQueue( followable );
+			}
+
+			if( animation != null ) {
+				animation.Play();
+			}
+
+			foreach( GameObject obj in gameObjectsToEnable )
+				obj.SetActive(true);
+		}
+
+		public void Stop()
+		{
+			if( skipStop )
+				return;
+
+			if( animation != null ) {
+				animation.Rewind();
+				animation.Stop();
+			}
+			
+			foreach( GameObject obj in gameObjectsToEnable )
+				obj.SetActive(false);
+		}
+
+		public bool Update( float dt )
+		{
+			elapsed += dt;
+			if( elapsed > duration )
+				return false;
+
+			return true;
+		}
+	}
+
+	public Step[] steps;
+
+	void Start()
+	{
+		instance = this;
+		if( runAtStartup )
+			Run();
+	}
+
+	int index = -1;
+	public bool running {
+		get {
+			return (index >= 0);
+		}
+	}
+
+	public void ResetAll()
+	{
+		index = -1;
+		foreach( Step step in steps )
+			step.Reset();
+
+		Room.instance.state = Room.State.MENU_MAIN;
+	}
+
+	public void Run()
+	{
+		if( running ) {
+			Debug.LogWarning( "Tried to start the ending when it was already running!" );
+			return;
+		}
+
+		index = 0;
+		steps[0].Start();
+
+		text.text = "Completion: " + Room.instance.completionPercentage + "%";
+	}
+
+	void OnTriggerEnter( Collider other )
+	{
+		Run ();
+
+		Destroy ( other.gameObject );
+	}
+
+	void Update()
+	{
+		if( running ) {
+			if( !steps[index].Update( Time.deltaTime ) ) {
+
+				if( ++index == steps.Length ) {
+					ResetAll ();
+				} else {
+					steps[index-1].Stop();
+					steps[index].Start();
+				}
+
+			}
+		}
+	}
+}

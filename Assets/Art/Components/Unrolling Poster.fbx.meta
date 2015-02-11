@@ -1,0 +1,306 @@
+fileFormatVersion: 2
+guid: 8e3324ce9b0f1854d9b61bae798a4f44
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: be_poster1
+    100002: be_poster10
+    100004: be_poster11
+    100006: be_poster12
+    100008: be_poster13
+    100010: be_poster14
+    100012: be_poster15
+    100014: be_poster16
+    100016: be_poster17
+    100018: be_poster18
+    100020: be_poster19
+    100022: be_poster2
+    100024: be_poster20
+    100026: be_poster21
+    100028: be_poster22
+    100030: be_poster23
+    100032: be_poster24
+    100034: be_poster25
+    100036: be_poster26
+    100038: be_poster27
+    100040: be_poster28
+    100042: be_poster29
+    100044: be_poster3
+    100046: be_poster30
+    100048: be_poster31
+    100050: be_poster32
+    100052: be_poster33
+    100054: be_poster34
+    100056: be_poster35
+    100058: be_poster36
+    100060: be_poster37
+    100062: be_poster38
+    100064: be_poster39
+    100066: be_poster4
+    100068: be_poster40
+    100070: be_poster41
+    100072: be_poster42
+    100074: be_poster43
+    100076: be_poster44
+    100078: be_poster45
+    100080: be_poster46
+    100082: be_poster47
+    100084: be_poster48
+    100086: be_poster49
+    100088: be_poster5
+    100090: be_poster6
+    100092: be_poster7
+    100094: be_poster8
+    100096: be_poster9
+    100098: ctrl_poster01
+    100100: grp_be_poster01
+    100102: grp_poster01
+    100104: mesh_poster03
+    100106: //RootNode
+    400000: be_poster1
+    400002: be_poster10
+    400004: be_poster11
+    400006: be_poster12
+    400008: be_poster13
+    400010: be_poster14
+    400012: be_poster15
+    400014: be_poster16
+    400016: be_poster17
+    400018: be_poster18
+    400020: be_poster19
+    400022: be_poster2
+    400024: be_poster20
+    400026: be_poster21
+    400028: be_poster22
+    400030: be_poster23
+    400032: be_poster24
+    400034: be_poster25
+    400036: be_poster26
+    400038: be_poster27
+    400040: be_poster28
+    400042: be_poster29
+    400044: be_poster3
+    400046: be_poster30
+    400048: be_poster31
+    400050: be_poster32
+    400052: be_poster33
+    400054: be_poster34
+    400056: be_poster35
+    400058: be_poster36
+    400060: be_poster37
+    400062: be_poster38
+    400064: be_poster39
+    400066: be_poster4
+    400068: be_poster40
+    400070: be_poster41
+    400072: be_poster42
+    400074: be_poster43
+    400076: be_poster44
+    400078: be_poster45
+    400080: be_poster46
+    400082: be_poster47
+    400084: be_poster48
+    400086: be_poster49
+    400088: be_poster5
+    400090: be_poster6
+    400092: be_poster7
+    400094: be_poster8
+    400096: be_poster9
+    400098: ctrl_poster01
+    400100: grp_be_poster01
+    400102: grp_poster01
+    400104: mesh_poster03
+    400106: //RootNode
+    4300000: mesh_poster03
+    7400000: Take 001
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: mesh_poster03
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 120
+      wrapMode: 8
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: grp_be_poster01
+        weight: 1
+      - path: grp_be_poster01/be_poster1
+        weight: 1
+      - path: grp_be_poster01/be_poster2
+        weight: 1
+      - path: grp_be_poster01/be_poster3
+        weight: 1
+      - path: grp_be_poster01/be_poster4
+        weight: 1
+      - path: grp_be_poster01/be_poster5
+        weight: 1
+      - path: grp_be_poster01/be_poster6
+        weight: 1
+      - path: grp_be_poster01/be_poster7
+        weight: 1
+      - path: grp_be_poster01/be_poster8
+        weight: 1
+      - path: grp_be_poster01/be_poster9
+        weight: 1
+      - path: grp_be_poster01/be_poster10
+        weight: 1
+      - path: grp_be_poster01/be_poster11
+        weight: 1
+      - path: grp_be_poster01/be_poster12
+        weight: 1
+      - path: grp_be_poster01/be_poster13
+        weight: 1
+      - path: grp_be_poster01/be_poster14
+        weight: 1
+      - path: grp_be_poster01/be_poster15
+        weight: 1
+      - path: grp_be_poster01/be_poster16
+        weight: 1
+      - path: grp_be_poster01/be_poster17
+        weight: 1
+      - path: grp_be_poster01/be_poster18
+        weight: 1
+      - path: grp_be_poster01/be_poster19
+        weight: 1
+      - path: grp_be_poster01/be_poster20
+        weight: 1
+      - path: grp_be_poster01/be_poster21
+        weight: 1
+      - path: grp_be_poster01/be_poster22
+        weight: 1
+      - path: grp_be_poster01/be_poster23
+        weight: 1
+      - path: grp_be_poster01/be_poster24
+        weight: 1
+      - path: grp_be_poster01/be_poster25
+        weight: 1
+      - path: grp_be_poster01/be_poster26
+        weight: 1
+      - path: grp_be_poster01/be_poster27
+        weight: 1
+      - path: grp_be_poster01/be_poster28
+        weight: 1
+      - path: grp_be_poster01/be_poster29
+        weight: 1
+      - path: grp_be_poster01/be_poster30
+        weight: 1
+      - path: grp_be_poster01/be_poster31
+        weight: 1
+      - path: grp_be_poster01/be_poster32
+        weight: 1
+      - path: grp_be_poster01/be_poster33
+        weight: 1
+      - path: grp_be_poster01/be_poster34
+        weight: 1
+      - path: grp_be_poster01/be_poster35
+        weight: 1
+      - path: grp_be_poster01/be_poster36
+        weight: 1
+      - path: grp_be_poster01/be_poster37
+        weight: 1
+      - path: grp_be_poster01/be_poster38
+        weight: 1
+      - path: grp_be_poster01/be_poster39
+        weight: 1
+      - path: grp_be_poster01/be_poster40
+        weight: 1
+      - path: grp_be_poster01/be_poster41
+        weight: 1
+      - path: grp_be_poster01/be_poster42
+        weight: 1
+      - path: grp_be_poster01/be_poster43
+        weight: 1
+      - path: grp_be_poster01/be_poster44
+        weight: 1
+      - path: grp_be_poster01/be_poster45
+        weight: 1
+      - path: grp_be_poster01/be_poster46
+        weight: 1
+      - path: grp_be_poster01/be_poster47
+        weight: 1
+      - path: grp_be_poster01/be_poster48
+        weight: 1
+      - path: grp_be_poster01/be_poster49
+        weight: 1
+      - path: grp_poster01
+        weight: 1
+      - path: grp_poster01/ctrl_poster01
+        weight: 1
+      - path: mesh_poster03
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 

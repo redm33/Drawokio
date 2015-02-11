@@ -1,0 +1,680 @@
+fileFormatVersion: 2
+guid: b557baf714128444d980520dc7dcfb53
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: be_bookPage1
+    100002: be_bookPage10
+    100004: be_bookPage11
+    100006: be_bookPage12
+    100008: be_bookPage13
+    100010: be_bookPage14
+    100012: be_bookPage15
+    100014: be_bookPage16
+    100016: be_bookPage17
+    100018: be_bookPage18
+    100020: be_bookPage19
+    100022: be_bookPage2
+    100024: be_bookPage20
+    100026: be_bookPage21
+    100028: be_bookPage22
+    100030: be_bookPage23
+    100032: be_bookPage24
+    100034: be_bookPage25
+    100036: be_bookPage26
+    100038: be_bookPage27
+    100040: be_bookPage28
+    100042: be_bookPage29
+    100044: be_bookPage3
+    100046: be_bookPage30
+    100048: be_bookPage31
+    100050: be_bookPage32
+    100052: be_bookPage33
+    100054: be_bookPage34
+    100056: be_bookPage35
+    100058: be_bookPage36
+    100060: be_bookPage37
+    100062: be_bookPage38
+    100064: be_bookPage39
+    100066: be_bookPage4
+    100068: be_bookPage40
+    100070: be_bookPage41
+    100072: be_bookPage42
+    100074: be_bookPage43
+    100076: be_bookPage44
+    100078: be_bookPage45
+    100080: be_bookPage46
+    100082: be_bookPage47
+    100084: be_bookPage48
+    100086: be_bookPage49
+    100088: be_bookPage5
+    100090: be_bookPage50
+    100092: be_bookPage51
+    100094: be_bookPage52
+    100096: be_bookPage53
+    100098: be_bookPage54
+    100100: be_bookPage55
+    100102: be_bookPage56
+    100104: be_bookPage57
+    100106: be_bookPage58
+    100108: be_bookPage59
+    100110: be_bookPage6
+    100112: be_bookPage60
+    100114: be_bookPage61
+    100116: be_bookPage62
+    100118: be_bookPage63
+    100120: be_bookPage64
+    100122: be_bookPage65
+    100124: be_bookPage66
+    100126: be_bookPage67
+    100128: be_bookPage68
+    100130: be_bookPage69
+    100132: be_bookPage7
+    100134: be_bookPage70
+    100136: be_bookPage71
+    100138: be_bookPage72
+    100140: be_bookPage73
+    100142: be_bookPage74
+    100144: be_bookPage75
+    100146: be_bookPage76
+    100148: be_bookPage77
+    100150: be_bookPage78
+    100152: be_bookPage79
+    100154: be_bookPage8
+    100156: be_bookPage80
+    100158: be_bookPage81
+    100160: be_bookPage82
+    100162: be_bookPage83
+    100164: be_bookPage84
+    100166: be_bookPage85
+    100168: be_bookPage86
+    100170: be_bookPage87
+    100172: be_bookPage88
+    100174: be_bookPage89
+    100176: be_bookPage9
+    100178: be_bookPage90
+    100180: be_bookPage91
+    100182: be_bookPage92
+    100184: be_bookPage93
+    100186: be_bookPage94
+    100188: be_bookPage95
+    100190: be_bookPage96
+    100192: be_coverBot01
+    100194: be_coverTop01
+    100196: bn_bookRoot01
+    100198: bn_coverBot01
+    100200: bn_coverTop01
+    100202: bn_spineA01
+    100204: bn_spineB01
+    100206: //RootNode
+    100208: comb_mesh_bookPages02
+    100210: grp_jntPage01
+    100212: grp_jntPage010
+    100214: grp_jntPage011
+    100216: grp_jntPage012
+    100218: grp_jntPage013
+    100220: grp_jntPage014
+    100222: grp_jntPage015
+    100224: grp_jntPage016
+    100226: grp_jntPage02
+    100228: grp_jntPage03
+    100230: grp_jntPage04
+    100232: grp_jntPage05
+    100234: grp_jntPage06
+    100236: grp_jntPage07
+    100238: grp_jntPage08
+    100240: grp_jntPage09
+    100242: grp_pageJoints01
+    100244: mesh_book01
+    100246: mesh_bookCover01
+    100248: mesh_bookPage1
+    100250: mesh_bookPage10
+    100252: mesh_bookPage11
+    100254: mesh_bookPage12
+    100256: mesh_bookPage13
+    100258: mesh_bookPage14
+    100260: mesh_bookPage15
+    100262: mesh_bookPage16
+    100264: mesh_bookPage3
+    100266: mesh_bookPage4
+    100268: mesh_bookPage5
+    100270: mesh_bookPage6
+    100272: mesh_bookPage7
+    100274: mesh_bookPage8
+    100276: mesh_bookPage9
+    100278: transform_mesh_bookPages01
+    400000: be_bookPage1
+    400002: be_bookPage10
+    400004: be_bookPage11
+    400006: be_bookPage12
+    400008: be_bookPage13
+    400010: be_bookPage14
+    400012: be_bookPage15
+    400014: be_bookPage16
+    400016: be_bookPage17
+    400018: be_bookPage18
+    400020: be_bookPage19
+    400022: be_bookPage2
+    400024: be_bookPage20
+    400026: be_bookPage21
+    400028: be_bookPage22
+    400030: be_bookPage23
+    400032: be_bookPage24
+    400034: be_bookPage25
+    400036: be_bookPage26
+    400038: be_bookPage27
+    400040: be_bookPage28
+    400042: be_bookPage29
+    400044: be_bookPage3
+    400046: be_bookPage30
+    400048: be_bookPage31
+    400050: be_bookPage32
+    400052: be_bookPage33
+    400054: be_bookPage34
+    400056: be_bookPage35
+    400058: be_bookPage36
+    400060: be_bookPage37
+    400062: be_bookPage38
+    400064: be_bookPage39
+    400066: be_bookPage4
+    400068: be_bookPage40
+    400070: be_bookPage41
+    400072: be_bookPage42
+    400074: be_bookPage43
+    400076: be_bookPage44
+    400078: be_bookPage45
+    400080: be_bookPage46
+    400082: be_bookPage47
+    400084: be_bookPage48
+    400086: be_bookPage49
+    400088: be_bookPage5
+    400090: be_bookPage50
+    400092: be_bookPage51
+    400094: be_bookPage52
+    400096: be_bookPage53
+    400098: be_bookPage54
+    400100: be_bookPage55
+    400102: be_bookPage56
+    400104: be_bookPage57
+    400106: be_bookPage58
+    400108: be_bookPage59
+    400110: be_bookPage6
+    400112: be_bookPage60
+    400114: be_bookPage61
+    400116: be_bookPage62
+    400118: be_bookPage63
+    400120: be_bookPage64
+    400122: be_bookPage65
+    400124: be_bookPage66
+    400126: be_bookPage67
+    400128: be_bookPage68
+    400130: be_bookPage69
+    400132: be_bookPage7
+    400134: be_bookPage70
+    400136: be_bookPage71
+    400138: be_bookPage72
+    400140: be_bookPage73
+    400142: be_bookPage74
+    400144: be_bookPage75
+    400146: be_bookPage76
+    400148: be_bookPage77
+    400150: be_bookPage78
+    400152: be_bookPage79
+    400154: be_bookPage8
+    400156: be_bookPage80
+    400158: be_bookPage81
+    400160: be_bookPage82
+    400162: be_bookPage83
+    400164: be_bookPage84
+    400166: be_bookPage85
+    400168: be_bookPage86
+    400170: be_bookPage87
+    400172: be_bookPage88
+    400174: be_bookPage89
+    400176: be_bookPage9
+    400178: be_bookPage90
+    400180: be_bookPage91
+    400182: be_bookPage92
+    400184: be_bookPage93
+    400186: be_bookPage94
+    400188: be_bookPage95
+    400190: be_bookPage96
+    400192: be_coverBot01
+    400194: be_coverTop01
+    400196: bn_bookRoot01
+    400198: bn_coverBot01
+    400200: bn_coverTop01
+    400202: bn_spineA01
+    400204: bn_spineB01
+    400206: //RootNode
+    400208: comb_mesh_bookPages02
+    400210: grp_jntPage01
+    400212: grp_jntPage010
+    400214: grp_jntPage011
+    400216: grp_jntPage012
+    400218: grp_jntPage013
+    400220: grp_jntPage014
+    400222: grp_jntPage015
+    400224: grp_jntPage016
+    400226: grp_jntPage02
+    400228: grp_jntPage03
+    400230: grp_jntPage04
+    400232: grp_jntPage05
+    400234: grp_jntPage06
+    400236: grp_jntPage07
+    400238: grp_jntPage08
+    400240: grp_jntPage09
+    400242: grp_pageJoints01
+    400244: mesh_book01
+    400246: mesh_bookCover01
+    400248: mesh_bookPage1
+    400250: mesh_bookPage10
+    400252: mesh_bookPage11
+    400254: mesh_bookPage12
+    400256: mesh_bookPage13
+    400258: mesh_bookPage14
+    400260: mesh_bookPage15
+    400262: mesh_bookPage16
+    400264: mesh_bookPage3
+    400266: mesh_bookPage4
+    400268: mesh_bookPage5
+    400270: mesh_bookPage6
+    400272: mesh_bookPage7
+    400274: mesh_bookPage8
+    400276: mesh_bookPage9
+    400278: transform_mesh_bookPages01
+    4300000: mesh_bookPage16
+    4300002: mesh_bookPage15
+    4300004: mesh_bookPage14
+    4300006: mesh_bookPage13
+    4300008: mesh_bookPage12
+    4300010: mesh_bookPage11
+    4300012: mesh_bookPage10
+    4300014: mesh_bookPage9
+    4300016: mesh_bookPage8
+    4300018: mesh_bookPage7
+    4300020: mesh_bookPage6
+    4300022: mesh_bookPage5
+    4300024: mesh_bookPage4
+    4300026: mesh_bookPage3
+    4300028: mesh_bookPage1
+    4300030: mesh_bookCover01
+    7400000: Take 001
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: mesh_bookCover01
+    13700002: mesh_bookPage1
+    13700004: mesh_bookPage10
+    13700006: mesh_bookPage11
+    13700008: mesh_bookPage12
+    13700010: mesh_bookPage13
+    13700012: mesh_bookPage14
+    13700014: mesh_bookPage15
+    13700016: mesh_bookPage16
+    13700018: mesh_bookPage3
+    13700020: mesh_bookPage4
+    13700022: mesh_bookPage5
+    13700024: mesh_bookPage6
+    13700026: mesh_bookPage7
+    13700028: mesh_bookPage8
+    13700030: mesh_bookPage9
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 120
+      wrapMode: 8
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bn_bookRoot01
+        weight: 1
+      - path: bn_bookRoot01/bn_coverBot01
+        weight: 1
+      - path: bn_bookRoot01/bn_coverBot01/be_coverBot01
+        weight: 1
+      - path: bn_bookRoot01/bn_spineA01
+        weight: 1
+      - path: bn_bookRoot01/bn_spineA01/bn_spineB01
+        weight: 1
+      - path: bn_bookRoot01/bn_spineA01/bn_spineB01/bn_coverTop01
+        weight: 1
+      - path: bn_bookRoot01/bn_spineA01/bn_spineB01/bn_coverTop01/be_coverTop01
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage01
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage01/be_bookPage1
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage01/be_bookPage2
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage01/be_bookPage3
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage01/be_bookPage4
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage01/be_bookPage5
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage01/be_bookPage6
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage02
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage02/be_bookPage7
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage02/be_bookPage8
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage02/be_bookPage9
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage02/be_bookPage10
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage02/be_bookPage11
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage02/be_bookPage12
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage03
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage03/be_bookPage13
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage03/be_bookPage14
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage03/be_bookPage15
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage03/be_bookPage16
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage03/be_bookPage17
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage03/be_bookPage18
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage04
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage04/be_bookPage19
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage04/be_bookPage20
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage04/be_bookPage21
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage04/be_bookPage22
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage04/be_bookPage23
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage04/be_bookPage24
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage05
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage05/be_bookPage25
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage05/be_bookPage26
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage05/be_bookPage27
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage05/be_bookPage28
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage05/be_bookPage29
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage05/be_bookPage30
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage06
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage06/be_bookPage31
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage06/be_bookPage32
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage06/be_bookPage33
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage06/be_bookPage34
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage06/be_bookPage35
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage06/be_bookPage36
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage07
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage07/be_bookPage37
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage07/be_bookPage38
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage07/be_bookPage39
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage07/be_bookPage40
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage07/be_bookPage41
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage07/be_bookPage42
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage08
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage08/be_bookPage43
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage08/be_bookPage44
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage08/be_bookPage45
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage08/be_bookPage46
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage08/be_bookPage47
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage08/be_bookPage48
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage09
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage09/be_bookPage49
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage09/be_bookPage50
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage09/be_bookPage51
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage09/be_bookPage52
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage09/be_bookPage53
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage09/be_bookPage54
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage010
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage010/be_bookPage55
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage010/be_bookPage56
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage010/be_bookPage57
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage010/be_bookPage58
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage010/be_bookPage59
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage010/be_bookPage60
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage011
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage011/be_bookPage61
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage011/be_bookPage62
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage011/be_bookPage63
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage011/be_bookPage64
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage011/be_bookPage65
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage011/be_bookPage66
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage012
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage012/be_bookPage67
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage012/be_bookPage68
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage012/be_bookPage69
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage012/be_bookPage70
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage012/be_bookPage71
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage012/be_bookPage72
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage013
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage013/be_bookPage73
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage013/be_bookPage74
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage013/be_bookPage75
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage013/be_bookPage76
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage013/be_bookPage77
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage013/be_bookPage78
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage014
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage014/be_bookPage79
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage014/be_bookPage80
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage014/be_bookPage81
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage014/be_bookPage82
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage014/be_bookPage83
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage014/be_bookPage84
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage015
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage015/be_bookPage85
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage015/be_bookPage86
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage015/be_bookPage87
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage015/be_bookPage88
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage015/be_bookPage89
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage015/be_bookPage90
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage016
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage016/be_bookPage91
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage016/be_bookPage92
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage016/be_bookPage93
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage016/be_bookPage94
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage016/be_bookPage95
+        weight: 1
+      - path: bn_bookRoot01/grp_pageJoints01/grp_jntPage016/be_bookPage96
+        weight: 1
+      - path: mesh_book01
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/mesh_bookPage1
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/mesh_bookPage3
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/mesh_bookPage4
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/mesh_bookPage5
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/mesh_bookPage6
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/mesh_bookPage7
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/mesh_bookPage8
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/mesh_bookPage9
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/mesh_bookPage10
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/mesh_bookPage11
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/mesh_bookPage12
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/mesh_bookPage13
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/mesh_bookPage14
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/mesh_bookPage15
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/mesh_bookPage16
+        weight: 1
+      - path: mesh_book01/comb_mesh_bookPages02/transform_mesh_bookPages01
+        weight: 1
+      - path: mesh_book01/mesh_bookCover01
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 

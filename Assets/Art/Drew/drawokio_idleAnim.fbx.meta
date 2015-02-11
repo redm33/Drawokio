@@ -1,0 +1,567 @@
+fileFormatVersion: 2
+guid: d49faeecbf1f7c249a437d05b2a413ea
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: be_head01
+    100002: be_l_ankle01
+    100004: be_l_clavical01
+    100006: be_l_eye01
+    100008: be_l_foot01
+    100010: be_l_hand01
+    100012: be_l_mouthB01
+    100014: be_neck01
+    100016: be_pelvis01
+    100018: be_r_ankle01
+    100020: be_r_clavical01
+    100022: be_r_eye01
+    100024: be_r_foot01
+    100026: be_r_hand01
+    100028: be_r_mouthB01
+    100030: bn_back01
+    100032: bn_chest01
+    100034: bn_head01
+    100036: bn_l_ankle01
+    100038: bn_l_clavical01
+    100040: bn_l_elbow01
+    100042: bn_l_eyeCenter01
+    100044: bn_l_foot01
+    100046: bn_l_hand01
+    100048: bn_l_mouthA01
+    100050: bn_l_shin01
+    100052: bn_l_shoulder01
+    100054: bn_l_thigh01
+    100056: bn_l_wrist01
+    100058: bn_mouthCenter01
+    100060: bn_neck01
+    100062: bn_pelvis01
+    100064: bn_r_ankle01
+    100066: bn_r_clavical01
+    100068: bn_r_elbow01
+    100070: bn_r_eyeCenter01
+    100072: bn_r_foot01
+    100074: bn_r_hand01
+    100076: bn_r_mouthA01
+    100078: bn_r_shin01
+    100080: bn_r_shoulder01
+    100082: bn_r_thigh01
+    100084: bn_r_wrist01
+    100086: bn_root01
+    100088: body
+    100090: controls
+    100092: ctrl_back01
+    100094: ctrl_chest01
+    100096: ctrl_cog01
+    100098: ctrl_head01
+    100100: ctrl_l_clavical01
+    100102: ctrl_l_elbow01
+    100104: ctrl_l_foot01
+    100106: ctrl_l_footBank02
+    100108: ctrl_l_footRoll01
+    100110: ctrl_l_handScale_mainr01
+    100112: ctrl_l_handScale_X01
+    100114: ctrl_l_handScale_Y01
+    100116: ctrl_l_handScale_Z01
+    100118: ctrl_l_knee01
+    100120: ctrl_l_wrist01
+    100122: ctrl_master01
+    100124: ctrl_neck01
+    100126: ctrl_pelvis01
+    100128: ctrl_r_clavical01
+    100130: ctrl_r_elbow01
+    100132: ctrl_r_foot01
+    100134: ctrl_r_footBank01
+    100136: ctrl_r_footRoll01
+    100138: ctrl_r_handScale_mainr01
+    100140: ctrl_r_handScale_X01
+    100142: ctrl_r_handScale_Y01
+    100144: ctrl_r_handScale_Z01
+    100146: ctrl_r_knee01
+    100148: ctrl_r_wrist01
+    100150: //RootNode
+    100152: drew_3d01
+    100154: footRoll
+    100156: footRoll 1
+    100158: Head
+    100160: Head 1
+    100162: ik_l_hand01
+    100164: ik_l_leg01
+    100166: ik_l_leg01 1
+    100168: ik_r_hand01
+    100170: ik_r_leg01
+    100172: ikHandles
+    100174: jDrv_l_ankle01
+    100176: jDrv_l_bank_left01
+    100178: jDrv_l_bank_right01
+    100180: jDrv_l_foot01
+    100182: jDrv_l_heel01
+    100184: jDrv_l_toe01
+    100186: jDrv_r_ankle01
+    100188: jDrv_r_bank_left01
+    100190: jDrv_r_bank_right01
+    100192: jDrv_r_foot01
+    100194: jDrv_r_heel01
+    100196: jDrv_r_toe01
+    100198: L_Eye
+    100200: L_Hand
+    100202: L_Hand2
+    100204: left1
+    100206: leftArmControls
+    100208: leftLegControls
+    100210: LimbControls
+    100212: mesh
+    100214: Mouth
+    100216: pPlane1
+    100218: R_Eye1
+    100220: right1
+    100222: rightArmControls
+    100224: rightLegControls
+    100226: skeleton
+    100228: ToonLine
+    400000: be_head01
+    400002: be_l_ankle01
+    400004: be_l_clavical01
+    400006: be_l_eye01
+    400008: be_l_foot01
+    400010: be_l_hand01
+    400012: be_l_mouthB01
+    400014: be_neck01
+    400016: be_pelvis01
+    400018: be_r_ankle01
+    400020: be_r_clavical01
+    400022: be_r_eye01
+    400024: be_r_foot01
+    400026: be_r_hand01
+    400028: be_r_mouthB01
+    400030: bn_back01
+    400032: bn_chest01
+    400034: bn_head01
+    400036: bn_l_ankle01
+    400038: bn_l_clavical01
+    400040: bn_l_elbow01
+    400042: bn_l_eyeCenter01
+    400044: bn_l_foot01
+    400046: bn_l_hand01
+    400048: bn_l_mouthA01
+    400050: bn_l_shin01
+    400052: bn_l_shoulder01
+    400054: bn_l_thigh01
+    400056: bn_l_wrist01
+    400058: bn_mouthCenter01
+    400060: bn_neck01
+    400062: bn_pelvis01
+    400064: bn_r_ankle01
+    400066: bn_r_clavical01
+    400068: bn_r_elbow01
+    400070: bn_r_eyeCenter01
+    400072: bn_r_foot01
+    400074: bn_r_hand01
+    400076: bn_r_mouthA01
+    400078: bn_r_shin01
+    400080: bn_r_shoulder01
+    400082: bn_r_thigh01
+    400084: bn_r_wrist01
+    400086: bn_root01
+    400088: body
+    400090: controls
+    400092: ctrl_back01
+    400094: ctrl_chest01
+    400096: ctrl_cog01
+    400098: ctrl_head01
+    400100: ctrl_l_clavical01
+    400102: ctrl_l_elbow01
+    400104: ctrl_l_foot01
+    400106: ctrl_l_footBank02
+    400108: ctrl_l_footRoll01
+    400110: ctrl_l_handScale_mainr01
+    400112: ctrl_l_handScale_X01
+    400114: ctrl_l_handScale_Y01
+    400116: ctrl_l_handScale_Z01
+    400118: ctrl_l_knee01
+    400120: ctrl_l_wrist01
+    400122: ctrl_master01
+    400124: ctrl_neck01
+    400126: ctrl_pelvis01
+    400128: ctrl_r_clavical01
+    400130: ctrl_r_elbow01
+    400132: ctrl_r_foot01
+    400134: ctrl_r_footBank01
+    400136: ctrl_r_footRoll01
+    400138: ctrl_r_handScale_mainr01
+    400140: ctrl_r_handScale_X01
+    400142: ctrl_r_handScale_Y01
+    400144: ctrl_r_handScale_Z01
+    400146: ctrl_r_knee01
+    400148: ctrl_r_wrist01
+    400150: //RootNode
+    400152: drew_3d01
+    400154: footRoll
+    400156: footRoll 1
+    400158: Head
+    400160: Head 1
+    400162: ik_l_hand01
+    400164: ik_l_leg01
+    400166: ik_l_leg01 1
+    400168: ik_r_hand01
+    400170: ik_r_leg01
+    400172: ikHandles
+    400174: jDrv_l_ankle01
+    400176: jDrv_l_bank_left01
+    400178: jDrv_l_bank_right01
+    400180: jDrv_l_foot01
+    400182: jDrv_l_heel01
+    400184: jDrv_l_toe01
+    400186: jDrv_r_ankle01
+    400188: jDrv_r_bank_left01
+    400190: jDrv_r_bank_right01
+    400192: jDrv_r_foot01
+    400194: jDrv_r_heel01
+    400196: jDrv_r_toe01
+    400198: L_Eye
+    400200: L_Hand
+    400202: L_Hand2
+    400204: left1
+    400206: leftArmControls
+    400208: leftLegControls
+    400210: LimbControls
+    400212: mesh
+    400214: Mouth
+    400216: pPlane1
+    400218: R_Eye1
+    400220: right1
+    400222: rightArmControls
+    400224: rightLegControls
+    400226: skeleton
+    400228: ToonLine
+    2300000: pPlane1
+    3300000: pPlane1
+    4300000: Head
+    4300002: L_Eye
+    4300004: Mouth
+    4300006: R_Eye1
+    4300008: body
+    4300010: L_Hand
+    4300012: L_Hand2
+    4300014: pPlane1
+    7400000: Idle
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: body
+    13700002: Head 1
+    13700004: L_Eye
+    13700006: L_Hand
+    13700008: L_Hand2
+    13700010: Mouth
+    13700012: R_Eye1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 32
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: drew_3d01
+        weight: 1
+      - path: drew_3d01/ctrl_master01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/ctrl_cog01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/ctrl_cog01/ctrl_pelvis01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/ctrl_cog01/ctrl_pelvis01/ctrl_back01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/ctrl_cog01/ctrl_pelvis01/ctrl_back01/ctrl_chest01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/ctrl_cog01/ctrl_pelvis01/ctrl_back01/ctrl_chest01/ctrl_l_clavical01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/ctrl_cog01/ctrl_pelvis01/ctrl_back01/ctrl_chest01/ctrl_neck01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/ctrl_cog01/ctrl_pelvis01/ctrl_back01/ctrl_chest01/ctrl_neck01/ctrl_head01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/ctrl_cog01/ctrl_pelvis01/ctrl_back01/ctrl_chest01/ctrl_r_clavical01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/ctrl_r_elbow01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftArmControls
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftArmControls/ctrl_l_elbow01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftArmControls/ctrl_l_wrist01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftArmControls/ctrl_l_wrist01/ctrl_l_handScale_mainr01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftArmControls/ctrl_l_wrist01/ctrl_l_handScale_mainr01/ctrl_l_handScale_X01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftArmControls/ctrl_l_wrist01/ctrl_l_handScale_mainr01/ctrl_l_handScale_Y01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftArmControls/ctrl_l_wrist01/ctrl_l_handScale_mainr01/ctrl_l_handScale_Z01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftLegControls
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftLegControls/ctrl_l_foot01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftLegControls/ctrl_l_foot01/ctrl_l_footBank02
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftLegControls/ctrl_l_foot01/ctrl_l_footRoll01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftLegControls/ctrl_l_foot01/footRoll
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftLegControls/ctrl_l_foot01/jDrv_l_bank_right01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftLegControls/ctrl_l_foot01/jDrv_l_bank_right01/jDrv_l_bank_left01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftLegControls/ctrl_l_foot01/jDrv_l_bank_right01/jDrv_l_bank_left01/jDrv_l_heel01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftLegControls/ctrl_l_foot01/jDrv_l_bank_right01/jDrv_l_bank_left01/jDrv_l_heel01/jDrv_l_toe01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftLegControls/ctrl_l_foot01/jDrv_l_bank_right01/jDrv_l_bank_left01/jDrv_l_heel01/jDrv_l_toe01/jDrv_l_foot01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftLegControls/ctrl_l_foot01/jDrv_l_bank_right01/jDrv_l_bank_left01/jDrv_l_heel01/jDrv_l_toe01/jDrv_l_foot01/jDrv_l_ankle01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/leftLegControls/ctrl_l_knee01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightArmControls
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightArmControls/ctrl_r_wrist01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightArmControls/ctrl_r_wrist01/ctrl_r_handScale_mainr01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightArmControls/ctrl_r_wrist01/ctrl_r_handScale_mainr01/ctrl_r_handScale_X01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightArmControls/ctrl_r_wrist01/ctrl_r_handScale_mainr01/ctrl_r_handScale_Y01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightArmControls/ctrl_r_wrist01/ctrl_r_handScale_mainr01/ctrl_r_handScale_Z01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightLegControls
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightLegControls/ctrl_r_foot01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightLegControls/ctrl_r_foot01/ctrl_r_footBank01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightLegControls/ctrl_r_foot01/ctrl_r_footRoll01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightLegControls/ctrl_r_foot01/footRoll
+          1
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightLegControls/ctrl_r_foot01/ik_l_leg01
+          1
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightLegControls/ctrl_r_foot01/jDrv_r_bank_right01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightLegControls/ctrl_r_foot01/jDrv_r_bank_right01/jDrv_r_bank_left01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightLegControls/ctrl_r_foot01/jDrv_r_bank_right01/jDrv_r_bank_left01/jDrv_r_heel01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightLegControls/ctrl_r_foot01/jDrv_r_bank_right01/jDrv_r_bank_left01/jDrv_r_heel01/jDrv_r_toe01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightLegControls/ctrl_r_foot01/jDrv_r_bank_right01/jDrv_r_bank_left01/jDrv_r_heel01/jDrv_r_toe01/jDrv_r_foot01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightLegControls/ctrl_r_foot01/jDrv_r_bank_right01/jDrv_r_bank_left01/jDrv_r_heel01/jDrv_r_toe01/jDrv_r_foot01/jDrv_r_ankle01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/controls/LimbControls/rightLegControls/ctrl_r_knee01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/ikHandles
+        weight: 1
+      - path: drew_3d01/ctrl_master01/ikHandles/ik_l_hand01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/ikHandles/ik_l_leg01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/ikHandles/ik_r_hand01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/ikHandles/ik_r_leg01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/be_neck01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_l_clavical01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_l_clavical01/be_l_clavical01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_l_clavical01/bn_l_shoulder01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_l_clavical01/bn_l_shoulder01/bn_l_elbow01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_l_clavical01/bn_l_shoulder01/bn_l_elbow01/bn_l_wrist01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_l_clavical01/bn_l_shoulder01/bn_l_elbow01/bn_l_wrist01/bn_l_hand01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_l_clavical01/bn_l_shoulder01/bn_l_elbow01/bn_l_wrist01/bn_l_hand01/be_l_hand01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_neck01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_neck01/bn_head01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_neck01/bn_head01/be_head01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_neck01/bn_head01/bn_l_eyeCenter01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_neck01/bn_head01/bn_l_eyeCenter01/be_l_eye01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_neck01/bn_head01/bn_mouthCenter01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_neck01/bn_head01/bn_mouthCenter01/bn_l_mouthA01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_neck01/bn_head01/bn_mouthCenter01/bn_l_mouthA01/be_l_mouthB01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_neck01/bn_head01/bn_mouthCenter01/bn_r_mouthA01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_neck01/bn_head01/bn_mouthCenter01/bn_r_mouthA01/be_r_mouthB01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_neck01/bn_head01/bn_r_eyeCenter01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_neck01/bn_head01/bn_r_eyeCenter01/be_r_eye01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_r_clavical01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_r_clavical01/be_r_clavical01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_r_clavical01/bn_r_shoulder01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_r_clavical01/bn_r_shoulder01/bn_r_elbow01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_r_clavical01/bn_r_shoulder01/bn_r_elbow01/bn_r_wrist01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_r_clavical01/bn_r_shoulder01/bn_r_elbow01/bn_r_wrist01/bn_r_hand01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_back01/bn_chest01/bn_r_clavical01/bn_r_shoulder01/bn_r_elbow01/bn_r_wrist01/bn_r_hand01/be_r_hand01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_pelvis01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_pelvis01/be_pelvis01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_pelvis01/bn_l_thigh01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_pelvis01/bn_l_thigh01/bn_l_shin01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_pelvis01/bn_l_thigh01/bn_l_shin01/be_l_ankle01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_pelvis01/bn_l_thigh01/bn_l_shin01/be_l_ankle01/bn_l_ankle01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_pelvis01/bn_l_thigh01/bn_l_shin01/be_l_ankle01/bn_l_ankle01/bn_l_foot01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_pelvis01/bn_l_thigh01/bn_l_shin01/be_l_ankle01/bn_l_ankle01/bn_l_foot01/be_l_foot01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_pelvis01/bn_r_thigh01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_pelvis01/bn_r_thigh01/bn_r_shin01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_pelvis01/bn_r_thigh01/bn_r_shin01/be_r_ankle01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_pelvis01/bn_r_thigh01/bn_r_shin01/be_r_ankle01/bn_r_ankle01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_pelvis01/bn_r_thigh01/bn_r_shin01/be_r_ankle01/bn_r_ankle01/bn_r_foot01
+        weight: 1
+      - path: drew_3d01/ctrl_master01/skeleton/bn_root01/bn_pelvis01/bn_r_thigh01/bn_r_shin01/be_r_ankle01/bn_r_ankle01/bn_r_foot01/be_r_foot01
+        weight: 1
+      - path: drew_3d01/mesh
+        weight: 1
+      - path: drew_3d01/mesh/body
+        weight: 1
+      - path: drew_3d01/mesh/Head
+        weight: 1
+      - path: drew_3d01/mesh/Head/Head 1
+        weight: 1
+      - path: drew_3d01/mesh/Head/L_Eye
+        weight: 1
+      - path: drew_3d01/mesh/Head/Mouth
+        weight: 1
+      - path: drew_3d01/mesh/Head/R_Eye1
+        weight: 1
+      - path: drew_3d01/mesh/L_Hand
+        weight: 1
+      - path: drew_3d01/mesh/L_Hand2
+        weight: 1
+      - path: drew_3d01/ToonLine
+        weight: 1
+      - path: left1
+        weight: 1
+      - path: pPlane1
+        weight: 1
+      - path: right1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 0
+    splitTangentsAcrossUV: 1
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
