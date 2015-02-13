@@ -9,11 +9,13 @@ public class PlayerMovementController : MonoBehaviour {
 	public PlayerAnimationController animationController;
 
 	public float speed = 20.0f;
+    public float sprintSpeed = 1.5f;
 	public float jumpSpeed = 13.0f;
 	public float standingVerticalVelocity = 10;
 
 	Vector3 movementInput = Vector3.zero;
 	bool jumpInput = false;
+    bool sprintInput = false;
 
 	[HideInInspector]
 	public Vector3 startPosition; // For use with constraining to a plane.
@@ -40,6 +42,7 @@ public class PlayerMovementController : MonoBehaviour {
 	void Update() {
 		movementInput = new Vector3( Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0 );
 		jumpInput = Input.GetButton("Jump");
+        sprintInput = Input.GetKey(KeyCode.LeftShift);
 	}
 
 	void FixedUpdate() {
@@ -66,12 +69,26 @@ public class PlayerMovementController : MonoBehaviour {
 				rigidbody.velocity = transform.right * movementInput.x;
 			}
 
-			rigidbody.velocity *= speed;
+            if (sprintInput)
+            {
+                rigidbody.velocity *= sprintSpeed;
+            }
+
+            else
+            {
+                rigidbody.velocity *= speed;
+            }
+			    
 
 			if (rigidbody.velocity.sqrMagnitude == 0)
 				animationController.state = PlayerAnimationController.State.IDLE;
 			else {
-				animationController.state = PlayerAnimationController.State.WALKING;
+                if (sprintInput)
+                {
+                    animationController.state = PlayerAnimationController.State.RUNNING;
+                }
+                else
+                    animationController.state = PlayerAnimationController.State.WALKING;
 
 				if (transformationController.in3D)
 				{
