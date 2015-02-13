@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Room : MonoBehaviour {
+public class Room : MonoBehaviour 
+{
 
 	public static Room instance;
 
@@ -16,7 +17,8 @@ public class Room : MonoBehaviour {
 	}
 	public void SpawnAtLatestSpawn()
 	{
-		if( Player.instance != null ) {
+		if( Player.instance != null ) 
+        {
 			Debug.LogWarning( "Don't spawn more than one player!" );
 			return;
 		}
@@ -43,7 +45,8 @@ public class Room : MonoBehaviour {
 
 	public GameObject deathText;
 
-	public enum State {
+	public enum State 
+    {
 		NONE,
 		MENU_MAIN,
 		MENU_CHOOSE, // Holdover from when you could choose levels...don't want to change it all over...this is the state it will enter when you continue
@@ -54,11 +57,15 @@ public class Room : MonoBehaviour {
 	}
 
 	private State _state = State.NONE;
-	public State state {
+	public State state 
+    {
 		get { return _state; }
-		set {
-			if( _state == value ) {
-				if( _state == State.MENU_MAIN ) {
+		set 
+        {
+			if( _state == value ) 
+            {
+				if( _state == State.MENU_MAIN ) 
+                {
 					PlayerPrefs.SetInt("SpawnPoint", 0);
 					PlayerPrefs.SetString("Pickups","" );
 					PlayerPrefs.SetInt("Hat", -1);
@@ -68,52 +75,51 @@ public class Room : MonoBehaviour {
 				return;
 			}
 
-			switch( _state ) {
-			case State.MENU_CHOOSE:
-				/*foreach( SpawnPoint point in spawnPoints )
-					point.particleSystem.Stop();*/
-				break;
-			case State.PLAYING:
-				DestroyAll();
-				break;
-			default:
-				break;
+			switch( _state ) 
+            {
+			    case State.MENU_CHOOSE:
+				    /*foreach( SpawnPoint point in spawnPoints )
+					    point.particleSystem.Stop();*/
+				    break;
+			    case State.PLAYING:
+				    DestroyAll();
+				    break;
+			    default:
+				    break;
 			}
 
-			if( (int)_state < menuGameObjects.Length && menuGameObjects[(int)_state] != null ) {
+			if( (int)_state < menuGameObjects.Length && menuGameObjects[(int)_state] != null ) 
 				menuGameObjects[(int)_state].SetActive(false);
-			}
 
 			_state = value;
 
-			switch( _state ) {
-			case State.MENU_CHOOSE:
-				/*foreach( SpawnPoint point in spawnPoints )
-					point.particleSystem.Play();*/
-				Continue ();
-				break;
-			case State.PLAYING:
-				drawer.gameObject.SetActive(true);
-				break;
-			case State.QUITTING:
-				quitStart = Time.time;
-				break;
-			case State.MENU_MAIN:
-				foreach( GameObject obj in disableDuringMenuObjects )
-					obj.SetActive(false);
-				break;
-			default:
-				break;
+			switch( _state ) 
+            {
+			    case State.MENU_CHOOSE:
+				    /*foreach( SpawnPoint point in spawnPoints )
+					    point.particleSystem.Play();*/
+				    Continue ();
+				    break;
+			    case State.PLAYING:
+				    drawer.gameObject.SetActive(true);
+				    break;
+			    case State.QUITTING:
+				    quitStart = Time.time;
+				    break;
+			    case State.MENU_MAIN:
+				    foreach( GameObject obj in disableDuringMenuObjects )
+					    obj.SetActive(false);
+				    break;
+			    default:
+				    break;
 			}
 			
-			if( (int)_state < menuGameObjects.Length && menuGameObjects[(int)_state] != null ) {
+			if( (int)_state < menuGameObjects.Length && menuGameObjects[(int)_state] != null ) 
 				menuGameObjects[(int)_state].SetActive(true);
-			}
-			
+					
 			cameraController.ClearQueue();
-			if( (int)_state < cameraFollowables.Length ) {
+			if( (int)_state < cameraFollowables.Length ) 
 				cameraController.AddToQueue( cameraFollowables[(int)_state] );
-			}
 		}
 	}
 
@@ -121,11 +127,13 @@ public class Room : MonoBehaviour {
 	{
 		instance = this;
 
-		for( int i = 0; i < spawnPoints.Length; i++ ) {
+		for( int i = 0; i < spawnPoints.Length; i++ ) 
+        {
 			spawnPoints[i].index = i;
 		}
 
-		for( int i = 0; i < resettables.Length; i++ ) {
+		for( int i = 0; i < resettables.Length; i++ ) 
+        {
 			resettables[i].index = i;
 		}
 	}
@@ -148,84 +156,93 @@ public class Room : MonoBehaviour {
 	float quitStart = 0;
 	//bool firstDrag = true;
 	Vector3 dragStart;
-	void Update() {
-		switch( state ) {
-		case State.QUITTING:
-			if( Time.time - quitStart > 1.0f ) {
-				Application.Quit();
-			}
-			break;
-		case State.MENU_CHOOSE:
-			// Deprecated...MENU_CHOOSE is an old thing that I am now using for continue.
-			/*if( Input.GetMouseButtonDown( 0 ) ) {
-				RaycastHit hit;
-				if( Physics.Raycast( Camera.main.ScreenPointToRay( Input.mousePosition ), out hit, 1000, (1<<SpawnPoint.layer) ) ) {
+	void Update() 
+    {
+		switch( state ) 
+        {
+		    case State.QUITTING:
+			    if( Time.time - quitStart > 1.0f ) 
+				    Application.Quit();
+			    break;
+		    case State.MENU_CHOOSE:
+			    // Deprecated...MENU_CHOOSE is an old thing that I am now using for continue.
+			    /*if( Input.GetMouseButtonDown( 0 ) ) {
+				    RaycastHit hit;
+				    if( Physics.Raycast( Camera.main.ScreenPointToRay( Input.mousePosition ), out hit, 1000, (1<<SpawnPoint.layer) ) ) {
 					
-					SpawnPoint point = hit.collider.GetComponent<SpawnPoint>();
-					if( point == null )
-					{
-						Debug.LogWarning( "Hit something that wasn't a SpawnPoint!" );
-						return;
-					}
+					    SpawnPoint point = hit.collider.GetComponent<SpawnPoint>();
+					    if( point == null )
+					    {
+						    Debug.LogWarning( "Hit something that wasn't a SpawnPoint!" );
+						    return;
+					    }
 
-					StartAt( point );
+					    StartAt( point );
 
-				} else {
-					dragStart = Input.mousePosition;
-				}
-			} else if( Input.GetMouseButton(0) ) {
-				if( !firstDrag ) {
-					cameraFollowables[(int)State.MENU_CHOOSE].transform.Rotate( Vector3.up, ( Input.mousePosition.x - dragStart.x ) * chooseCameraSpinSpeed * Time.deltaTime, Space.World );
-				}
-				dragStart = Input.mousePosition;
-				firstDrag = false;
-			} else {
-				firstDrag = true;
-			}*/
+				    } else {
+					    dragStart = Input.mousePosition;
+				    }
+			    } else if( Input.GetMouseButton(0) ) {
+				    if( !firstDrag ) {
+					    cameraFollowables[(int)State.MENU_CHOOSE].transform.Rotate( Vector3.up, ( Input.mousePosition.x - dragStart.x ) * chooseCameraSpinSpeed * Time.deltaTime, Space.World );
+				    }
+				    dragStart = Input.mousePosition;
+				    firstDrag = false;
+			    } else {
+				    firstDrag = true;
+			    }*/
 
-			break;
-		case State.MENU_MAIN:
-		case State.MENU_QUIT:
-			if( Input.GetMouseButtonDown( 0 ) ) {
-				RaycastHit hit;
-				if( Physics.Raycast( Camera.main.ScreenPointToRay( Input.mousePosition ), out hit, 1000, (1<<MenuButton.layer) ) ) {
+			    break;
+		    case State.MENU_MAIN:
+		    case State.MENU_QUIT:
+			    if( Input.GetMouseButtonDown( 0 ) ) 
+                {
+				    RaycastHit hit;
+				    if( Physics.Raycast( Camera.main.ScreenPointToRay( Input.mousePosition ), out hit, 1000, (1<<MenuButton.layer) ) ) 
+                    {
 
-					MenuButton button = hit.collider.GetComponent<MenuButton>();
-					if( button == null ) {
-						Debug.LogWarning( "Hit something that wasn't a MenuButton!" );
-						return;
-					}
+					    MenuButton button = hit.collider.GetComponent<MenuButton>();
+					    if( button == null ) 
+                        {
+						    Debug.LogWarning( "Hit something that wasn't a MenuButton!" );
+						    return;
+					    }
 
-					state = button.state;
-				}
-			}
-			break;
-		case State.MENU_CONTROLS:
-			if( Input.GetMouseButtonDown( 0 ) || Input.GetButtonDown( "Back" ) ) {
-				state = State.MENU_MAIN;
-			}
-			break;
-		case State.PLAYING:
-			if( Player.instance == null && !EndingController.instance.running ) {
-				deathText.SetActive(true);
+					    state = button.state;
+				    }
+			    }
+			    break;
+		    case State.MENU_CONTROLS:
+			    if( Input.GetMouseButtonDown( 0 ) || Input.GetButtonDown( "Back" ) ) 
+				    state = State.MENU_MAIN;
+			    break;
+		    case State.PLAYING:
+			    if( Player.instance == null && !EndingController.instance.running ) 
+                {
+				    deathText.SetActive(true);
 
-				if( Input.GetButtonDown( "Back" ) ) {
-					DestroyAll();
-					SpawnAtLatestSpawn();
-				}
-			} else {
-				deathText.SetActive(false);
-			}
-			break;
+				    if( Input.GetButtonDown( "Back" ) ) 
+                    {
+					    DestroyAll();
+					    SpawnAtLatestSpawn();
+				    }
+			    } 
+                else 
+				    deathText.SetActive(false);
+			    break;
 		}
 	}
 
-	public int completionPercentage {
-		get {
+	public int completionPercentage 
+    {
+		get 
+        {
 			int found = 0, total = 0;
 
-			foreach( Resettable obj in resettables ) {
-				if( obj.isPickup ) {
+			foreach( Resettable obj in resettables ) 
+            {
+				if( obj.isPickup ) 
+                {
 					total++;
 					if( obj.pickedUp )
 						found++;
@@ -236,23 +253,27 @@ public class Room : MonoBehaviour {
 		}
 	}
 
-	void Continue() {
+	void Continue() 
+    {
 		StartAt( spawnPoints[PlayerPrefs.GetInt( "SpawnPoint", 0 )] );
 
 		string pickupsStr = PlayerPrefs.GetString( "Pickups", "" );
-		for( int i = 0; i < pickupsStr.Length; i++ ) {
+		for( int i = 0; i < pickupsStr.Length; i++ ) 
+        {
 			int index = (int)pickupsStr[i];
 			resettables[index-33].ForcePickup();
 		}
 
 		int hat = PlayerPrefs.GetInt("Hat",-1);
-		if( hat >= 0 ) {
+		if( hat >= 0 ) 
+        {
 			SetHat(hat);
 			Player.instance.SetHat(hat);
 		}
 	}
 
-	public bool Save( int spawnPoint ) {
+	public bool Save( int spawnPoint ) 
+    {
 		bool changed = false;
 
 		if( PlayerPrefs.GetInt( "SpawnPoint", 0 ) != spawnPoint )
@@ -264,7 +285,8 @@ public class Room : MonoBehaviour {
 		PlayerPrefs.SetInt( "Hat", currentHat );
 
 		string pickupsStr = "";
-		for( int i = 0; i < resettables.Length; i++ ) {
+		for( int i = 0; i < resettables.Length; i++ ) 
+        {
 			if( resettables[i].pickedUp )
 				pickupsStr += (char)(i+33);
 		}
@@ -277,18 +299,18 @@ public class Room : MonoBehaviour {
 		return changed;
 	}
 
-	void StartAt( SpawnPoint point ) {
+	void StartAt( SpawnPoint point ) 
+    {
 
 		ResetSpawnPoints();
 		point.isLatestSpawn = true;
 		
 		Player player = Instantiate( playerPrefab, point.transform.position, point.transform.rotation ) as Player;
 		
-		if( point.spawnIn3D ) {
+		if( point.spawnIn3D ) 
 			player.transformationController.Become3D();
-		} else {
+		else 
 			player.movementController.ApplyLockType( point.lockType );
-		}
 
 		SetHat(-1);
 
@@ -296,7 +318,8 @@ public class Room : MonoBehaviour {
 
 		Drawer.instance.hasPencil = Drawer.instance.hasCharcoal = false;
 
-		foreach( Resettable resettable in resettables ) {
+		foreach( Resettable resettable in resettables ) 
+        {
 			if( resettable != null )
 				resettable.PerformReset();
 		}
@@ -307,36 +330,41 @@ public class Room : MonoBehaviour {
 	public GameObject[] endHats;
 	int currentHat = -1;
 
-	public void SetHat( int index ) {
+	public void SetHat( int index ) 
+    {
 		if( currentHat >= 0 )
 			endHats[currentHat].SetActive(false);
 
 		currentHat = index;
 
-		if( index >= 0 && index < endHats.Length ) {
+		if( index >= 0 && index < endHats.Length ) 
 			endHats[index].SetActive(true);
-		}
 	}
 
 	private bool _paused = false;
-	public bool paused {
-		get {
+	public bool paused 
+    {
+		get 
+        {
 			return _paused;
 		}
-		set {
+		set 
+        {
 			if( _paused == value )
 				return;
 
 			_paused = value;
 
-			foreach( Resettable resettable in resettables ) {
+			foreach( Resettable resettable in resettables ) 
+            {
 				if( resettable != null )
 					resettable.paused = value;
 			}
 			
 			Player.instance.paused = value;
 			
-			foreach( Transform child in Drawer.instance.drawingParent ) {
+			foreach( Transform child in Drawer.instance.drawingParent ) 
+            {
 				child.GetComponent<Ink>().paused = value;
 			}
 		}

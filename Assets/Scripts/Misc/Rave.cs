@@ -24,22 +24,28 @@ public class Rave : MonoBehaviour
 
 	void Update()
 	{
-		if( raving ){
+		if( raving )
+        {
 			light.intensity = raveIntensity;
 
 			progress += Time.deltaTime * speed;
 
-			if( progress > 1 ) {
+			if( progress > 1 ) 
+            {
 				light.color = destColor;
 
 				startColor = destColor;
 				destColor = new Color( Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f) );
 
 				progress = 0;
-			} else {
+			} 
+            else 
+            {
 				light.color = Color.Lerp( startColor, destColor, progress );
 			}
-		} else {
+		} 
+        else 
+        {
 			light.color = realStartColor;
 			light.intensity = startIntensity;
 		}

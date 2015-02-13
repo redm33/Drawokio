@@ -1,12 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Spawnable : Resettable {
-
+public class Spawnable : Resettable 
+{
 	public Transform[] patrolPoints;
-
-	public override void PerformReset ()
-	{
-
-	}
+	public override void PerformReset (){}
 }

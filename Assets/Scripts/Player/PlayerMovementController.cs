@@ -2,7 +2,8 @@
 using System.Collections;
 
 [AddComponentMenu("Game/Player/Movement Controller")]
-public class PlayerMovementController : MonoBehaviour {
+public class PlayerMovementController : MonoBehaviour 
+{
 
 	public Player player;
 	public PlayerTransformationController transformationController;
@@ -23,7 +24,8 @@ public class PlayerMovementController : MonoBehaviour {
 	private bool _isActive = false;
 	public bool isActive {
 		get { return _isActive; }
-		set {
+		set 
+        {
 			if( _isActive == value )
 				return;
 
@@ -33,25 +35,27 @@ public class PlayerMovementController : MonoBehaviour {
 		}
 	}
 
-	void Awake() {
+	void Awake() 
+    {
 		isGrounded = false;
-
 		startPosition = transform.position;
 	}
 
-	void Update() {
+	void Update() 
+    {
 		movementInput = new Vector3( Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0 );
 		jumpInput = Input.GetButton("Jump");
         sprintInput = Input.GetKey(KeyCode.LeftShift);
 	}
 
-	void FixedUpdate() {
-		if( isActive && !player.paused ) {
+	void FixedUpdate() 
+    {
+		if( isActive && !player.paused ) 
 			Movement( Time.fixedDeltaTime );
-		}
 	}
 
-	public void ApplyLockType( DrawingCanvas.LockType lockType ) {
+	public void ApplyLockType( DrawingCanvas.LockType lockType ) 
+    {
 		rigidbody.constraints = DrawingCanvas.GetConstraintsForLockType( lockType ) | RigidbodyConstraints.FreezeRotation;
 	}
 
@@ -60,33 +64,28 @@ public class PlayerMovementController : MonoBehaviour {
 	{		
 		CheckGrounded();
 	
-		if( isGrounded ) {
-
-			if( transformationController.in3D ) {
+		if( isGrounded ) 
+        {
+			if( transformationController.in3D ) 
+            {
 				CameraController camera = CameraController.instance;
 				rigidbody.velocity = camera.moveRight * movementInput.x + camera.moveForward * movementInput.y;
-			} else {
+			} 
+            else 
 				rigidbody.velocity = transform.right * movementInput.x;
-			}
 
             if (sprintInput)
-            {
                 rigidbody.velocity *= sprintSpeed;
-            }
-
             else
-            {
                 rigidbody.velocity *= speed;
-            }
 			    
 
 			if (rigidbody.velocity.sqrMagnitude == 0)
 				animationController.state = PlayerAnimationController.State.IDLE;
-			else {
+			else 
+            {
                 if (sprintInput)
-                {
                     animationController.state = PlayerAnimationController.State.RUNNING;
-                }
                 else
                     animationController.state = PlayerAnimationController.State.WALKING;
 
@@ -104,13 +103,14 @@ public class PlayerMovementController : MonoBehaviour {
 				}
 			}
 
-			if( jumpInput ) {
+			if( jumpInput ) 
 				Jump ();
-			} else
+			else
 				rigidbody.velocity -=  transform.up * standingVerticalVelocity;
 
-		} else {
-			
+		} 
+        else 
+        {		
 			rigidbody.velocity += transform.TransformDirection( Physics.gravity ) * dt;
 			
 			if (isGrounded)
@@ -125,8 +125,7 @@ public class PlayerMovementController : MonoBehaviour {
 
 	public void Jump()
 	{
-		animationController.state = PlayerAnimationController.State.JUMPING;
-		
+		animationController.state = PlayerAnimationController.State.JUMPING;	
 		rigidbody.velocity += transform.up * jumpSpeed;
 	}
 	

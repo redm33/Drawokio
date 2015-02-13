@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TriggeredSequence : Resettable {
+public class TriggeredSequence : Resettable 
+{
 
 	[System.Serializable]
-	public class Sequence {
+	public class Sequence 
+    {
 		public float duration = 1;
 		float elapsed = 0;
 
@@ -20,10 +22,12 @@ public class TriggeredSequence : Resettable {
 
 		public CameraFollowable cameraFollowable;
 
-		public void Start() {
+		public void Start() 
+        {
 			elapsed = 0;
 
-			if( toMove != null ) {
+			if( toMove != null ) 
+            {
 				startPos = toMove.position;
 				startRot = toMove.rotation;
 			}
@@ -38,10 +42,12 @@ public class TriggeredSequence : Resettable {
 				objectToEnable.gameObject.SetActive(!objectToEnable.pickedUp);
 		}
 
-		public bool Update(float dt) {
+		public bool Update(float dt) 
+        {
 			elapsed += dt;
 
-			if( toMove != null ) {
+			if( toMove != null ) 
+            {
 				float t = elapsed / duration;
 
 				toMove.position = Vector3.Lerp ( startPos, moveTo.position, t );
@@ -51,18 +57,22 @@ public class TriggeredSequence : Resettable {
 			return ( elapsed > duration );
 		}
 
-		public void End() {
+		public void End() 
+        {
 			if( cameraFollowable != null )
 				CameraController.instance.RemoveFromQueue( cameraFollowable );
 
-			if( toMove != null ) {
+			if( toMove != null ) 
+            {
 				toMove.position = moveTo.position;
 				toMove.rotation = moveTo.rotation;
 			}
 		}
 
-		public void Reset() {
-			if( animation != null ) {
+		public void Reset() 
+        {
+			if( animation != null ) 
+            {
 				animation.Rewind();
 				animation.Sample();
 				animation.Stop();
@@ -80,9 +90,8 @@ public class TriggeredSequence : Resettable {
 
 	public override void PerformReset ()
 	{
-		if( cur < sequences.Length ) {
+		if( cur < sequences.Length ) 
 			sequences[cur].End();
-		}
 
 		foreach( Sequence obj in sequences ) 
 			obj.Reset();
@@ -91,7 +100,8 @@ public class TriggeredSequence : Resettable {
 		cur = 0;
 	}
 
-	void OnTriggerEnter( Collider other ) {
+	void OnTriggerEnter( Collider other ) 
+    {
 		if( triggered )
 			return;
 
@@ -103,15 +113,16 @@ public class TriggeredSequence : Resettable {
 
 	void Update()
 	{
-		if( triggered && cur < sequences.Length ) {
-			if( sequences[cur].Update( Time.deltaTime ) ) {
+		if( triggered && cur < sequences.Length ) 
+        {
+			if( sequences[cur].Update( Time.deltaTime ) ) 
+            {
 				sequences[cur].End();
 
-				if( ++cur < sequences.Length ) {
+				if( ++cur < sequences.Length ) 
 					sequences[cur].Start();
-				} else {
+				else 
 					Player.instance.paused = false;
-				}
 			}
 		}
 	}

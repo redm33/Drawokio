@@ -30,13 +30,16 @@ public class Player: MonoBehaviour
 		NONE
     }
 	private State _state = State.NONE;
-	public State state {
+	public State state 
+    {
 		get { return _state; }
-		set {
+		set 
+        {
 			if( _state == value )
 				return;
 
-			switch( _state ) {
+			switch( _state ) 
+            {
 			case State.WALKING:
 				WalkingLeave();
 				break;
@@ -53,7 +56,8 @@ public class Player: MonoBehaviour
 
 			_state = value;
 
-			switch( _state ) {
+			switch( _state ) 
+            {
 			case State.WALKING:
 				WalkingEnter();
 				break;
@@ -70,8 +74,10 @@ public class Player: MonoBehaviour
 
 		}
 	}
-	void UpdateState() {
-		switch( _state ) {
+	void UpdateState() 
+    {
+		switch( _state )
+        {
 		case State.WALKING:
 			WalkingUpdate();
 			break;
@@ -87,60 +93,60 @@ public class Player: MonoBehaviour
 		}
 	}
 
-	void WalkingEnter() {
+	void WalkingEnter() 
+    {
 		movementController.isActive = true;
 	}
 
-	void WalkingUpdate() {
+	void WalkingUpdate() {}
 
-	}
-
-	void WalkingLeave() {
+	void WalkingLeave() 
+    {
 		movementController.isActive = false;
 	}
 
-	void ClimbingEnter() {
+	void ClimbingEnter() 
+    {
 		rigidbody.isKinematic = false;
 	}
 
-	void ClimbingUpdate() {
-		
-	}
+	void ClimbingUpdate() {}
 
-	void ClimbingLeave() {
+	void ClimbingLeave() 
+    {
 		rigidbody.isKinematic = true;
 	}
 
-	void TransformingEnter() {
+	void TransformingEnter() 
+    {
 		animationController.state = PlayerAnimationController.State.JUMPING;
 	}
 	
-	void TransformingUpdate() {
+	void TransformingUpdate() {}
 
-	}
-
-	void TransformingLeave() {
+	void TransformingLeave() 
+    {
 		movementController.startPosition = transform.position;
 	}
 
 	Transform transport;
-	void TransportedEnter() {
+	void TransportedEnter() 
+    {
 		transform.position = transport.position;
 		transform.rotation = transport.rotation;
 		animationController.state = PlayerAnimationController.State.T;
 	}
 
-	void LateUpdate() {
-		if( state == State.TRANSPORTED ) {
+	void LateUpdate() 
+    {
+		if( state == State.TRANSPORTED ) 
 			transform.position = transport.position;
-		}
 	}
 
-	void TransportedUpdate() {
+	void TransportedUpdate() {}
 
-	}
-
-	void TransportedLeave() {
+	void TransportedLeave() 
+    {
 		transform.rotation = Quaternion.identity;
 	}
 
@@ -162,7 +168,8 @@ public class Player: MonoBehaviour
         }
     }
 
-	void BeginPause() {
+	void BeginPause() 
+    {
 		pauseVelocity = rigidbody.velocity;
 
 		rigidbody.isKinematic = true;
@@ -170,7 +177,8 @@ public class Player: MonoBehaviour
 		animationController.Pause();
 	}
 	
-	void EndPause() {
+	void EndPause() 
+    {
 		rigidbody.isKinematic = false;
 		rigidbody.velocity = pauseVelocity;
 		
@@ -186,7 +194,6 @@ public class Player: MonoBehaviour
     void Awake()
     {
 		instance = this;
-
 		state = State.WALKING;
     }
 
@@ -194,28 +201,24 @@ public class Player: MonoBehaviour
 	public GameObject[] hats;
 	int currentHat = -1;
 	
-	public void SetHat( int index ) {
+	public void SetHat( int index ) 
+    {
 		if( currentHat >= 0 )
 			hats[currentHat].SetActive(false);
 		
 		currentHat = index;
 		
-		if( index >= 0 && index < hats.Length ) {
+		if( index >= 0 && index < hats.Length ) 
 			hats[index].SetActive(true);
-		}
 	}
 
 	void Update()
 	{
-		if( !paused && Input.GetButtonDown("Back") ) {
+		if( !paused && Input.GetButtonDown("Back") ) 
 			Room.instance.state = Room.State.MENU_MAIN;
-		}
 	}
 
-	void FixedUpdate()
-	{
-
-	}
+	void FixedUpdate(){}
 
 	public void Kill()
 	{
@@ -223,7 +226,8 @@ public class Player: MonoBehaviour
 		Destroy ( gameObject );
 	}
 
-	public void StartTransport( Transform transport ) {
+	public void StartTransport( Transform transport ) 
+    {
 		this.transport = transport;
 		state = State.TRANSPORTED;
 	}

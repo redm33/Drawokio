@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Plane : Patrol {
+public class Plane : Patrol 
+{
 
 	public CameraFollowable cameraFollowable;
 	public Transform playerPosition;
 
-	void OnTriggerEnter( Collider other ) {
+	void OnTriggerEnter( Collider other ) 
+    {
 		Player.instance.StartTransport( playerPosition );
 
 		CameraController.instance.AddToQueue( cameraFollowable );
@@ -16,9 +18,8 @@ public class Plane : Patrol {
 
 	public override void PerformReset ()
 	{
-		if( running ) {
+		if( running ) 
 			Player.instance.state = Player.State.WALKING;
-		}
 
 		CameraController.instance.RemoveFromQueue( cameraFollowable );
 

@@ -3,17 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 
 [AddComponentMenu("Game/Camera/Camera Controller")]
-public class CameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour 
+{
 
 	public static CameraController instance;
 
 	public float baseTimeToTarget = 1.0f;
 	private float _timeToTarget = 1.0f;
 	public float timeToTarget {
-		get {
+		get 
+        {
 			return _timeToTarget;
 		}
-		set {
+		set 
+        {
 			if( value <= 0 )
 			{
 				Debug.LogWarning( "Cannot have timeToTarget value of " + value );
@@ -30,14 +33,16 @@ public class CameraController : MonoBehaviour {
 
 	public CameraFollowable startTarget = null;
 	private CameraFollowable _target = null;
-	public CameraFollowable target {
-		get {
+	public CameraFollowable target 
+    {
+		get 
+        {
 			return _target;
 		}
-		set {
-			if( _target == value ) {
+		set 
+        {
+			if( _target == value ) 
 				return;
-			}
 
 			_target = value;
 			startT = Time.time;
@@ -46,10 +51,13 @@ public class CameraController : MonoBehaviour {
 		}
 	}
 
-	public CameraFollowable highestPriorityTarget {
-		get {
+	public CameraFollowable highestPriorityTarget 
+    {
+		get 
+        {
 			CameraFollowable ret = null;
-			foreach( CameraFollowable cur in followQueue ) {
+			foreach( CameraFollowable cur in followQueue )
+            {
 				if( ret == null || cur.priority > ret.priority )
 					ret = cur;
 			}
@@ -63,15 +71,18 @@ public class CameraController : MonoBehaviour {
 	Vector3 startPos = Vector3.zero;
 	Quaternion startRot = Quaternion.identity;
 
-	void Awake() {
+	void Awake() 
+    {
 		timeToTarget = baseTimeToTarget;
 		target = startTarget;
 
 		instance = this;
 	}
 
-	void FixedUpdate() {
-		if( target != null ) {
+	void FixedUpdate() 
+    {
+		if( target != null ) 
+        {
 			Transform trans = target.followTransform;
 			float t = ( target.instant ? 1 : ( Time.time - startT ) * inverseTimeToTarget );
 
@@ -82,48 +93,57 @@ public class CameraController : MonoBehaviour {
 		}
 	}
 
-	public void AddToQueue( CameraFollowable followable, bool atEnd = false ) {
-		if( atEnd ) {
+	public void AddToQueue( CameraFollowable followable, bool atEnd = false ) 
+    {
+		if( atEnd ) 
+        {
 			followQueue.AddLast( followable );
 			if( followQueue.Count == 1 )
 				target = followable;
 			else if( followable.priority > target.priority )
 				target = followable;
-		} else {
+		} else 
+        {
 			followQueue.AddFirst( followable );
 			if( followQueue.Count == 1 || followable.priority >= target.priority )
 				target = followable;
 		}
 	}
 
-	public void RemoveFromQueue( CameraFollowable followable ) {
+	public void RemoveFromQueue( CameraFollowable followable ) 
+    {
 		bool wasFirst = ( followable == target );
 		followQueue.Remove( followable );
 
-		if( wasFirst ) {
+		if( wasFirst ) 
 			target = highestPriorityTarget;
-		}
 	}
 
-	public void ClearQueue() {
+	public void ClearQueue() 
+    {
 		followQueue.Clear();
 		target = startTarget;
 	}
 
-	public void Reset() {
+	public void Reset() 
+    {
 		target = highestPriorityTarget;
 	}
 
-	public Vector3 moveRight {
-		get {
+	public Vector3 moveRight 
+    {
+		get 
+        {
 			Vector3 ret = transform.right;
 			ret.y = 0;
 			return ret.normalized;
 		}
 	}
 
-	public Vector3 moveForward {
-		get {
+	public Vector3 moveForward 
+    {
+		get 
+        {
 			Vector3 ret = transform.forward;
 			ret.y = 0;
 			return ret.normalized;

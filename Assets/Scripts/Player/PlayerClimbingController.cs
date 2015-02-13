@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerClimbingController : MonoBehaviour {
+public class PlayerClimbingController : MonoBehaviour 
+{
 	public Player player;
 	public PlayerMovementController movementController;
 	public PlayerAnimationController animationController;
@@ -23,14 +24,16 @@ public class PlayerClimbingController : MonoBehaviour {
 		if( player.paused )
 			return;
 
-		if( player.state != Player.State.CLIMBING ) {
+		if( player.state != Player.State.CLIMBING ) 
+        {
 			CheckClimbing();
 			return;
 		}
 
 		List<Pencil> temp = climbables;
 		climbables = new List<Pencil>();
-		foreach( Pencil pencil in temp ) {
+		foreach( Pencil pencil in temp ) 
+        {
 			if( pencil != null )
 				climbables.Add( pencil );
 		}
@@ -43,7 +46,6 @@ public class PlayerClimbingController : MonoBehaviour {
 			movementController.Jump();
 
             lastJump = Time.time;
-
             return;
         }
 
@@ -110,9 +112,7 @@ public class PlayerClimbingController : MonoBehaviour {
 
 	private Pencil _currentClimbable = null;
 	private Pencil currentClimbable {
-		get {
-			return _currentClimbable;
-		}
+		get {return _currentClimbable;}
 		set {
 			_currentClimbable = value;
 
@@ -127,19 +127,23 @@ public class PlayerClimbingController : MonoBehaviour {
 		}
 	}
 
-	private Pencil closestClimbable {
-		get {
+	private Pencil closestClimbable 
+    {
+		get 
+        {
 			if( climbables.Count == 0 )
 				return null;
 
 			Pencil ret = null;
 			float nearestDist = 0;
-			foreach( Pencil pencil in climbables ) {
+			foreach( Pencil pencil in climbables ) 
+            {
 				if( pencil == null )
 					continue;
 
 				float sqrDist = ( climbCenter.position - pencil.transform.position ).sqrMagnitude;
-				if( ret == null || sqrDist < nearestDist ) {
+				if( ret == null || sqrDist < nearestDist ) 
+                {
 					ret = pencil;
 					nearestDist = sqrDist;
 				}
@@ -149,22 +153,28 @@ public class PlayerClimbingController : MonoBehaviour {
 		}
 	}
 
-	private Pencil bestClimbUp {
-		get {
+	private Pencil bestClimbUp 
+    {
+		get 
+        {
 			if( currentClimbable == null )
 				return null;
 
 			Pencil ret = null;
 			float xOffset = 0;
-			if( currentClimbable.parent != null && currentClimbable.parent.transform.position.y > currentClimbable.transform.position.y ) {
+			if( currentClimbable.parent != null && currentClimbable.parent.transform.position.y > currentClimbable.transform.position.y ) 
+            {
 				ret = currentClimbable.parent as Pencil;
 				xOffset = Mathf.Abs( ret.transform.position.x - currentClimbable.transform.position.x );
 			}
 
-			foreach( Ink child in currentClimbable.children ) {
-				if( child.transform.position.y > currentClimbable.transform.position.y ) {
+			foreach( Ink child in currentClimbable.children ) 
+            {
+				if( child.transform.position.y > currentClimbable.transform.position.y ) 
+                {
 					float curXOffset = Mathf.Abs( child.transform.position.x - currentClimbable.transform.position.x );
-					if( ret == null || curXOffset < xOffset ) {
+					if( ret == null || curXOffset < xOffset ) 
+                    {
 						ret = child as Pencil;
 						xOffset = curXOffset;
 					}
@@ -175,22 +185,27 @@ public class PlayerClimbingController : MonoBehaviour {
 		}
 	}
 
-	private Pencil bestClimbDown {
+	private Pencil bestClimbDown 
+    {
 		get {
 			if( currentClimbable == null )
 				return null;
 			
 			Pencil ret = null;
 			float xOffset = 0;
-			if( currentClimbable.parent != null && currentClimbable.parent.transform.position.y < currentClimbable.transform.position.y ) {
+			if( currentClimbable.parent != null && currentClimbable.parent.transform.position.y < currentClimbable.transform.position.y ) 
+            {
 				ret = currentClimbable.parent as Pencil;
 				xOffset = Mathf.Abs( ret.transform.position.x - currentClimbable.transform.position.x );
 			}
 			
-			foreach( Ink child in currentClimbable.children ) {
-				if( child.transform.position.y < currentClimbable.transform.position.y ) {
+			foreach( Ink child in currentClimbable.children ) 
+            {
+				if( child.transform.position.y < currentClimbable.transform.position.y ) 
+                {
 					float curXOffset = Mathf.Abs( child.transform.position.x - currentClimbable.transform.position.x );
-					if( ret == null || curXOffset < xOffset ) {
+					if( ret == null || curXOffset < xOffset ) 
+                    {
 						ret = child as Pencil;
 						xOffset = curXOffset;
 					}

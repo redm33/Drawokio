@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpawnPoint : MonoBehaviour {
+public class SpawnPoint : MonoBehaviour 
+{
 
 	public static int layer = 17;
-
 	public int index = 0;
 
 	public bool spawnIn3D = false;

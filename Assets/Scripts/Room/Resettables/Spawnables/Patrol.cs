@@ -2,14 +2,16 @@
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Patrol : Spawnable {
+public class Patrol : Spawnable 
+{
 
 	public bool startRunning = true;
 	public bool running = true;
 
 	public float speed = 1.0f;
 
-	public enum EndBehaviour {
+	public enum EndBehaviour 
+    {
 		DESTROY,
 		STOP,
 		LOOP,
@@ -18,7 +20,8 @@ public class Patrol : Spawnable {
 	public EndBehaviour endBehaviour = EndBehaviour.DESTROY;
 
 	[System.Serializable]
-	public class Stop {
+	public class Stop 
+    {
 		public float duration = 1;
 		public int step = 0;
 	}
@@ -34,42 +37,45 @@ public class Patrol : Spawnable {
 	void Awake()
 	{
 		startPos = transform.position;
-
 		running = startRunning;
 	}
 
 	public override void PerformReset ()
 	{
 		transform.position = startPos;
-
 		cur = 0;
-
 		running = startRunning;
 	}
 
 	void FixedUpdate() 
 	{
-		if( stopped ) {
-			if( (stopLeft -= Time.fixedDeltaTime) < 0 ) {
-				stopped = false;
-
-				OnEnd();
-			} else
-				return;
+		if( stopped ) 
+        {
+            if ((stopLeft -= Time.fixedDeltaTime) < 0)
+            {
+                stopped = false;
+                OnEnd();
+            }
+            else
+                return;
 		}
 
-		if( running && !paused && cur < patrolPoints.Length ) {
+		if( running && !paused && cur < patrolPoints.Length )
+        {
 			float movement = speed * Time.fixedDeltaTime;
 
 			Vector3 diff = patrolPoints[cur].position - transform.position;
 
-			if( diff.sqrMagnitude < movement * movement ) {
+			if( diff.sqrMagnitude < movement * movement ) 
+            {
 				rigidbody.MovePosition( patrolPoints[cur].position );
 
 				cur++;
 
-				foreach( Stop stop in stops ) {
-					if( stop.step == cur ) {
+				foreach( Stop stop in stops ) 
+                {
+					if( stop.step == cur ) 
+                    {
 						stopped = true;
 						stopLeft = stop.duration;
 						break;
@@ -78,7 +84,9 @@ public class Patrol : Spawnable {
 
 				if( !stopped )
 					OnEnd();
-			} else {
+			} 
+            else 
+            {
 				rigidbody.MovePosition( transform.position + diff.normalized * movement );
 			}
 		}
@@ -86,8 +94,10 @@ public class Patrol : Spawnable {
 
 	void OnEnd()
 	{
-		if( cur == patrolPoints.Length ) {
-			switch( endBehaviour ) {
+		if( cur == patrolPoints.Length ) 
+        {
+			switch( endBehaviour ) 
+            {
 			case EndBehaviour.DESTROY:
 				Destroy ( gameObject );
 				break;

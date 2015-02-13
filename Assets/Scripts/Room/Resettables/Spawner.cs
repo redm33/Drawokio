@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Spawner : Resettable {
+public class Spawner : Resettable 
+{
 
 	public Transform[] patrolPoints;
 
@@ -12,11 +13,14 @@ public class Spawner : Resettable {
 	public float interval = 1;
 	float elapsed = 0;
 
-	public override bool paused {
-		get {
+	public override bool paused 
+    {
+		get 
+        {
 			return base.paused;
 		}
-		set {
+		set 
+        {
 			base.paused = value;
 
 			foreach( Spawnable obj in spawnables )
@@ -27,12 +31,12 @@ public class Spawner : Resettable {
 
 	public override void PerformReset ()
 	{
-		foreach( Spawnable obj in spawnables ) {
+		foreach( Spawnable obj in spawnables ) 
+        {
 			if( obj != null )
 				Destroy ( obj.gameObject );
 		}
 		spawnables = new List<Spawnable>();
-
 		elapsed = interval;
 	}
 
@@ -45,15 +49,18 @@ public class Spawner : Resettable {
 	{
 		List<Spawnable> temp = spawnables;
 		spawnables = new List<Spawnable>();
-		foreach( Spawnable obj in temp ) {
+		foreach( Spawnable obj in temp ) 
+        {
 			if( obj != null )
 				spawnables.Add( obj );
 		}
 
-		if( !paused ) {
+		if( !paused ) 
+        {
 			elapsed += Time.deltaTime;
 
-			if( elapsed > interval ) {
+			if( elapsed > interval ) 
+            {
 				elapsed -= interval;
 
 				Spawnable spawnable = Instantiate( spawnablePrefab, transform.position, spawnablePrefab.transform.rotation ) as Spawnable;

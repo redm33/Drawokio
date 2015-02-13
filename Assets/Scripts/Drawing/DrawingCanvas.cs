@@ -2,18 +2,22 @@
 using System.Collections;
 
 [AddComponentMenu("Game/Drawing/Canvas")]
-public class DrawingCanvas : MonoBehaviour {
+public class DrawingCanvas : MonoBehaviour 
+{
 	public static int layer = 11;
 
-	public enum LockType {
+	public enum LockType 
+    {
 		LOCK_X,
 		LOCK_Y,
 		LOCK_Z
 	}
 	public LockType lockType = LockType.LOCK_Z;
 
-	public static RigidbodyConstraints GetConstraintsForLockType( LockType lockType ) {
-		switch( lockType ) {
+	public static RigidbodyConstraints GetConstraintsForLockType( LockType lockType ) 
+    {
+		switch( lockType ) 
+        {
 		case LockType.LOCK_X:
 			return RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
 		case LockType.LOCK_Y:
@@ -23,8 +27,10 @@ public class DrawingCanvas : MonoBehaviour {
 		}
 	}
 
-	public RigidbodyConstraints drawingConstraints {
-		get {
+	public RigidbodyConstraints drawingConstraints 
+    {
+		get 
+        {
 			return GetConstraintsForLockType(lockType);
 		}
 	}

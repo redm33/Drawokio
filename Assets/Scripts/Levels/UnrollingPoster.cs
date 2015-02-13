@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UnrollingPoster : Resettable {
+public class UnrollingPoster : Resettable 
+{
 
 	public float resetTime = 5;
 	public float timeElapsed = 0;
 
-	private enum State {
+	private enum State 
+    {
 		WAITING,
 		UNROLLING,
 		ROLLING
@@ -17,11 +19,14 @@ public class UnrollingPoster : Resettable {
 	public Transform transporter;
 	public CameraFollowable followable;
 
-	public override bool paused {
-		get {
+	public override bool paused 
+    {
+		get 
+        {
 			return base.paused;
 		}
-		set {
+		set 
+        {
 			base.paused = value;
 
 			if( paused )
@@ -41,7 +46,8 @@ public class UnrollingPoster : Resettable {
 		state = State.WAITING;
 	}
 
-	void OnTriggerEnter( Collider other ) {
+	void OnTriggerEnter( Collider other ) 
+    {
 		if( state != State.WAITING )
 			return;
 
@@ -53,11 +59,13 @@ public class UnrollingPoster : Resettable {
 		CameraController.instance.AddToQueue( followable );
 	}
 
-	void Update() {
+	void Update() 
+    {
 		if( state == State.WAITING )
 			return;
 
-		if( (timeElapsed+=Time.deltaTime) > resetTime ) {
+		if( (timeElapsed+=Time.deltaTime) > resetTime ) 
+        {
 			if( state == State.UNROLLING ) {
 				state = State.ROLLING;
 				timeElapsed = 0;
@@ -65,7 +73,9 @@ public class UnrollingPoster : Resettable {
 				animation.Play();
 				Player.instance.state = Player.State.WALKING;
 				CameraController.instance.RemoveFromQueue( followable );
-			} else {
+			} 
+            else 
+            {
 				state = State.WAITING;
 				animation["Take 001"].speed = 1;
 				animation.Stop();

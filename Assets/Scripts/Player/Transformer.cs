@@ -2,7 +2,8 @@
 using System.Collections;
 
 [AddComponentMenu("Game/Player/Transformer")]
-public class Transformer : MonoBehaviour {
+public class Transformer : MonoBehaviour 
+{
 
 	public static int layer = 10;
 

@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Pickup : Resettable {
+public class Pickup : Resettable 
+{
 
-	public enum Type {
+	public enum Type 
+    {
 		PENCIL,
 		CHARCOAL
 	}
 	public Type type;
 
-	void OnTriggerEnter( Collider other ) {
+	void OnTriggerEnter( Collider other ) 
+    {
 		if( type == Type.PENCIL )
 			Drawer.instance.hasPencil = true;
 		else if( type == Type.CHARCOAL )
@@ -29,8 +32,10 @@ public class Pickup : Resettable {
 		pickedUp = false;
 	}
 
-	public override bool isPickup {
-		get {
+	public override bool isPickup 
+    {
+		get 
+        {
 			return true;
 		}
 	}

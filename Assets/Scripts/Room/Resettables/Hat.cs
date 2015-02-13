@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Hat : Resettable {
-
+public class Hat : Resettable 
+{
 	public bool startInactive = false;
-
 	public int hatIndex = 0;
 
 	public override void PerformReset ()
@@ -13,7 +12,8 @@ public class Hat : Resettable {
 		gameObject.SetActive(!startInactive);
 	}
 
-	void OnTriggerEnter( Collider other ) {
+	void OnTriggerEnter( Collider other ) 
+    {
 		Room.instance.SetHat( hatIndex );
 		gameObject.SetActive(false);
 		other.GetComponent<Player>().SetHat(hatIndex);
@@ -21,8 +21,10 @@ public class Hat : Resettable {
 		pickedUp = true;
 	}
 
-	public override bool isPickup {
-		get {
+	public override bool isPickup 
+    {
+		get 
+        {
 			return true;
 		}
 	}

@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
-public class Profile {
+public class Profile 
+{
 	public string name = "Unknown";
 	public string filename = "";
 
@@ -12,12 +13,13 @@ public class Profile {
 
 	public bool isMaster = false;
 
-	public void ReportLevel( int level, int part, int pen, int pencil, int charcoal ) {
-
+	public void ReportLevel( int level, int part, int pen, int pencil, int charcoal ) 
+    {
 		if( !isMaster )
 			RemoveAfter( level, part );
 
-		foreach( LevelInfo info in levels ) {
+		foreach( LevelInfo info in levels ) 
+        {
 			if( level == info.level && part == info.part ) {
 				info.pen = pen;
 				info.pencil = pencil;
@@ -38,14 +40,17 @@ public class Profile {
 		Save ();
 	}
 
-	public void SortLevels() {
+	public void SortLevels() 
+    {
 		List<LevelInfo> temp = levels;
 		levels = new List<LevelInfo>();
 
-		while( temp.Count > 0 ) {
+		while( temp.Count > 0 ) 
+        {
 			LevelInfo best = null;
 
-			foreach( LevelInfo info in temp ) {
+			foreach( LevelInfo info in temp ) 
+            {
 				if( best == null )
 					best = info;
 				else if( info.level < best.level || info.part < best.part )
@@ -57,17 +62,20 @@ public class Profile {
 		}
 	}
 
-	public void RemoveAfter( int level, int part ) {
+	public void RemoveAfter( int level, int part ) 
+    {
 		List<LevelInfo> temp = levels;
 		levels = new List<LevelInfo>();
 
-		foreach( LevelInfo info in temp ) {
+		foreach( LevelInfo info in temp ) 
+        {
 			if( info.level < level || info.part <= part )
 				levels.Add( info );
 		}
 	}
 
-	public void Reset() {
+	public void Reset() 
+    {
 		if( isMaster )
 			return;
 
@@ -77,7 +85,8 @@ public class Profile {
 		Save ();
 	}
 
-	public class LevelInfo {
+	public class LevelInfo 
+    {
 		public int level = 0;
 		public int part = 0;
 		public int pen = 0;
@@ -85,7 +94,8 @@ public class Profile {
 		public int charcoal = 0;
 	}
 
-	public void Save() {
+	public void Save() 
+    {
 		if( isMaster )
 			return;
 
@@ -93,7 +103,8 @@ public class Profile {
 		t.Start();
 	}
 
-	private void Save_Thread() {
+	private void Save_Thread() 
+    {
 		
 		StreamWriter writer;
 		if( File.Exists( filename ) )
@@ -102,7 +113,8 @@ public class Profile {
 			writer = File.CreateText( filename );
 		using( writer ) {
 			writer.WriteLine(name);
-			foreach( LevelInfo info in levels ) {
+			foreach( LevelInfo info in levels ) 
+            {
 				writer.WriteLine( info.level.ToString() + "," + info.part.ToString() + "," + info.pen.ToString() + "," + info.pencil.ToString() + "," + info.charcoal.ToString() );
 			}
 		}

@@ -2,13 +2,15 @@
 using System.Collections;
 
 [AddComponentMenu("Game/Player/Animation Controller")]
-public class PlayerAnimationController : MonoBehaviour {
+public class PlayerAnimationController : MonoBehaviour 
+{
 	public Player player;
 	public PlayerTransformationController transformationController;
 
 	public new Animation animation;
 
-	public enum State {
+	public enum State 
+    {
 		NONE,
 		IDLE,
 		WALKING,
@@ -20,13 +22,16 @@ public class PlayerAnimationController : MonoBehaviour {
 	}
 
 	private State _state = State.NONE;
-	public State state {
+	public State state 
+    {
 		get { return _state; }
-		set {
+		set 
+        {
 			if( _state == value )
 				return;
 
-			switch( _state ) {
+			switch( _state ) 
+            {
 			case State.IDLE:
 			case State.WALKING:
 			case State.RUNNING:
@@ -37,7 +42,8 @@ public class PlayerAnimationController : MonoBehaviour {
 
 			_state = value;
 			
-			switch( _state ) {
+			switch( _state ) 
+            {
 			case State.IDLE:
 				animation.CrossFade( "Idle" );
 				break;
@@ -63,7 +69,8 @@ public class PlayerAnimationController : MonoBehaviour {
 		}
 	}
 
-	public enum Direction {
+	public enum Direction 
+    {
 		LEFT,
 		RIGHT,
 		FORWARD
@@ -71,24 +78,28 @@ public class PlayerAnimationController : MonoBehaviour {
 	[HideInInspector]
 	public Direction direction = Direction.RIGHT;
 
-	void Awake() {
+	void Awake() 
+    {
 		state = State.IDLE;
 	}
 	
-	void Update() {
+	void Update() 
+    {
 		Vector3 euler;
 
 		if( state == State.JUMPING && !animation.isPlaying )
 			state = State.AIRBORNE;
 
-		if( transformationController.in3D ) {
+		if( transformationController.in3D ) 
+        {
 			euler = animation.transform.localEulerAngles;
 			euler.y = 0;
 			animation.transform.localEulerAngles = euler;
 			return;
 		}
 
-		switch( state ) {
+		switch( state ) 
+        {
 		case State.IDLE:
 		case State.CLIMBING:
 			euler = animation.transform.localEulerAngles;
@@ -99,7 +110,8 @@ public class PlayerAnimationController : MonoBehaviour {
 		case State.RUNNING:
 		case State.AIRBORNE:
 			euler = animation.transform.localEulerAngles;
-			switch( direction ) {
+			switch( direction ) 
+            {
 			case Direction.FORWARD:
 				euler.y = 180;
 				break;
@@ -117,11 +129,13 @@ public class PlayerAnimationController : MonoBehaviour {
 		}
 	}
 
-	public void Pause() {
+	public void Pause() 
+    {
 		animation.Stop();
 	}
 
-	public void Start() {
+	public void Start() 
+    {
 		State temp = state;
 		state = State.NONE;
 		state = temp;

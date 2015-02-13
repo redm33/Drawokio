@@ -3,14 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 
 [AddComponentMenu("Game/Ink/Drawer")]
-public class Drawer : MonoBehaviour {
+public class Drawer : MonoBehaviour 
+{
 	public static Drawer instance = null;
 
 	/**
 	 * Generic
 	 */
 
-	void Awake() {
+	void Awake() 
+    {
 		instance = this;
 	}
 
@@ -31,28 +33,30 @@ public class Drawer : MonoBehaviour {
 			Destroy ( child.gameObject );
 	}
 	
-	void Update() {
+	void Update() 
+    {
 		// Cheatz Yo
-		if( Input.GetButtonDown("Refill") ) {
+		if( Input.GetButtonDown("Refill") ) 
 			hasPencil = hasCharcoal = true;
-		}
 
 		StepMenu( Time.deltaTime );
 
 		if( !CheckMenu() || !hasCurrentInk )
 			return;
 
-		if( GUIUtility.hotControl == 0 && Input.GetButton( "Draw" ) ) {
-			
+		if( GUIUtility.hotControl == 0 && Input.GetButton( "Draw" ) ) 
+        {		
 			RaycastHit hit;
-			if( Physics.Raycast( Camera.main.ScreenPointToRay( Input.mousePosition ), out hit, 1000, raycastMask ) ) {
+			if( Physics.Raycast( Camera.main.ScreenPointToRay( Input.mousePosition ), out hit, 1000, raycastMask ) ) 
+            {
 				
 				bool isCanvas = ( hit.collider.gameObject.layer == DrawingCanvas.layer );
 				bool isConnector = ( hit.collider.tag == "Connector" );
 				
-				if( drawing ) {
-					
-					if( isCanvas ) {
+				if( drawing ) 
+                {
+					if( isCanvas ) 
+                    {
 						DrawingCanvas canvas = hit.collider.GetComponent<DrawingCanvas>();
 
 						if( lastNode == null && startConnector == null )
@@ -73,19 +77,26 @@ public class Drawer : MonoBehaviour {
 								}
 							}
 						}
-					} else if( isConnector ) {
-						if( lastNode != null && lastNode.ConnectTo( hit.collider.attachedRigidbody.GetComponent<Connector>() ) ) {
+					} 
+                    else if( isConnector ) 
+                    {
+						if( lastNode != null && lastNode.ConnectTo( hit.collider.attachedRigidbody.GetComponent<Connector>() ) ) 
 							lastNode = currentRoot = null;
-						}
+			
 						StopDrawing();
-					} else {
+					} 
+                    else 
+                    {
 						StopDrawing();
 					}
 					
-				} else /* if not drawing already */ {
+				} 
+                else /* if not drawing already */ 
+                {
 					DrawingCanvas canvas = hit.collider.GetComponent<DrawingCanvas>();
 					
-					if( isCanvas ) {
+					if( isCanvas ) 
+                    {
 						//Level.current.paused = true;
 						PlaceInk( hit.point, canvas );
 						drawing = true;
@@ -94,36 +105,43 @@ public class Drawer : MonoBehaviour {
 						startConnector = hit.collider.GetComponent<Connector>();
 						//drawing = true;
 					}*/
-					
 				}
 				
-			} else /* if raycast didn't hit anything */ {
+			} 
+            else /* if raycast didn't hit anything */ 
 				StopDrawing();
-			}
 			
-		} else /* if draw button not pressed */ {
+		} 
+        else /* if draw button not pressed */ 
 			StopDrawing();
-		}
 	}
 
 	float currentTimeout = 0;
 
-	private void PlaceInk( Vector3 pos, DrawingCanvas canvas ) {
+	private void PlaceInk( Vector3 pos, DrawingCanvas canvas ) 
+    {
 		bool placeNew = true;
 
-		if( currentInk.connects ) {
+		if( currentInk.connects ) 
+        {
 			Collider[] hits = Physics.OverlapSphere( pos, currentInk.connectRadius, spherecastMask );
-			if( hits.Length > 0 ) {
-				foreach( Collider hit in hits ) {
-					if( hit.tag == "Connector" ) {
+			if( hits.Length > 0 ) 
+            {
+				foreach( Collider hit in hits ) 
+                {
+					if( hit.tag == "Connector" ) 
+                    {
 						Connector connector = hit.attachedRigidbody.GetComponent<Connector>();
 
-						if( lastNode == null ) {
+						if( lastNode == null ) 
+                        {
 							startConnector = connector;
 							connectStart = pos;
 							placeNew = false;
 							break;
-						} else if( lastNode.ConnectTo( connector ) ) {
+						} 
+                        else if( lastNode.ConnectTo( connector ) ) 
+                        {
 							startConnector = connector;
 							connectStart = pos;
 							placeNew = false;
@@ -135,7 +153,8 @@ public class Drawer : MonoBehaviour {
 			}
 		}
 
-		if( placeNew ) {
+		if( placeNew ) 
+        {
 			Ink node = Instantiate( currentInk, pos, canvas.transform.rotation ) as Ink;
 			node.rigidbody.constraints = canvas.drawingConstraints;
 			if( node.type == Connector.Type.CHARCOAL )
@@ -147,14 +166,14 @@ public class Drawer : MonoBehaviour {
 				roots.Add( node );
 
 				node.timeoutRemaining = currentTimeout = node.baseTimeout;
-			} else {
+			} 
+            else 
 				node.timeoutRemaining = ( currentTimeout += node.timeoutIncrement );
-			}
 
-			if( lastNode != null ) {
+			if( lastNode != null ) 
 				lastNode.AddChild( node );
-			}
-			lastNode = node;
+						
+            lastNode = node;
 
 			node.OnCreated();
 			
@@ -162,18 +181,21 @@ public class Drawer : MonoBehaviour {
 				node.ConnectTo( startConnector );
 			startConnector = null;
 
-			if( !audio.isPlaying && node.drawingSound != null ) {
+			if( !audio.isPlaying && node.drawingSound != null ) 
+            {
 				audio.clip = node.drawingSound;
 				audio.Play ();
 			}
 		}
 	}
 
-	private void StopDrawing() {
+	private void StopDrawing() 
+    {
 		if( !drawing )
 			return;
 
-		foreach( Ink root in roots ) {
+		foreach( Ink root in roots ) 
+        {
 			root.OnDrawEnd();
 		}
 		
@@ -191,13 +213,16 @@ public class Drawer : MonoBehaviour {
 	 */
 	
 	public int[] raycastLayers;
-	private int raycastMask {
-		get {
+	private int raycastMask 
+    {
+		get 
+        {
 			if( raycastLayers == null )
 				return 0;
 			
 			int ret = 0;
-			foreach( int layer in raycastLayers ) {
+			foreach( int layer in raycastLayers ) 
+            {
 				ret += 1 << layer;
 			}
 			
@@ -206,8 +231,10 @@ public class Drawer : MonoBehaviour {
 	}
 	
 	public int[] spherecastLayers;
-	public int spherecastMask {
-		get {
+	public int spherecastMask 
+    {
+		get 
+        {
 			if( spherecastLayers == null )
 				return 0;
 			
@@ -229,13 +256,17 @@ public class Drawer : MonoBehaviour {
 	public bool hasPencil = false;
 	public bool hasCharcoal = false;
 
-	public bool hasCurrentInk {
-		get {
+	public bool hasCurrentInk 
+    {
+		get 
+        {
 			return HasInk( currentInkIndex );
 		}
 	}
-	public bool HasInk( int index ) {
-		switch( index ) {
+	public bool HasInk( int index ) 
+    {
+		switch( index ) 
+        {
 		case 0:
 			return hasPencil;
 		case 1:
@@ -246,9 +277,11 @@ public class Drawer : MonoBehaviour {
 	}
 	
 	private int _currentInkIndex = 0;
-	public int currentInkIndex {
+	public int currentInkIndex 
+    {
 		get { return _currentInkIndex; }
-		set {
+		set 
+        {
 			_currentInkIndex = value;
 			if( _currentInkIndex >= inkButtons.Length )
 				_currentInkIndex = 0;
@@ -257,11 +290,15 @@ public class Drawer : MonoBehaviour {
 		}
 	}
 	
-	public Ink currentInk {
+	public Ink currentInk 
+    {
 		get { return ( currentInkIndex >= 0 && currentInkIndex < inkTypes.Length ? inkTypes[currentInkIndex] : null ); }
-		set {
-			for( int i = 0; i < inkTypes.Length; i++ ) {
-				if( inkTypes[i] == value ) {
+		set 
+        {
+			for( int i = 0; i < inkTypes.Length; i++ ) 
+            {
+				if( inkTypes[i] == value ) 
+                {
 					currentInkIndex = i;
 					return;
 				}
@@ -278,7 +315,8 @@ public class Drawer : MonoBehaviour {
 	private bool _uiOpen = false;
 	public bool uiOpen {
 		get { return _uiOpen; }
-		set {
+		set 
+        {
 			if( _uiOpen == value )
 				return;
 
@@ -286,10 +324,9 @@ public class Drawer : MonoBehaviour {
 
 			Room.instance.paused = value;
 
-			if( uiOpen ) {
-			} else {
+			if( uiOpen ) {} 
+            else 
 				StopDrawing();
-			}
 		}
 	}
 	public float menuSpeed = 1;
@@ -303,22 +340,23 @@ public class Drawer : MonoBehaviour {
 
 	public GUITexture arrowTexture;
 
-	bool CheckMenu() {
-		if( Input.GetButtonDown( "DrawMode" ) && ( Player.instance != null && !Player.instance.transformationController.in3D ) ) {
+	bool CheckMenu() 
+    {
+		if( Input.GetButtonDown( "DrawMode" ) && ( Player.instance != null && !Player.instance.transformationController.in3D ) ) 
 			uiOpen = !uiOpen;
-		} else if( Player.instance.transformationController.in3D )
+		else if( Player.instance.transformationController.in3D )
 			uiOpen = false;
 
 		return uiOpen;
 	}
 
-	void StepMenu(float dt) {
+	void StepMenu(float dt) 
+    {
 
-		if( uiOpen ) {
+		if( uiOpen ) 
 			menuProgress = Mathf.Min( 1, menuProgress + dt * menuSpeed );
-		} else {
+	    else 
 			menuProgress = Mathf.Max( 0, menuProgress - dt * menuSpeed );
-		}
 
 		toolboxTransform.position = Vector3.Lerp( closedToolboxPosition, openToolboxPosition, menuProgress );
 
@@ -338,8 +376,10 @@ public class Drawer : MonoBehaviour {
 		if( pressed && ( Player.instance != null && !Player.instance.transformationController.in3D ) && arrowTexture.GetScreenRect().Contains( Input.mousePosition ) )
 			uiOpen = !uiOpen;
 
-		for( int i = 0; i < inkButtons.Length; i++ ) {
-			if( !HasInk(i) ) {
+		for( int i = 0; i < inkButtons.Length; i++ ) 
+        {
+			if( !HasInk(i) ) 
+            {
 				inkButtons[i].gameObject.SetActive(false);
 				continue;
 			}

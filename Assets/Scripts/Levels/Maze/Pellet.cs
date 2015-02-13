@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Pellet : Resettable {
+public class Pellet : Resettable 
+{
 
-	void OnTriggerEnter( Collider other ) {
+	void OnTriggerEnter( Collider other ) 
+    {
 		Gate.instance.gathered++;
 
 		gameObject.SetActive(false);

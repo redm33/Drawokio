@@ -4,7 +4,8 @@ using System.IO;
 using System.Collections.Generic;
 
 [AddComponentMenu("Game/Profiles/Profile Manager")]
-public class ProfileManager : MonoBehaviour {
+public class ProfileManager : MonoBehaviour 
+{
 	public static ProfileManager instance;
 
 	public string directory = "Profiles/";
@@ -12,31 +13,38 @@ public class ProfileManager : MonoBehaviour {
 	public List<Profile> loadedProfiles = new List<Profile>();
 	public Profile currentProfile = null;
 
-	void Awake() {
+	void Awake() 
+    {
 		instance = this;
 
 		if( !Directory.Exists( directory ) )
 			Directory.CreateDirectory( directory );
 
 		string[] files = Directory.GetFiles( directory, "*.save" );
-		foreach( string filename in files ) {
-			try {
+		foreach( string filename in files ) 
+        {
+			try 
+            {
 				ProcessFile(filename);
-			} catch( System.Exception ex ) {
+			} catch( System.Exception ex ) 
+            {
 				Debug.LogError( "Failed to load file " + filename );
 				Debug.LogError( ex );
 			}
 		}
 	}
 
-	bool ProcessFile( string filename ) {
-		if( !File.Exists( filename ) ) {
+	bool ProcessFile( string filename ) 
+    {
+		if( !File.Exists( filename ) ) 
+        {
 			Debug.LogError( "No file exists at " + filename );
 			return false;
 		}
 
 		StreamReader reader = File.OpenText( filename );
-		if( reader == null ) {
+		if( reader == null ) 
+        {
 			Debug.LogError( "Failed to open file at " + filename );
 			return false;
 		}
@@ -45,16 +53,19 @@ public class ProfileManager : MonoBehaviour {
 		Profile profile = new Profile();
 		profile.filename = filename;
 
-		if( (line = reader.ReadLine()) == null ) {
+		if( (line = reader.ReadLine()) == null ) 
+        {
 			Debug.LogError( "Invalid file at " + filename );
 			return false;
 		}
 
 		profile.name = line.Trim();
 
-		while( (line = reader.ReadLine()) != null ) {
+		while( (line = reader.ReadLine()) != null ) 
+        {
 			string[] parts = line.Split(',');
-			if( parts.Length < 5 ) {
+			if( parts.Length < 5 ) 
+            {
 				Debug.LogError( "Invalid line found in " + filename + ": " + line );
 				return false;
 			}
@@ -76,14 +87,14 @@ public class ProfileManager : MonoBehaviour {
 		return true;
 	}
 
-	public Profile CreateProfile( string name ) {
+	public Profile CreateProfile( string name ) 
+    {
 		if( !IsNameValid(name) )
 			return null;
 
 		string path = directory + name + ".save";
-		if( File.Exists( path ) ) {
+		if( File.Exists( path ) )
 			return null;
-		}
 
 		Profile profile = new Profile();
 		profile.name = name;
@@ -96,11 +107,13 @@ public class ProfileManager : MonoBehaviour {
 		return profile;
 	}
 
-	public static bool IsNameValid( string name ) {
+	public static bool IsNameValid( string name ) 
+    {
 		if( name.Length == 0 )
 			return false;
 
-		for( int i = 0; i < name.Length; i++ ) {
+		for( int i = 0; i < name.Length; i++ ) 
+        {
 			char cur = name[i];
 			if( (cur < 'a' || cur > 'z') && (cur < 'A' || cur > 'Z') && (cur < '0' || cur > '9') )
 				return false;

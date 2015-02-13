@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EndingController : MonoBehaviour {
+public class EndingController : MonoBehaviour 
+{
 
 	public static EndingController instance;
 
@@ -10,7 +11,8 @@ public class EndingController : MonoBehaviour {
 	public TextMesh text;
 
 	[System.Serializable]
-	public class Step {
+	public class Step 
+    {
 		public float duration = 1;
 		[HideInInspector]
 		public float elapsed = 0;
@@ -26,7 +28,8 @@ public class EndingController : MonoBehaviour {
 		{
 			elapsed = 0;
 
-			if( animation != null ) {
+			if( animation != null ) 
+            {
 				animation.Rewind();
 				animation.Stop();
 			}
@@ -37,14 +40,14 @@ public class EndingController : MonoBehaviour {
 
 		public void Start()
 		{
-			if( followable != null ) {
+			if( followable != null ) 
+            {
 				CameraController.instance.Reset();
 				CameraController.instance.AddToQueue( followable );
 			}
 
-			if( animation != null ) {
+			if( animation != null ) 
 				animation.Play();
-			}
 
 			foreach( GameObject obj in gameObjectsToEnable )
 				obj.SetActive(true);
@@ -55,7 +58,8 @@ public class EndingController : MonoBehaviour {
 			if( skipStop )
 				return;
 
-			if( animation != null ) {
+			if( animation != null ) 
+            {
 				animation.Rewind();
 				animation.Stop();
 			}
@@ -84,8 +88,10 @@ public class EndingController : MonoBehaviour {
 	}
 
 	int index = -1;
-	public bool running {
-		get {
+	public bool running 
+    {
+		get 
+        {
 			return (index >= 0);
 		}
 	}
@@ -101,7 +107,8 @@ public class EndingController : MonoBehaviour {
 
 	public void Run()
 	{
-		if( running ) {
+		if( running ) 
+        {
 			Debug.LogWarning( "Tried to start the ending when it was already running!" );
 			return;
 		}
@@ -115,18 +122,19 @@ public class EndingController : MonoBehaviour {
 	void OnTriggerEnter( Collider other )
 	{
 		Run ();
-
 		Destroy ( other.gameObject );
 	}
 
 	void Update()
 	{
-		if( running ) {
-			if( !steps[index].Update( Time.deltaTime ) ) {
+		if( running ) 
+        {
+			if( !steps[index].Update( Time.deltaTime ) ) 
+            {
 
-				if( ++index == steps.Length ) {
+				if( ++index == steps.Length ) 
 					ResetAll ();
-				} else {
+				else {
 					steps[index-1].Stop();
 					steps[index].Start();
 				}

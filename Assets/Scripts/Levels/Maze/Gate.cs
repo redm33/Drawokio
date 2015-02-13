@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Gate : Resettable {
+public class Gate : Resettable 
+{
 
 	public static Gate instance;
 
 	public int gathered = 0;
 	public int total = 5;
 
-	void Awake() {
+	void Awake() 
+    {
 		instance = this;
 	}
 
@@ -17,7 +19,8 @@ public class Gate : Resettable {
 		gathered = 0;
 	}
 
-	void Update() {
+	void Update() 
+    {
 		bool active = ( gathered < total );
 
 		renderer.enabled = active;

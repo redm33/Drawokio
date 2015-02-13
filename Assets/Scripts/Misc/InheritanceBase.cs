@@ -9,30 +9,36 @@ using System.Collections;
  */
 
 [AddComponentMenu("Game/Misc/Inheritance Base")]
-public class InheritanceBase : MonoBehaviour {
+public class InheritanceBase : MonoBehaviour 
+{
 	protected virtual void OnAwake() {}
 	protected virtual void OnStart() {}
 	protected virtual void OnUpdate() {}
 	protected virtual void OnFixedUpdate() {}
 	protected virtual void OnLateUpdate() {}
 
-	void Awake() {
+	void Awake() 
+    {
 		OnAwake();
 	}
 
-	void Start() {
+	void Start() 
+    {
 		OnStart ();
 	}
 
-	void Update() {
+	void Update() 
+    {
 		OnUpdate ();
 	}
 
-	void FixedUpdate() {
+	void FixedUpdate() 
+    {
 		OnFixedUpdate();
 	}
 
-	void LateUpdate() {
+	void LateUpdate() 
+    {
 		OnLateUpdate();
 	}
 }

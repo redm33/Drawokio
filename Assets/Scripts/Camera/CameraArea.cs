@@ -11,14 +11,16 @@ public class CameraArea : MonoBehaviour {
 	private Collider cur;
 	bool inArea = false;
 
-	void OnTriggerEnter( Collider other ) {
+	void OnTriggerEnter( Collider other ) 
+    {
 		cur = other;
 		inArea = true;
 
 		cameraController.AddToQueue( followable );
 	}
 
-	void OnTriggerExit( Collider other ) {
+	void OnTriggerExit( Collider other ) 
+    {
 		inArea = false;
 		cur = null;
 

@@ -2,12 +2,14 @@
 using System.Collections;
 
 [AddComponentMenu("Game/Player/Transformation Controller")]
-public class PlayerTransformationController : MonoBehaviour {
+public class PlayerTransformationController : MonoBehaviour 
+{
 
 	public Player player;
 	public PlayerMovementController movementController;
 
-	public enum State {
+	public enum State 
+    {
 		IN_2D,
 		TRANSFORMING_2D_TO_3D,
 		IN_3D,
@@ -15,13 +17,16 @@ public class PlayerTransformationController : MonoBehaviour {
 	};
 	public State state { get; private set; }
 
-	public bool isTransforming {
+	public bool isTransforming 
+    {
 		get { return ( state == State.TRANSFORMING_2D_TO_3D || state == State.TRANSFORMING_3D_TO_2D ); }
 	}
-	public bool in2D {
+	public bool in2D 
+    {
 		get { return ( state == State.IN_2D ); }
 	}
-	public bool in3D {
+	public bool in3D 
+    {
 		get { return ( state == State.IN_3D ); }
 	}
 
@@ -51,11 +56,13 @@ public class PlayerTransformationController : MonoBehaviour {
 		rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 	}
 
-	public void StartTransform( Transform target, bool to3D, bool ignoreX = false, bool ignoreY = false, bool ignoreZ = false ) {
+	public void StartTransform( Transform target, bool to3D, bool ignoreX = false, bool ignoreY = false, bool ignoreZ = false ) 
+    {
 		player.state = Player.State.TRANSFORMING;
 
 		targetPos = target.position;
-		if( to3D ) {
+		if( to3D ) 
+        {
 			if( ignoreX )
 				targetPos.x = transform.position.x;
 			if( ignoreY )
@@ -68,79 +75,96 @@ public class PlayerTransformationController : MonoBehaviour {
 		startPos = transform.position;
 		startRot = transform.rotation;
 
-		if( to3D ) {
+		if( to3D ) 
+        {
 			transformationProgress = 0;
 			state = State.TRANSFORMING_2D_TO_3D;
-		} else {
+		} 
+        else 
+        {
 			transformationProgress = 1;
 			state = State.TRANSFORMING_3D_TO_2D;
 		}
 	}
 
-	void FixedUpdate() {
-		switch( state ) {
-		case State.IN_2D:
-			transformationProgress = 0;
-			UpdateTransform();
-			break;
-		case State.IN_3D:
-			transformationProgress = 1;
-			UpdateTransform();
-			break;
-		case State.TRANSFORMING_2D_TO_3D:
-			transformationProgress += Time.fixedDeltaTime*transformationSpeed;
-			UpdateTransform();
-			UpdatePosition();
+	void FixedUpdate() 
+    {
+		switch( state ) 
+        {
+		    case State.IN_2D:
+			    transformationProgress = 0;
+			    UpdateTransform();
+			    break;
+		    case State.IN_3D:
+			    transformationProgress = 1;
+			    UpdateTransform();
+			    break;
+		    case State.TRANSFORMING_2D_TO_3D:
+			    transformationProgress += Time.fixedDeltaTime*transformationSpeed;
+			    UpdateTransform();
+			    UpdatePosition();
 
-			if( transformationProgress >= 1 ) {
-				gameObject.layer = Player.layer3D;
-				state = State.IN_3D;
-				player.state = Player.State.WALKING;
-			}
-			break;
-		case State.TRANSFORMING_3D_TO_2D:
-			transformationProgress -= Time.fixedDeltaTime*transformationSpeed;
-			UpdateTransform();
-			UpdatePosition( true );
+			    if( transformationProgress >= 1 ) 
+                {
+				    gameObject.layer = Player.layer3D;
+				    state = State.IN_3D;
+				    player.state = Player.State.WALKING;
+			    }
+			    break;
+		    case State.TRANSFORMING_3D_TO_2D:
+			    transformationProgress -= Time.fixedDeltaTime*transformationSpeed;
+			    UpdateTransform();
+			    UpdatePosition( true );
 
-			if( transformationProgress <= 0 ) {
-				gameObject.layer = Player.layer2D;
-				state = State.IN_2D;
-				player.state = Player.State.WALKING;
-			}
-			break;
+			    if( transformationProgress <= 0 ) 
+                {
+				    gameObject.layer = Player.layer2D;
+				    state = State.IN_2D;
+				    player.state = Player.State.WALKING;
+			    }
+			    break;
 		}
 	}
 
-	void UpdateTransform() {
+	void UpdateTransform() 
+    {
 		modelTransform.localScale = Vector3.Lerp( modelScale2D, Vector3.one, transformationProgress );
 		modelTransform.localPosition = Vector3.Lerp( modelPosition2D, Vector3.zero, transformationProgress );
 	}
 
-	void UpdatePosition( bool inverse = false ) {
+	void UpdatePosition( bool inverse = false ) 
+    {
 		float t = ( inverse ? 1-transformationProgress : transformationProgress );
 
 		transform.position = Vector3.Lerp( startPos, targetPos, t );
 		transform.rotation = Quaternion.Lerp( startRot, targetRot, t );
 	}
 
-	void OnTriggerEnter( Collider other ) {
+	void OnTriggerEnter( Collider other ) 
+    {
 		int layer = other.gameObject.layer;
 
-		if( layer == Transformer.layer ) {
+		if( layer == Transformer.layer ) 
+        {
 			Transformer transformer = other.GetComponent<Transformer>();
-			if( transformer == null ) {
+			if( transformer == null ) 
+            {
 				Debug.LogWarning( "Entered a non-transformer object in the transformer layer!" );
 				return;
 			}
 
-			if( state == State.IN_2D ) {
-				if( transformer.target3D != null ) {
+			if( state == State.IN_2D ) 
+            {
+				if( transformer.target3D != null ) 
+                {
 					rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 					StartTransform( transformer.target3D, true, transformer.ignore3DX, transformer.ignore3DY, transformer.ignore3DZ );
 				}
-			} else if( state == State.IN_3D ) {
-				if( transformer.target2D != null ) {
+			} 
+            else if( state == State.IN_3D ) 
+            {
+				if( transformer.target2D != null ) 
+                {
 					movementController.ApplyLockType( transformer.lockType );
 					StartTransform( transformer.target2D, false );
 				}
