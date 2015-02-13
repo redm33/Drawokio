@@ -20,6 +20,7 @@ public class Player: MonoBehaviour
 	public PlayerClimbingController climbingController;
 
 	public ParticleSystem deathPoof;
+    public static Vector3 playerPosition;
 
     public enum State
     {
@@ -216,6 +217,8 @@ public class Player: MonoBehaviour
 	{
 		if( !paused && Input.GetButtonDown("Back") ) 
 			Room.instance.state = Room.State.MENU_MAIN;
+
+        playerPosition = this.transform.localPosition;
 	}
 
 	void FixedUpdate(){}

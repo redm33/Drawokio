@@ -306,6 +306,7 @@ public class Room : MonoBehaviour
 		point.isLatestSpawn = true;
 		
 		Player player = Instantiate( playerPrefab, point.transform.position, point.transform.rotation ) as Player;
+        player.name = "Player";
 		
 		if( point.spawnIn3D ) 
 			player.transformationController.Become3D();

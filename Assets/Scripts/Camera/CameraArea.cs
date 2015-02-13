@@ -17,6 +17,8 @@ public class CameraArea : MonoBehaviour {
 		inArea = true;
 
 		cameraController.AddToQueue( followable );
+        Debug.Log("Switching");
+
 	}
 
 	void OnTriggerExit( Collider other ) 

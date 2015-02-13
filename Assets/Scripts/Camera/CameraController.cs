@@ -87,9 +87,33 @@ public class CameraController : MonoBehaviour
 			float t = ( target.instant ? 1 : ( Time.time - startT ) * inverseTimeToTarget );
 
 			Quaternion rot = ( target.offset == Vector3.zero ? trans.rotation : Quaternion.LookRotation( target.followTransform.position - transform.position ) );
-		
-			transform.position = Vector3.Lerp( startPos, target.target, t );
-			transform.rotation = Quaternion.Lerp( startRot, rot, t );
+            if (Player.instance != null)
+            {
+                //This is temporary until I get 3D cameras working
+                Player player = GameObject.Find("Player").GetComponent<Player>();
+                Debug.Log(player.transformationController.in2D);
+                if (player.transformationController.in2D)
+                {
+                    transform.parent = Player.instance.transform;
+                    transform.localPosition = new Vector3(0, 0, -30f);
+
+                    var relativePos = Player.instance.transform.position - transform.position;
+                    var rotation = Quaternion.LookRotation(relativePos);
+                    transform.rotation = rotation;
+                }
+                else //This is temporary until I get 3D cameras working
+                {
+                    transform.parent = Player.instance.transform.parent;
+                    transform.position = Vector3.Lerp(startPos, target.target, t);
+                    transform.rotation = Quaternion.Lerp(startRot, rot, t);
+                }
+            }
+            else
+            {
+
+                transform.position = Vector3.Lerp(startPos, target.target, t);
+                transform.rotation = Quaternion.Lerp(startRot, rot, t);
+            }
 		}
 	}
 
@@ -102,7 +126,8 @@ public class CameraController : MonoBehaviour
 				target = followable;
 			else if( followable.priority > target.priority )
 				target = followable;
-		} else 
+		} 
+        else 
         {
 			followQueue.AddFirst( followable );
 			if( followQueue.Count == 1 || followable.priority >= target.priority )
