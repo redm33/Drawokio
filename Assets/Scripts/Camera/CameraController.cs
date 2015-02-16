@@ -81,64 +81,74 @@ public class CameraController : MonoBehaviour
 
 	void FixedUpdate() 
     {
-		if( target != null ) 
+
+		if (Player.instance != null)
         {
-			Transform trans = target.followTransform;
-			float t = ( target.instant ? 1 : ( Time.time - startT ) * inverseTimeToTarget );
-
-			Quaternion rot = ( target.offset == Vector3.zero ? trans.rotation : Quaternion.LookRotation( target.followTransform.position - transform.position ) );
-            if (Player.instance != null)
+            //This is temporary until I get 3D cameras working
+            Player player = GameObject.Find("Player").GetComponent<Player>();
+            if (player.transformationController.in2D)
             {
-                //This is temporary until I get 3D cameras working
-                Player player = GameObject.Find("Player").GetComponent<Player>();
-                if (player.transformationController.in2D)
-                {
-                    transform.parent = Player.instance.transform;
-                    transform.localPosition = new Vector3(0, 0, -30f);
+                transform.parent = Player.instance.transform;
+                transform.localPosition = new Vector3(0, 0, -30f);
 
-                    var relativePos = Player.instance.transform.position - transform.position;
-                    var rotation = Quaternion.LookRotation(relativePos);
-                    transform.rotation = rotation;
-                }
-                else 
-                {
-                    //Remove the camera from the player object
-                    transform.parent = Player.instance.transform.parent;
+                var relativePos = Player.instance.transform.position - transform.position;
+                var rotation = Quaternion.LookRotation(relativePos);
 
-                    //Get the vector between the player and the camera
-                    var relativePos = Player.instance.transform.position - transform.position;
-                    //Rotate the camera accordingly
-                    var rotation = Quaternion.LookRotation(relativePos);
-                    transform.rotation = rotation;
-
-                    //If the relative position of the camera and player, is greater than 5, move the camera away from the player
-                    if (relativePos.magnitude > 5)
-                    {
-                        Vector3 playerPosition = new Vector3(Player.instance.transform.position.x, transform.position.y, Player.instance.transform.position.z);
-                        transform.position = Vector3.MoveTowards(transform.position, playerPosition, 1.5f*Time.deltaTime);
-                    }
-
-                    //If the relative position of the camera and player, is less than 4.5, move the camera closer to the player
-                    else if(relativePos.magnitude <= 4.5)
-                    {
-                        Vector3 playerPosition = new Vector3(Player.instance.transform.position.x, transform.position.y, Player.instance.transform.position.z);
-                        transform.position = Vector3.MoveTowards(transform.position, playerPosition, -1.5f*Time.deltaTime);
-                    }
-
-                    /*Old Method
-                    transform.parent = Player.instance.transform.parent;
-                    transform.position = Vector3.Lerp(startPos, target.target, t);
-                    transform.rotation = Quaternion.Lerp(startRot, rot, t);
-                    */
-                }
+                transform.rotation = rotation;
             }
-            else
+            else 
             {
+                //Remove the camera from the player object
+                transform.parent = Player.instance.transform.parent;
 
+                //Get the vector between the player and the camera
+                var relativePos = Player.instance.transform.position - transform.position;
+                //Rotate the camera accordingly
+
+                //If the relative position of the camera and player, is greater than 5, move the camera away from the player
+                if (relativePos.magnitude > 5)
+                {
+                    Vector3 playerPosition;
+                    if (Mathf.Abs(Player.instance.transform.position.y - transform.position.y) < 3)
+                        playerPosition = new Vector3(Player.instance.transform.position.x, transform.position.y, Player.instance.transform.position.z);
+                    else
+                        playerPosition = Player.instance.transform.position;
+
+                    transform.position = Vector3.MoveTowards(transform.position, playerPosition, 2*Time.deltaTime);
+
+                }
+
+                //If the relative position of the camera and player, is less than 4.5, move the camera closer to the player
+                else if (relativePos.magnitude <= 4.5)
+                {
+                    Vector3 playerPosition = new Vector3(Player.instance.transform.position.x, transform.position.y, Player.instance.transform.position.z);
+                    transform.position = Vector3.MoveTowards(transform.position, playerPosition, -2*Time.deltaTime);
+                }
+
+                var rotation = Quaternion.LookRotation(relativePos);
+                var angle = Quaternion.Angle(rotation, transform.rotation);
+                if (angle > 5)
+                    transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 2*Time.deltaTime);
+
+
+                /*Old Method
+                transform.parent = Player.instance.transform.parent;
                 transform.position = Vector3.Lerp(startPos, target.target, t);
                 transform.rotation = Quaternion.Lerp(startRot, rot, t);
+                */
             }
-		}
+        }
+        else if(target != null)
+        {
+            Transform trans = target.followTransform;
+            float t = (target.instant ? 1 : (Time.time - startT) * inverseTimeToTarget);
+
+            Quaternion rot = (target.offset == Vector3.zero ? trans.rotation : Quaternion.LookRotation(target.followTransform.position - transform.position));
+
+            transform.position = Vector3.Lerp(startPos, target.target, t);
+            transform.rotation = Quaternion.Lerp(startRot, rot, t);
+        }
+		
 	}
 
 	public void AddToQueue( CameraFollowable followable, bool atEnd = false ) 
