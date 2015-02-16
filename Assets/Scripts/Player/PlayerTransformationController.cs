@@ -7,6 +7,7 @@ public class PlayerTransformationController : MonoBehaviour
 
 	public Player player;
 	public PlayerMovementController movementController;
+	public ParticleSystem poof3D;
 
 	public enum State 
     {
@@ -49,6 +50,8 @@ public class PlayerTransformationController : MonoBehaviour
 
 	public void Become3D()
 	{
+		poof3D.Play ();
+		Debug.Log ("triggered particles");
 		state = State.IN_3D;
 
 		gameObject.layer = Player.layer3D;
@@ -100,6 +103,11 @@ public class PlayerTransformationController : MonoBehaviour
 			    UpdateTransform();
 			    break;
 		    case State.TRANSFORMING_2D_TO_3D:
+				
+				if(!poof3D.isPlaying) {
+				//poof3D.Play();
+				}
+
 			    transformationProgress += Time.fixedDeltaTime*transformationSpeed;
 			    UpdateTransform();
 			    UpdatePosition();
