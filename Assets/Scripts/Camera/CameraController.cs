@@ -91,7 +91,6 @@ public class CameraController : MonoBehaviour
             {
                 //This is temporary until I get 3D cameras working
                 Player player = GameObject.Find("Player").GetComponent<Player>();
-                Debug.Log(player.transformationController.in2D);
                 if (player.transformationController.in2D)
                 {
                     transform.parent = Player.instance.transform;
@@ -101,11 +100,36 @@ public class CameraController : MonoBehaviour
                     var rotation = Quaternion.LookRotation(relativePos);
                     transform.rotation = rotation;
                 }
-                else //This is temporary until I get 3D cameras working
+                else 
                 {
+                    //Remove the camera from the player object
+                    transform.parent = Player.instance.transform.parent;
+
+                    //Get the vector between the player and the camera
+                    var relativePos = Player.instance.transform.position - transform.position;
+                    //Rotate the camera accordingly
+                    var rotation = Quaternion.LookRotation(relativePos);
+                    transform.rotation = rotation;
+
+                    //If the relative position of the camera and player, is greater than 5, move the camera away from the player
+                    if (relativePos.magnitude > 5)
+                    {
+                        Vector3 playerPosition = new Vector3(Player.instance.transform.position.x, transform.position.y, Player.instance.transform.position.z);
+                        transform.position = Vector3.MoveTowards(transform.position, playerPosition, 1.5f*Time.deltaTime);
+                    }
+
+                    //If the relative position of the camera and player, is less than 4.5, move the camera closer to the player
+                    else if(relativePos.magnitude <= 4.5)
+                    {
+                        Vector3 playerPosition = new Vector3(Player.instance.transform.position.x, transform.position.y, Player.instance.transform.position.z);
+                        transform.position = Vector3.MoveTowards(transform.position, playerPosition, -1.5f*Time.deltaTime);
+                    }
+
+                    /*Old Method
                     transform.parent = Player.instance.transform.parent;
                     transform.position = Vector3.Lerp(startPos, target.target, t);
                     transform.rotation = Quaternion.Lerp(startRot, rot, t);
+                    */
                 }
             }
             else
