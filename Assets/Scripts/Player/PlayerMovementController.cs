@@ -43,7 +43,16 @@ public class PlayerMovementController : MonoBehaviour
 
 	void Update() 
     {
-		movementInput = new Vector3( Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0 );
+        if (transformationController.in2D && (Player.instance.transform.rotation.y >= -1 && Player.instance.transform.rotation.y <= 1))
+        {
+            movementInput = new Vector3(0, Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
+            rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotation;
+        }
+        else
+        {
+            movementInput = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+            rigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotation;
+        }
 		jumpInput = Input.GetButton("Jump");
         sprintInput = Input.GetKey(KeyCode.LeftShift);
 	}
@@ -70,9 +79,15 @@ public class PlayerMovementController : MonoBehaviour
             {
 				CameraController camera = CameraController.instance;
 				rigidbody.velocity = camera.moveRight * movementInput.x + camera.moveForward * movementInput.y;
-			} 
-            else 
-				rigidbody.velocity = transform.right * movementInput.x;
+			}
+            else if (movementInput.x == 0)
+            {
+                rigidbody.velocity = transform.right * movementInput.z;
+                Debug.Log(transform.position);
+            }
+            else
+                rigidbody.velocity = transform.right * movementInput.x;
+
 
             if (sprintInput)
                 rigidbody.velocity *= sprintSpeed;
@@ -96,7 +111,7 @@ public class PlayerMovementController : MonoBehaviour
 				}
 				else
 				{
-					if (movementInput.x > 0)
+					if (movementInput.x > 0 || movementInput.z > 0)
 						animationController.direction = PlayerAnimationController.Direction.RIGHT;
 					else
 						animationController.direction = PlayerAnimationController.Direction.LEFT;
@@ -165,4 +180,6 @@ public class PlayerMovementController : MonoBehaviour
 		RaycastHit hit;
 		isGrounded = Physics.SphereCast(groundCastOrigin.position, groundCastRadius, Vector3.down, out hit, groundCastDistance, groundLayerMask);
 	}
+
+  
 }

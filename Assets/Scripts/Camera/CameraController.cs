@@ -8,6 +8,9 @@ public class CameraController : MonoBehaviour
 
 	public static CameraController instance;
 
+    bool rotatingRight = false;
+    bool rotatingLeft = false;
+
 	public float baseTimeToTarget = 1.0f;
 	private float _timeToTarget = 1.0f;
 	public float timeToTarget {
@@ -100,42 +103,65 @@ public class CameraController : MonoBehaviour
             {
                 //Remove the camera from the player object
                 transform.parent = Player.instance.transform.parent;
+                Vector3 playerPosition = Player.instance.transform.position;
 
                 //Get the vector between the player and the camera
                 var relativePos = Player.instance.transform.position - transform.position;
-                //Rotate the camera accordingly
+                if (Mathf.Abs(Player.instance.transform.position.y - transform.position.y) <= .5)
+                {
+                    playerPosition = new Vector3(transform.position.x, transform.position.y + (.5f - Mathf.Abs(Player.instance.transform.position.y - transform.position.y)), transform.position.z);
+                    transform.position = Vector3.MoveTowards(transform.position, playerPosition, 3 * Time.deltaTime);
+                }
 
                 //If the relative position of the camera and player, is greater than 5, move the camera away from the player
-                if (relativePos.magnitude > 5)
+                if (relativePos.magnitude > 4)
                 {
-                    Vector3 playerPosition;
-                    if (Mathf.Abs(Player.instance.transform.position.y - transform.position.y) < 3)
-                        playerPosition = new Vector3(Player.instance.transform.position.x, transform.position.y, Player.instance.transform.position.z);
-                    else
+                    if (Mathf.Abs(Player.instance.transform.position.y - transform.position.y) > 1)
                         playerPosition = Player.instance.transform.position;
-
-                    transform.position = Vector3.MoveTowards(transform.position, playerPosition, 2*Time.deltaTime);
+                    else
+                        playerPosition = new Vector3(Player.instance.transform.position.x, transform.position.y, Player.instance.transform.position.z);
+  
+                    transform.position = Vector3.MoveTowards(transform.position, playerPosition, 3*Time.deltaTime);
 
                 }
 
                 //If the relative position of the camera and player, is less than 4.5, move the camera closer to the player
-                else if (relativePos.magnitude <= 4.5)
+                else if (relativePos.magnitude <= 3)
                 {
-                    Vector3 playerPosition = new Vector3(Player.instance.transform.position.x, transform.position.y, Player.instance.transform.position.z);
-                    transform.position = Vector3.MoveTowards(transform.position, playerPosition, -2*Time.deltaTime);
+                    playerPosition = new Vector3(Player.instance.transform.position.x, transform.position.y, Player.instance.transform.position.z);
+                    transform.position = Vector3.MoveTowards(transform.position, playerPosition, -3*Time.deltaTime);
                 }
 
                 var rotation = Quaternion.LookRotation(relativePos);
                 var angle = Quaternion.Angle(rotation, transform.rotation);
                 if (angle > 5)
-                    transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 2*Time.deltaTime);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 4*Time.deltaTime);
 
 
-                /*Old Method
-                transform.parent = Player.instance.transform.parent;
-                transform.position = Vector3.Lerp(startPos, target.target, t);
-                transform.rotation = Quaternion.Lerp(startRot, rot, t);
-                */
+                RaycastHit hit;
+                Debug.DrawRay(transform.position, relativePos, Color.green);
+                relativePos = Player.instance.transform.position - transform.position;
+                if (Physics.Raycast(transform.position, relativePos, out hit))
+                {
+                    if (hit.collider.name != "Player")
+                    {
+                        if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && !rotatingRight)
+                        {
+                            transform.RotateAround(Player.instance.transform.position, Vector3.up, -180 * Time.deltaTime);
+                            rotatingLeft = true;
+                        }
+                        else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !rotatingLeft)
+                        {
+                            transform.RotateAround(Player.instance.transform.position, Vector3.up, 180 * Time.deltaTime);
+                            rotatingRight = true;
+                        }
+                        StartCoroutine(WaitForRotate());
+                    }
+                }
+                if(rotatingLeft)
+                    transform.RotateAround(Player.instance.transform.position, Vector3.up, -15 * Time.deltaTime);
+                else if(rotatingRight)
+                    transform.RotateAround(Player.instance.transform.position, Vector3.up, 15 * Time.deltaTime);
             }
         }
         else if(target != null)
@@ -208,4 +234,11 @@ public class CameraController : MonoBehaviour
 			return ret.normalized;
 		}
 	}
+
+    IEnumerator WaitForRotate()
+    {
+        yield return new WaitForSeconds(2f);
+        rotatingLeft = false;
+        rotatingRight = false;
+    }
 }
