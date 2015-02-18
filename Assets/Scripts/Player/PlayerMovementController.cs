@@ -81,10 +81,7 @@ public class PlayerMovementController : MonoBehaviour
 				rigidbody.velocity = camera.moveRight * movementInput.x + camera.moveForward * movementInput.y;
 			}
             else if (movementInput.x == 0)
-            {
                 rigidbody.velocity = transform.right * movementInput.z;
-                Debug.Log(transform.position);
-            }
             else
                 rigidbody.velocity = transform.right * movementInput.x;
 

@@ -145,9 +145,13 @@ public class Room : MonoBehaviour
 
 	public void DestroyAll()
 	{
-		if( Player.instance != null )
-			Destroy ( Player.instance.gameObject );
-		drawer.DestroyAll();
+
+        if (Player.instance != null)
+        {
+            GameObject.Find("Main Camera").transform.parent = Player.instance.transform.parent;
+            Destroy(Player.instance.gameObject);
+        }
+        drawer.DestroyAll();
 		drawer.gameObject.SetActive(false);
 		paused = false;
 		Drawer.instance.uiOpen = false;
