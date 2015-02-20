@@ -97,7 +97,7 @@ public class CameraController : MonoBehaviour
                 var relativePos = Player.instance.transform.position - transform.position;
                 var rotation = Quaternion.LookRotation(relativePos);
 
-                transform.rotation = new Quaternion(rotation.x + -.1f, rotation.y, rotation.z, rotation.w);
+                transform.rotation = new Quaternion(rotation.x + -.1f, rotation.y, 0, rotation.w);
             }
             else 
             {
