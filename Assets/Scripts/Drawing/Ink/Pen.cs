@@ -1,127 +1,79 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Rigidbody))]
 [AddComponentMenu("Game/Ink/Pen")]
-public class Pen : Ink
-{
+public class Pen : Ink {
 
-    public LineRenderer lineRenderer;
+	public static int layer = 11;
 
-    public static int layer = 12;
+	public override Type type {
+		get { return Type.PEN; }
+	}
 
-    public override Type type
-    {
-        get
-        {
-            return Type.PEN;
-        }
-    }
+	public float mass = 1;
 
-    public override void OnCreated()
-    {
-        base.OnCreated();
+	public override void AddChild ( Ink child )
+	{
+		children.Add( child );
+		child.parent = this;
+		child.transform.parent = transform;
+	}
 
-        PrepRigidbody();
-    }
+	public override bool paused {
+		get {
+			return base.paused;
+		}
+		set {
+			if( isRoot )
+				base.paused = value;
+		}
+	}
 
-    protected override void OnLateUpdate()
-    {
-        base.OnLateUpdate();
+	public override void OnCreated ()
+	{
+		if( isRoot ) {
+			AttachRigidbody();
+		}
+	}
 
-        if (isRoot && children.Count > 0)
-        {
-            lineRenderer.enabled = true;
+	public override void OnDrawEnd() {
+		float mass = SumMass();
 
-            int i = 1;
+		if( isRoot ) {
+			paused = true;
+			rigidbody.mass = mass;
+		}
+	}
 
-            lineRenderer.SetPosition(0, transform.position);
+	public override bool ConnectTo (Connector connector)
+	{
+		if( connector.type == Type.CHARCOAL || connector.type == Type.DEFAULT )
+			return false;
 
-            Ink child = children[0];
-            while (child != null)
-            {
-                lineRenderer.SetVertexCount(++i);
+		if( connector.type == Type.PEN ) {
+			Pen other = connector as Pen;
 
-                lineRenderer.SetPosition(i - 1, child.transform.position);
+			if( other.root == root )
+				return false;
 
-                if (child.children.Count > 0)
-                    child = child.children[0];
-                else
-                    child = null;
-            }
-        }
-        else
-        {
-            lineRenderer.enabled = false;
-        }
-    }
+			Destroy ( root.rigidbody );
+			other.root.AddChild( root );
+			return true;
+		} else if( connector.type == Type.PENCIL ) {
+			Pencil pencil = connector as Pencil;
+			pencil.ConnectTo( this );
+			return true;
+		}
 
-    public override void AddChild(Ink child)
-    {
-        BuildJoint(child.rigidbody);
-        BuildJointOn(child.gameObject, rigidbody);
+		return false;
+	}
 
-        children.Add(child);
-        child.parent = this;
-        child.transform.parent = transform;
-    }
+	protected float SumMass() {
+		float mass = this.mass;
 
-    public override bool ConnectTo(Connector other)
-    {
-        if (other.type == Type.CHARCOAL)
-            return false;
+		foreach( Ink child in children )
+			mass += (child as Pen).SumMass();
 
-        if (other == this)
-            return false;
-
-        if (other.type == Type.PENCIL && (parent == (other as Ink) || children.Contains(other as Ink)))
-            return false;
-
-        BuildJoint(other.rigidbody);
-        if (other.type != Connector.Type.DEFAULT)
-            BuildJointOn(other.gameObject, rigidbody);
-        return true;
-    }
-
-    public override void OnDrawEnd()
-    {
-        base.OnDrawEnd();
-        foreach (Ink child in children)
-            child.OnDrawEnd();
-    }
-
-    //Joint Settings
-    public Vector3 swingAxis = Vector3.forward;
-    public Vector3 twistAxis = Vector3.right;
-    public float lowTwistLimit = -100.0F;
-    public float highTwistLimit = 100.0F;
-    public float swing1Limit = 20.0F;
-
-    public CharacterJoint BuildJointOn(GameObject obj, Rigidbody connectTo)
-    {
-        CharacterJoint ph = obj.AddComponent<CharacterJoint>();
-        ph.axis = transform.forward;
-        ph.swingAxis = transform.forward;
-
-        SoftJointLimit limit_setter = ph.lowTwistLimit;
-        limit_setter.limit = lowTwistLimit;
-        ph.lowTwistLimit = limit_setter;
-
-        limit_setter = ph.highTwistLimit;
-        limit_setter.limit = highTwistLimit;
-        ph.highTwistLimit = limit_setter;
-
-        limit_setter = ph.swing1Limit;
-        limit_setter.limit = swing1Limit;
-        ph.swing1Limit = limit_setter;
-
-        ph.connectedBody = connectTo;
-
-        return ph;
-    }
-
-    public CharacterJoint BuildJoint(Rigidbody connectTo)
-    {
-        return BuildJointOn(gameObject, connectTo);
-    }
+		return mass;
+	}
 }

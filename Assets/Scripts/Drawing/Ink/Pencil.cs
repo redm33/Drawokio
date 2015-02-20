@@ -26,7 +26,8 @@ public class Pencil : Ink {
 	{
 		base.OnLateUpdate();
 
-		if( isRoot && children.Count > 0 ) {
+		if( isRoot && children.Count > 0 ) 
+        {
 			lineRenderer.enabled = true;
 
 			int i = 1;
@@ -34,7 +35,8 @@ public class Pencil : Ink {
 			lineRenderer.SetPosition(0,transform.position);
 
 			Ink child = children[0];
-			while( child != null ) {
+			while( child != null ) 
+            {
 				lineRenderer.SetVertexCount(++i);
 
 				lineRenderer.SetPosition(i-1, child.transform.position);
@@ -44,7 +46,9 @@ public class Pencil : Ink {
 				else
 					child = null;
 			}
-		} else {
+		} 
+        else 
+        {
 			lineRenderer.enabled = false;
 		}
 	}
@@ -69,6 +73,7 @@ public class Pencil : Ink {
 		if( other.type == Type.PENCIL && ( parent == (other as Ink) || children.Contains( other as Ink ) ) )
 			return false;
 
+        Debug.Log(other.name);
 		BuildJoint( other.rigidbody );
 		if( other.type != Connector.Type.DEFAULT )
 			BuildJointOn( other.gameObject, rigidbody );

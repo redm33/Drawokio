@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class Drawer : MonoBehaviour 
 {
 	public static Drawer instance = null;
-
+    bool hasConnector = false;
 	/**
 	 * Generic
 	 */
@@ -52,37 +52,39 @@ public class Drawer : MonoBehaviour
 				
 				bool isCanvas = ( hit.collider.gameObject.layer == DrawingCanvas.layer );
 				bool isConnector = ( hit.collider.tag == "Connector" );
-				
+
 				if( drawing ) 
                 {
 					if( isCanvas ) 
                     {
-						DrawingCanvas canvas = hit.collider.GetComponent<DrawingCanvas>();
+                        DrawingCanvas canvas = hit.collider.GetComponent<DrawingCanvas>();
 
-						if( lastNode == null && startConnector == null )
-							PlaceInk( hit.point, canvas );
-						else /* lastNode isn't null */ {
-							Vector3 start = ( lastNode != null ? lastNode.transform.position : connectStart );
+                        if (lastNode == null && startConnector == null)
+                            PlaceInk(hit.point, canvas);
 
-							Vector3 diff = ( hit.point - start );
-							if( diff.sqrMagnitude > currentInk.distanceBetweenNodes * currentInk.distanceBetweenNodes ) {
-								float dist = diff.magnitude;
-								Vector3 dir =  diff / dist;
-								
-								Vector3 point = start;
-								while( dist > currentInk.distanceBetweenNodes ) {
-									point += dir * currentInk.distanceBetweenNodes;
-									PlaceInk( point, canvas );
-									dist -= currentInk.distanceBetweenNodes;
-								}
-							}
-						}
+                        else /* lastNode isn't null */
+                        {
+                            Vector3 start = (lastNode != null ? lastNode.transform.position : connectStart);
+                            Vector3 diff = (hit.point - start);
+                            if (diff.sqrMagnitude > currentInk.distanceBetweenNodes * currentInk.distanceBetweenNodes)
+                            {
+                                float dist = diff.magnitude;
+                                Vector3 dir = diff / dist;
+
+                                Vector3 point = start;
+                                while (dist > currentInk.distanceBetweenNodes)
+                                {
+                                    point += dir * currentInk.distanceBetweenNodes;
+                                    PlaceInk(point, canvas);
+                                    dist -= currentInk.distanceBetweenNodes;
+                                }
+                            }
+                        }
 					} 
                     else if( isConnector ) 
                     {
 						if( lastNode != null && lastNode.ConnectTo( hit.collider.attachedRigidbody.GetComponent<Connector>() ) ) 
 							lastNode = currentRoot = null;
-			
 						StopDrawing();
 					} 
                     else 
@@ -129,26 +131,28 @@ public class Drawer : MonoBehaviour
             {
 				foreach( Collider hit in hits ) 
                 {
-					if( hit.tag == "Connector" ) 
+                    if (hit.name != "Pencil(Clone)")
+                        hasConnector = true;
+                    if (hit.tag == "Connector")
                     {
-						Connector connector = hit.attachedRigidbody.GetComponent<Connector>();
+                        Connector connector = hit.attachedRigidbody.GetComponent<Connector>();
 
-						if( lastNode == null ) 
+                        if (lastNode == null)
                         {
-							startConnector = connector;
-							connectStart = pos;
-							placeNew = false;
-							break;
-						} 
-                        else if( lastNode.ConnectTo( connector ) ) 
+                            startConnector = connector;
+                            connectStart = pos;
+                            placeNew = false;
+                            break;
+                        }
+                        else if (lastNode.ConnectTo(connector))
                         {
-							startConnector = connector;
-							connectStart = pos;
-							placeNew = false;
-							lastNode = currentRoot = null;
-							break;
-						}
-					}
+                            startConnector = connector;
+                            connectStart = pos;
+                            placeNew = false;
+                            lastNode = currentRoot = null;
+                            break;
+                        }
+                    }
 				}
 			}
 		}
@@ -202,10 +206,28 @@ public class Drawer : MonoBehaviour
 		drawing = false;
 		roots = new List<Ink>();
 
+        //if the pencil isn't conneted to anything, remove it very quickly from the world.
+        Debug.Log(currentInkIndex);
+        if (!hasConnector && currentInkIndex == 0)
+        {
+            float incrememnt = .02f;
+            Ink last = lastNode;
+            while(currentRoot.gameObject != last.gameObject && !Input.GetKey(KeyCode.Space))
+            {
+                last.timeoutRemaining = incrememnt;
+                last = last.gameObject.transform.parent.GetComponent<Pencil>();
+                incrememnt += .02f;
+            }
+        }
+
 		lastNode = currentRoot = null;
 		startConnector = null;
 
+        
 		audio.Stop ();
+
+        hasConnector = false;
+
 	}
 
 	/**
