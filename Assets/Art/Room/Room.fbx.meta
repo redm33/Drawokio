@@ -359,6 +359,76 @@ ModelImporter:
     100706: WheelR4
     100708: Yarn4
     100710: YellowStickyPad1
+    100712: ambientLight1
+    100714: Arcade 1
+    100716: AwesomeBalloon
+    100718: BackBoard
+    100720: Balloon_Poster
+    100722: Book_Pile
+    100724: BookShelf_Stuff
+    100726: Coffee
+    100728: Coffee2
+    100730: Crumple
+    100732: directionalLight1
+    100734: Fan
+    100736: HOPE
+    100738: Magnet31
+    100740: Magnet32
+    100742: Magnet33
+    100744: Magnet34
+    100746: Magnet35
+    100748: Magnet36
+    100750: Magnet37
+    100752: Magnet38
+    100754: Magnet39
+    100756: Magnet40
+    100758: Magnet41
+    100760: Magnet42
+    100762: Magnet43
+    100764: Magnet44
+    100766: Magnet45
+    100768: Magnet46
+    100770: Magnet47
+    100772: Magnet48
+    100774: Magnet49
+    100776: Magnet50
+    100778: Magnet51
+    100780: Magnet52
+    100782: Magnet53
+    100784: Magnet54
+    100786: Magnet55
+    100788: Magnet56
+    100790: Magnet57
+    100792: Magnet58
+    100794: Magnet59
+    100796: Magnet60
+    100798: MAYA_STUFF
+    100800: OLD_ROOM
+    100802: Paper_Stack3
+    100804: PigBalloon
+    100806: Pillow3
+    100808: PlatypusBalloon
+    100810: Poster10
+    100812: Poster11
+    100814: Poster12
+    100816: Poster6
+    100818: Poster7
+    100820: Poster8
+    100822: Poster9
+    100824: Printer
+    100826: PrinterPaper1
+    100828: PrinterPaper2
+    100830: PrinterPaper3
+    100832: RedBalloon
+    100834: RedBalloon1
+    100836: ScrumBoard
+    100838: Sticky2
+    100840: Sticky3
+    100842: Sticky4
+    100844: Sticky5
+    100846: Sticky6
+    100848: Sticky7
+    100850: ToyCar
     400000: Almighty_Drawer1
     400002: Almighty_Drawer2
     400004: Arcade
@@ -715,6 +785,76 @@ ModelImporter:
     400706: WheelR4
     400708: Yarn4
     400710: YellowStickyPad1
+    400712: ambientLight1
+    400714: Arcade 1
+    400716: AwesomeBalloon
+    400718: BackBoard
+    400720: Balloon_Poster
+    400722: Book_Pile
+    400724: BookShelf_Stuff
+    400726: Coffee
+    400728: Coffee2
+    400730: Crumple
+    400732: directionalLight1
+    400734: Fan
+    400736: HOPE
+    400738: Magnet31
+    400740: Magnet32
+    400742: Magnet33
+    400744: Magnet34
+    400746: Magnet35
+    400748: Magnet36
+    400750: Magnet37
+    400752: Magnet38
+    400754: Magnet39
+    400756: Magnet40
+    400758: Magnet41
+    400760: Magnet42
+    400762: Magnet43
+    400764: Magnet44
+    400766: Magnet45
+    400768: Magnet46
+    400770: Magnet47
+    400772: Magnet48
+    400774: Magnet49
+    400776: Magnet50
+    400778: Magnet51
+    400780: Magnet52
+    400782: Magnet53
+    400784: Magnet54
+    400786: Magnet55
+    400788: Magnet56
+    400790: Magnet57
+    400792: Magnet58
+    400794: Magnet59
+    400796: Magnet60
+    400798: MAYA_STUFF
+    400800: OLD_ROOM
+    400802: Paper_Stack3
+    400804: PigBalloon
+    400806: Pillow3
+    400808: PlatypusBalloon
+    400810: Poster10
+    400812: Poster11
+    400814: Poster12
+    400816: Poster6
+    400818: Poster7
+    400820: Poster8
+    400822: Poster9
+    400824: Printer
+    400826: PrinterPaper1
+    400828: PrinterPaper2
+    400830: PrinterPaper3
+    400832: RedBalloon
+    400834: RedBalloon1
+    400836: ScrumBoard
+    400838: Sticky2
+    400840: Sticky3
+    400842: Sticky4
+    400844: Sticky5
+    400846: Sticky6
+    400848: Sticky7
+    400850: ToyCar
     2300000: Almighty_Drawer1
     2300002: Almighty_Drawer2
     2300004: Arcade
@@ -1065,6 +1205,67 @@ ModelImporter:
     2300694: WheelR4
     2300696: Yarn4
     2300698: YellowStickyPad1
+    2300700: Arcade 1
+    2300702: AwesomeBalloon
+    2300704: BackBoard
+    2300706: Coffee
+    2300708: Coffee2
+    2300710: Crumple
+    2300712: HOPE
+    2300714: Magnet31
+    2300716: Magnet32
+    2300718: Magnet33
+    2300720: Magnet34
+    2300722: Magnet35
+    2300724: Magnet36
+    2300726: Magnet37
+    2300728: Magnet38
+    2300730: Magnet39
+    2300732: Magnet40
+    2300734: Magnet41
+    2300736: Magnet42
+    2300738: Magnet43
+    2300740: Magnet44
+    2300742: Magnet45
+    2300744: Magnet46
+    2300746: Magnet47
+    2300748: Magnet48
+    2300750: Magnet49
+    2300752: Magnet50
+    2300754: Magnet51
+    2300756: Magnet52
+    2300758: Magnet53
+    2300760: Magnet54
+    2300762: Magnet55
+    2300764: Magnet56
+    2300766: Magnet57
+    2300768: Magnet58
+    2300770: Magnet59
+    2300772: Magnet60
+    2300774: Paper_Stack3
+    2300776: PigBalloon
+    2300778: Pillow3
+    2300780: PlatypusBalloon
+    2300782: Poster10
+    2300784: Poster11
+    2300786: Poster12
+    2300788: Poster6
+    2300790: Poster7
+    2300792: Poster8
+    2300794: Poster9
+    2300796: Printer
+    2300798: PrinterPaper1
+    2300800: PrinterPaper2
+    2300802: PrinterPaper3
+    2300804: RedBalloon
+    2300806: RedBalloon1
+    2300808: Sticky2
+    2300810: Sticky3
+    2300812: Sticky4
+    2300814: Sticky5
+    2300816: Sticky6
+    2300818: Sticky7
+    2300820: ToyCar
     3300000: Almighty_Drawer1
     3300002: Almighty_Drawer2
     3300004: Arcade
@@ -1415,6 +1616,67 @@ ModelImporter:
     3300694: WheelR4
     3300696: Yarn4
     3300698: YellowStickyPad1
+    3300700: Arcade 1
+    3300702: AwesomeBalloon
+    3300704: BackBoard
+    3300706: Coffee
+    3300708: Coffee2
+    3300710: Crumple
+    3300712: HOPE
+    3300714: Magnet31
+    3300716: Magnet32
+    3300718: Magnet33
+    3300720: Magnet34
+    3300722: Magnet35
+    3300724: Magnet36
+    3300726: Magnet37
+    3300728: Magnet38
+    3300730: Magnet39
+    3300732: Magnet40
+    3300734: Magnet41
+    3300736: Magnet42
+    3300738: Magnet43
+    3300740: Magnet44
+    3300742: Magnet45
+    3300744: Magnet46
+    3300746: Magnet47
+    3300748: Magnet48
+    3300750: Magnet49
+    3300752: Magnet50
+    3300754: Magnet51
+    3300756: Magnet52
+    3300758: Magnet53
+    3300760: Magnet54
+    3300762: Magnet55
+    3300764: Magnet56
+    3300766: Magnet57
+    3300768: Magnet58
+    3300770: Magnet59
+    3300772: Magnet60
+    3300774: Paper_Stack3
+    3300776: PigBalloon
+    3300778: Pillow3
+    3300780: PlatypusBalloon
+    3300782: Poster10
+    3300784: Poster11
+    3300786: Poster12
+    3300788: Poster6
+    3300790: Poster7
+    3300792: Poster8
+    3300794: Poster9
+    3300796: Printer
+    3300798: PrinterPaper1
+    3300800: PrinterPaper2
+    3300802: PrinterPaper3
+    3300804: RedBalloon
+    3300806: RedBalloon1
+    3300808: Sticky2
+    3300810: Sticky3
+    3300812: Sticky4
+    3300814: Sticky5
+    3300816: Sticky6
+    3300818: Sticky7
+    3300820: ToyCar
     4300000: pPlane90
     4300002: pPlane91
     4300004: Chair6
@@ -1765,6 +2027,66 @@ ModelImporter:
     4300694: pCube163
     4300696: pCube164
     4300698: pCube165
+    4300700: Pillow3
+    4300702: Poster6
+    4300704: Poster7
+    4300706: Poster8
+    4300708: Poster11
+    4300710: Poster9
+    4300712: Poster12
+    4300714: Sticky4
+    4300716: Sticky5
+    4300718: Sticky6
+    4300720: Sticky3
+    4300722: Sticky2
+    4300724: Sticky7
+    4300726: Crumple
+    4300728: Poster10
+    4300730: Magnet60
+    4300732: Magnet59
+    4300734: Magnet58
+    4300736: Magnet57
+    4300738: Magnet56
+    4300740: Magnet55
+    4300742: Magnet54
+    4300744: Magnet53
+    4300746: Magnet52
+    4300748: Magnet51
+    4300750: Magnet50
+    4300752: Magnet49
+    4300754: Magnet48
+    4300756: Magnet47
+    4300758: Magnet46
+    4300760: Magnet45
+    4300762: Magnet44
+    4300764: Magnet43
+    4300766: Magnet42
+    4300768: Magnet41
+    4300770: Magnet40
+    4300772: Magnet39
+    4300774: Magnet38
+    4300776: Magnet37
+    4300778: Magnet36
+    4300780: Magnet35
+    4300782: Magnet34
+    4300784: Magnet33
+    4300786: Magnet32
+    4300788: Magnet31
+    4300790: BackBoard
+    4300792: Paper_Stack3
+    4300794: Printer
+    4300796: PrinterPaper3
+    4300798: PrinterPaper2
+    4300800: PrinterPaper1
+    4300802: Coffee
+    4300804: Coffee2
+    4300806: ToyCar
+    4300808: AwesomeBalloon
+    4300810: RedBalloon
+    4300812: PigBalloon
+    4300814: PlatypusBalloon
+    4300816: RedBalloon1
+    4300818: HOPE
     9500000: //RootNode
   materials:
     importMaterials: 1
