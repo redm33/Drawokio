@@ -9,7 +9,8 @@ public class Connector : InheritanceBase
     {
 		DEFAULT,
 		PENCIL,
-		CHARCOAL
+		CHARCOAL,
+        PEN
 	}
 	public virtual Type type 
     {

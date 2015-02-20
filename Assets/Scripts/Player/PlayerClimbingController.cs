@@ -225,7 +225,7 @@ public class PlayerClimbingController : MonoBehaviour
             return false;
 
         float climbInput = Input.GetAxis("Vertical");
-        if (climbables.Count > 0 && climbInput != 0)
+        if (climbables.Count > 0) //&& climbInput != 0)
         {
             player.state = Player.State.CLIMBING;
 
