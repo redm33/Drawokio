@@ -3,7 +3,8 @@ using System.Collections;
 
 public class DisolveShader : MonoBehaviour {
 
-	public Material disolveMaterial;
+	public Material dissolveMaterial;
+	public Material dissolveMaterialBlack;
 
 	private PlayerTransformationController.State lastState;
 	private PlayerTransformationController.State currentState;
@@ -18,14 +19,17 @@ public class DisolveShader : MonoBehaviour {
 		currentState = lastState;
 		delay = 0;
 		time = 0;
-		disolveMaterial.SetFloat ("_FadePosition", -1);
+		dissolveMaterial.SetFloat ("_FadePosition", -1);
+		dissolveMaterialBlack.SetFloat ("_FadePosition", -1);
+
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		currentState = Player.instance.transformationController.state;
-		disolveMaterial.SetFloat ("_ObjectPosition", this.transform.position.y);
+		dissolveMaterial.SetFloat ("_ObjectPosition", this.transform.position.y);
+		dissolveMaterialBlack.SetFloat ("_ObjectPosition", this.transform.position.y);
 
 		if (lastState.Equals (PlayerTransformationController.State.IN_3D)) {
 			if(currentState.Equals(PlayerTransformationController.State.IN_3D)) {
@@ -34,12 +38,16 @@ public class DisolveShader : MonoBehaviour {
 				} else if(time < dissolveTime) {
 					time += Time.deltaTime;
 
-					disolveMaterial.SetFloat ("_FadePosition", (time/dissolveTime)/2);
+					dissolveMaterial.SetFloat ("_FadePosition", (time/dissolveTime)/2);
+					dissolveMaterialBlack.SetFloat ("_FadePosition", (time/dissolveTime)/2);
+
 				} else if(time >= dissolveTime) {
 					Player.instance.Kill();
 				}
 			} else if(currentState.Equals(PlayerTransformationController.State.TRANSFORMING_3D_TO_2D)) {
-				disolveMaterial.SetFloat ("_FadePosition", -1);
+				dissolveMaterial.SetFloat ("_FadePosition", -1);
+				dissolveMaterialBlack.SetFloat ("_FadePosition", -1);
+
 				delay = 0;
 				time = 0;
 			}
