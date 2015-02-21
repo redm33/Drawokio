@@ -9,6 +9,14 @@ public class PlayerTransformationController : MonoBehaviour
 	public PlayerMovementController movementController;
 	public ParticleSystem poof3D;
 
+	public enum TransformType 
+	{
+		FROM_2D_TO_3D,
+		FROM_3D_TO_2D,
+		FROM_2D_TO_2D,
+		FROM_3D_TO_3D
+	};
+
 	public enum State 
     {
 		IN_2D,
@@ -148,14 +156,16 @@ public class PlayerTransformationController : MonoBehaviour
 		transform.rotation = Quaternion.Lerp( startRot, targetRot, t );
 	}
 
+
+	//Checks if an object that enters the trigger is on the layer "Transformer"
 	void OnTriggerEnter( Collider other ) 
     {
-		int layer = other.gameObject.layer;
+		int layer = other.gameObject.layer; //Layer of the object entering the trigger
 
-		if( layer == Transformer.layer ) 
+		if( layer == Transformer.layer ) //Check if the object is on the Transformer layer
         {
 			Transformer transformer = other.GetComponent<Transformer>();
-			if( transformer == null ) 
+			if( transformer == null ) //Checks if the object isn't actually a transformer and logs a warning if true
             {
 				Debug.LogWarning( "Entered a non-transformer object in the transformer layer!" );
 				return;
@@ -163,18 +173,24 @@ public class PlayerTransformationController : MonoBehaviour
 
 			if( state == State.IN_2D ) 
             {
-				if( transformer.target3D != null ) 
+				if(transformer.transformType.Equals(TransformType.FROM_2D_TO_3D) && transformer.target3D != null ) 
                 {
 					rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 					StartTransform( transformer.target3D, true, transformer.ignore3DX, transformer.ignore3DY, transformer.ignore3DZ );
+				} else if(transformer.transformType.Equals(TransformType.FROM_2D_TO_2D) && transformer.target2D != null ) {
+					movementController.ApplyLockType( transformer.lockType );
+					StartTransform( transformer.target2D, false );
 				}
 			} 
             else if( state == State.IN_3D ) 
             {
-				if( transformer.target2D != null ) 
+				if(transformer.transformType.Equals(TransformType.FROM_3D_TO_2D) && transformer.target2D != null ) 
                 {
 					movementController.ApplyLockType( transformer.lockType );
 					StartTransform( transformer.target2D, false );
+				} else if(transformer.transformType.Equals(TransformType.FROM_3D_TO_3D) && transformer.target3D != null ) {
+					rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+					StartTransform( transformer.target3D, true, transformer.ignore3DX, transformer.ignore3DY, transformer.ignore3DZ );
 				}
 			}
 		}
