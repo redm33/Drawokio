@@ -20,6 +20,7 @@ public class PlayerMovementController : MonoBehaviour
 
 	[HideInInspector]
 	public Vector3 startPosition; // For use with constraining to a plane.
+    public string twoDAxis = "Z";
 
 	private bool _isActive = false;
 	public bool isActive {
@@ -43,15 +44,18 @@ public class PlayerMovementController : MonoBehaviour
 
 	void Update() 
     {
-        if (transformationController.in2D && (Player.instance.transform.rotation.y >= -1 && Player.instance.transform.rotation.y <= 1))
+        if (transformationController.in2D && ((Player.instance.transform.rotation.y >= -1 && Player.instance.transform.rotation.y <= 1) || (Player.instance.transform.rotation.y >= 179 && Player.instance.transform.rotation.y <= 181)))
         {
             movementInput = new Vector3(0, Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
             rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotation;
+            twoDAxis = "Z";
         }
         else
         {
             movementInput = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
             rigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotation;
+            twoDAxis = "X";
+
         }
 		jumpInput = Input.GetButton("Jump");
         sprintInput = Input.GetKey(KeyCode.LeftShift);

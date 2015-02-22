@@ -98,6 +98,8 @@ public class CameraController : MonoBehaviour
                 var rotation = Quaternion.LookRotation(relativePos);
 
                 transform.rotation = new Quaternion(rotation.x + -.1f, rotation.y, 0, rotation.w);
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+
             }
             else 
             {
