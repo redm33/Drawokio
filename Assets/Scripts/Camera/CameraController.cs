@@ -91,6 +91,7 @@ public class CameraController : MonoBehaviour
             Player player = GameObject.Find("Player").GetComponent<Player>();
             if (player.transformationController.in2D)
             {
+                GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
                 transform.parent = Player.instance.transform;
                 transform.localPosition = new Vector3(0, 15f, -40f);
 
@@ -104,9 +105,12 @@ public class CameraController : MonoBehaviour
             else 
             {
                 //Remove the camera from the player object
-                transform.parent = Player.instance.transform.parent;
+                transform.parent = GameObject.Find("PlayerCamera").transform;
                 Vector3 playerPosition = Player.instance.transform.position;
+                GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = true;
 
+                #region Old3DCamera
+                /*
                 //Get the vector between the player and the camera
                 var relativePos = Player.instance.transform.position - transform.position;
                 if (Mathf.Abs(Player.instance.transform.position.y - transform.position.y) <= 1)
@@ -156,6 +160,9 @@ public class CameraController : MonoBehaviour
                     transform.RotateAround(Player.instance.transform.position, Vector3.up, -100 * Time.deltaTime);
                 else if(rotatingRight)
                     transform.RotateAround(Player.instance.transform.position, Vector3.up, 100 * Time.deltaTime);
+            */
+
+            #endregion
             }
         }
         else if(target != null)

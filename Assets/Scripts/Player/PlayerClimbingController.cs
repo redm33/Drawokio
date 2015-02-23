@@ -224,16 +224,19 @@ public class PlayerClimbingController : MonoBehaviour
         if (Time.time - lastJump < climbDelay)
             return false;
 
-        float climbInput = Input.GetAxis("Vertical");
+        float climbInputY = Input.GetAxis("Vertical");
         if (climbables.Count > 0) //&& climbInput != 0)
         {
-            player.state = Player.State.CLIMBING;
+            if (climbables[0].climbable)
+            {
+                player.state = Player.State.CLIMBING;
 
-            rigidbody.velocity = Vector3.zero;
+                rigidbody.velocity = Vector3.zero;
 
-			currentClimbable = closestClimbable;
+                currentClimbable = closestClimbable;
 
-            return true;
+                return true;
+            }
         }
 
         return false;

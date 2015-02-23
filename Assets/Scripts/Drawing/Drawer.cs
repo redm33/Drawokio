@@ -131,7 +131,7 @@ public class Drawer : MonoBehaviour
             {
 				foreach( Collider hit in hits ) 
                 {
-                    if (hit.name != "Pencil(Clone)")
+                    if (hit.name != "Pencil(Clone)" && hit.tag == "Connector")
                         hasConnector = true;
                     if (hit.tag == "Connector")
                     {
@@ -212,13 +212,20 @@ public class Drawer : MonoBehaviour
         {
             float incrememnt = .02f;
             Ink last = lastNode;
-            while(currentRoot.gameObject != last.gameObject && !Input.GetKey(KeyCode.Space))
+            while(currentRoot.gameObject != last.gameObject)
             {
                 last.timeoutRemaining = incrememnt;
+                last.gameObject.GetComponent<Pencil>().climbable = false;
                 last = last.gameObject.transform.parent.GetComponent<Pencil>();
                 incrememnt += .02f;
             }
+            Material[] mats = { last.gameObject.GetComponent<LineRenderer>().materials[1] };
+            last.timeoutRemaining = incrememnt;
+            last.gameObject.GetComponent<Pencil>().climbable = false;
+            last.gameObject.GetComponent<LineRenderer>().materials = mats;
         }
+
+        
 
 		lastNode = currentRoot = null;
 		startConnector = null;
