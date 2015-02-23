@@ -223,6 +223,7 @@ public class Player: MonoBehaviour
         if(Input.GetKey(KeyCode.LeftControl))
         {
             this.rigidbody.velocity = Vector3.zero;
+            this.animationController.state = PlayerAnimationController.State.IDLE;
             this.GetComponent<PlayerMovementController>().enabled = false;
         }
         else
