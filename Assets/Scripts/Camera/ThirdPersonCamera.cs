@@ -286,7 +286,8 @@ public class ThirdPersonCamera : MonoBehaviour
 
         // Determine camera state
         // * Targeting *
-        if (leftTrigger > TARGETING_THRESHOLD)
+
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.W))//(leftTrigger > TARGETING_THRESHOLD)
         {
             barEffect.coverage = Mathf.SmoothStep(barEffect.coverage, widescreen, targetingTime);
             camState = CamStates.Target;
@@ -313,7 +314,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
             // * Behind the back *
             if ((camState == CamStates.FirstPerson && bButtonPressed) ||
-                (camState == CamStates.Target && leftTrigger <= TARGETING_THRESHOLD))
+               (camState == CamStates.Target && leftTrigger <= TARGETING_THRESHOLD))
             {
                 camState = CamStates.Behind;
             }
@@ -331,7 +332,6 @@ public class ThirdPersonCamera : MonoBehaviour
                 // Only update camera look direction if moving //Marlee* not sure what this does, commented out things that didn't work.
                 if (Input.anyKeyDown)//follow.LocomotionThreshold && follow.IsInLocomotion() && !follow.IsInPivot())
                 {
-                    Debug.Log(follow.speed);
                     lookDir = Vector3.Lerp(followXform.right * (leftX < 0 ? 1f : -1f), followXform.forward * (leftY < 0 ? -1f : 1f), Mathf.Abs(Vector3.Dot(this.transform.forward, followXform.forward)));
                     Debug.DrawRay(this.transform.position, lookDir, Color.white);
 

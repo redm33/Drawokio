@@ -44,22 +44,21 @@ public class PlayerMovementController : MonoBehaviour
 
 	void Update() 
     {
-        if (transformationController.in2D && ((Player.instance.transform.rotation.y >= -1 && Player.instance.transform.rotation.y <= 1) || (Player.instance.transform.rotation.y >= 179 && Player.instance.transform.rotation.y <= 181)))
+        if (transformationController.in2D && ((Player.instance.transform.eulerAngles.y >= -1 && Player.instance.transform.eulerAngles.y <= 1) || (Player.instance.transform.eulerAngles.y >= 179 && Player.instance.transform.eulerAngles.y <= 181)))
+        {
+            Debug.Log(Player.instance.transform.eulerAngles);
+            movementInput = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"),0);
+            rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+
+        }
+        else if (transformationController.in2D)
         {
             movementInput = new Vector3(0, Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
-            rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotation;
-            if (startPosition.x + .07f < transform.position.x)
-                transform.position = new Vector3(startPosition.x, transform.position.y, transform.position.z);
-            if (startPosition.x - .07f > transform.position.x)
-                transform.position = new Vector3(startPosition.x, transform.position.y, transform.position.z);
+            rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
         }
         else
         {
             movementInput = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-            rigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotation;
-
-
-
         }
 		jumpInput = Input.GetButton("Jump");
         sprintInput = Input.GetKey(KeyCode.LeftShift);

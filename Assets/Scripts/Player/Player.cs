@@ -219,6 +219,15 @@ public class Player: MonoBehaviour
 			Room.instance.state = Room.State.MENU_MAIN;
 
         playerPosition = this.transform.localPosition;
+
+        if(Input.GetKey(KeyCode.LeftControl))
+        {
+            this.rigidbody.velocity = Vector3.zero;
+            this.GetComponent<PlayerMovementController>().enabled = false;
+        }
+        else
+            this.GetComponent<PlayerMovementController>().enabled = true;
+
 	}
 
 	void FixedUpdate(){}
