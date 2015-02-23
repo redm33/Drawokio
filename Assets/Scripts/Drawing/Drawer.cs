@@ -37,7 +37,7 @@ public class Drawer : MonoBehaviour
     {
 		// Cheatz Yo
 		if( Input.GetButtonDown("Refill") ) 
-			hasPencil = hasCharcoal = true;
+			hasPencil = hasCharcoal = hasPen = true;
 
 		StepMenu( Time.deltaTime );
 
@@ -160,7 +160,9 @@ public class Drawer : MonoBehaviour
 		if( placeNew ) 
         {
 			Ink node = Instantiate( currentInk, pos, canvas.transform.rotation ) as Ink;
-			node.rigidbody.constraints = canvas.drawingConstraints;
+            //Ink node = Instantiate(inkTypes[3], pos, canvas.transform.rotation) as Ink;
+            if(node.rigidbody != null)
+			    node.rigidbody.constraints = canvas.drawingConstraints;
 			if( node.type == Connector.Type.CHARCOAL )
 				node.rigidbody.constraints |= RigidbodyConstraints.FreezeRotation;
 
@@ -284,6 +286,7 @@ public class Drawer : MonoBehaviour
 
 	public bool hasPencil = false;
 	public bool hasCharcoal = false;
+    public bool hasPen = false;
 
 	public bool hasCurrentInk 
     {
@@ -389,7 +392,9 @@ public class Drawer : MonoBehaviour
 
 		toolboxTransform.position = Vector3.Lerp( closedToolboxPosition, openToolboxPosition, menuProgress );
 
-		if( hasCharcoal )
+        if (hasPen)
+            boxTexture.texture = boxTextures[3];
+		else if( hasCharcoal )
 			boxTexture.texture = boxTextures[2];
 		else if( hasPencil )
 			boxTexture.texture = boxTextures[1];

@@ -4,7 +4,7 @@ using System.Collections;
 [AddComponentMenu("Game/Ink/Pen")]
 public class Pen : Ink {
 
-	public static int layer = 11;
+	public static int layer = 23;
 
 	public override Type type {
 		get { return Type.PEN; }
@@ -24,8 +24,8 @@ public class Pen : Ink {
 			return base.paused;
 		}
 		set {
-			if( isRoot )
-				base.paused = value;
+			//if( isRoot )
+			base.paused = value;
 		}
 	}
 
@@ -33,7 +33,9 @@ public class Pen : Ink {
 	{
 		if( isRoot ) {
 			AttachRigidbody();
-		}
+            rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
+            rigidbody.drag = 20f;
+        }
 	}
 
 	public override void OnDrawEnd() {

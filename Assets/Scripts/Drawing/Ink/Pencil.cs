@@ -21,6 +21,7 @@ public class Pencil : Ink {
 		base.OnCreated ();
 
 		PrepRigidbody();
+
 	}
 
 	protected override void OnLateUpdate ()
@@ -99,6 +100,7 @@ public class Pencil : Ink {
 		ph.axis = transform.forward;
 		ph.swingAxis = transform.forward;
 		
+
 		SoftJointLimit limit_setter = ph.lowTwistLimit;
 		limit_setter.limit = lowTwistLimit;
 		ph.lowTwistLimit = limit_setter;

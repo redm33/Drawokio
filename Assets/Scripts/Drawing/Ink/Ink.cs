@@ -86,18 +86,23 @@ public abstract class Ink : Connector {
 		set {
 			_paused = value;
 
-			if( value ) {
-				pauseVelocity = rigidbody.velocity;
-				pauseRotVelocity = rigidbody.angularVelocity;
-			}
-		
-			rigidbody.useGravity = ( !pinned && !paused );
-			rigidbody.isKinematic = ( pinned || paused );
+            if (rigidbody != null)
+            {
+                if (value)
+                {
+                    pauseVelocity = rigidbody.velocity;
+                    pauseRotVelocity = rigidbody.angularVelocity;
+                }
 
-			if( !rigidbody.isKinematic ) {
-				rigidbody.velocity = pauseVelocity;
-				rigidbody.angularVelocity = pauseRotVelocity;
-			}
+                rigidbody.useGravity = (!pinned && !paused);
+                rigidbody.isKinematic = (pinned || paused);
+
+                if (!rigidbody.isKinematic)
+                {
+                    rigidbody.velocity = pauseVelocity;
+                    rigidbody.angularVelocity = pauseRotVelocity;
+                }
+            }
 
 			foreach( Ink child in children )
 				if( child != null )
@@ -117,6 +122,7 @@ public abstract class Ink : Connector {
 		if( rigidbody == null )
 			gameObject.AddComponent<Rigidbody>();
 
+
 		PrepRigidbody();
 	}
 
@@ -128,5 +134,6 @@ public abstract class Ink : Connector {
 
 		rigidbody.isKinematic = true;
 		rigidbody.useGravity = false;
+
 	}
 }

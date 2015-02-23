@@ -48,13 +48,17 @@ public class PlayerMovementController : MonoBehaviour
         {
             movementInput = new Vector3(0, Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
             rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotation;
-            twoDAxis = "Z";
+            if (startPosition.x + .07f < transform.position.x)
+                transform.position = new Vector3(startPosition.x, transform.position.y, transform.position.z);
+            if (startPosition.x - .07f > transform.position.x)
+                transform.position = new Vector3(startPosition.x, transform.position.y, transform.position.z);
         }
         else
         {
             movementInput = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
             rigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotation;
-            twoDAxis = "X";
+
+
 
         }
 		jumpInput = Input.GetButton("Jump");
