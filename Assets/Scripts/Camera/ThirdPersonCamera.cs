@@ -162,6 +162,9 @@ public class ThirdPersonCamera : MonoBehaviour
         Behind,			// Single analog stick, Japanese-style; character orbits around camera; default for games like Mario64 and 3D Zelda series
         FirstPerson,	// Traditional 1st person look around
         Target,			// L-targeting variation on "Behind" mode
+        Front,
+        Left,
+        Right,
         Free			// High angle; character moves relative to camera facing direction
     }
 
@@ -287,15 +290,17 @@ public class ThirdPersonCamera : MonoBehaviour
         // Determine camera state
         // * Targeting *
 
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.W))//(leftTrigger > TARGETING_THRESHOLD)
+        if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.W))//(leftTrigger > TARGETING_THRESHOLD)
         {
             barEffect.coverage = Mathf.SmoothStep(barEffect.coverage, widescreen, targetingTime);
             camState = CamStates.Target;
+            camSmoothDampTime = .5f;
         }
+
         else
         {
             barEffect.coverage = Mathf.SmoothStep(barEffect.coverage, 0f, targetingTime);
-
+            camSmoothDampTime = .1f;
             // * First Person *
             if (rightY > firstPersonThreshold && camState != CamStates.Free)// && !follow.IsInLocomotion())
             {
@@ -356,6 +361,7 @@ public class ThirdPersonCamera : MonoBehaviour
                 targetPosition = characterOffset + followXform.up * distanceUp - lookDir * distanceAway;
 
                 break;
+
             case CamStates.FirstPerson:
                 // Looking up and down
                 // Calculate the amount of rotation and apply to the firstPersonCamPos GameObject
