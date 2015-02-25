@@ -236,6 +236,7 @@ public class Player: MonoBehaviour
 	public void Kill()
 	{
 		Instantiate( deathPoof, transform.position, transform.rotation );
+        GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
 		Destroy ( gameObject );
 	}
 

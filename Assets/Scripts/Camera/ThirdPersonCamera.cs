@@ -234,7 +234,8 @@ public class ThirdPersonCamera : MonoBehaviour
     /// </summary>
     void Update()
     {
-
+        follow = GameObject.Find("Player").GetComponent<PlayerMovementController>();
+        followXform = GameObject.Find("Player").transform;
     }
 
     /// <summary>
@@ -294,6 +295,25 @@ public class ThirdPersonCamera : MonoBehaviour
         {
             barEffect.coverage = Mathf.SmoothStep(barEffect.coverage, widescreen, targetingTime);
             camState = CamStates.Target;
+            camSmoothDampTime = .5f;
+        }
+        else if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.S))//(leftTrigger > TARGETING_THRESHOLD)
+        {
+            barEffect.coverage = Mathf.SmoothStep(barEffect.coverage, widescreen, targetingTime);
+            camState = CamStates.Front;
+            Debug.Log("Front");
+            camSmoothDampTime = .5f;
+        }
+        else if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.A))//(leftTrigger > TARGETING_THRESHOLD)
+        {
+            barEffect.coverage = Mathf.SmoothStep(barEffect.coverage, widescreen, targetingTime);
+            camState = CamStates.Left;
+            camSmoothDampTime = .5f;
+        }
+        else if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.D))//(leftTrigger > TARGETING_THRESHOLD)
+        {
+            barEffect.coverage = Mathf.SmoothStep(barEffect.coverage, widescreen, targetingTime);
+            camState = CamStates.Right;
             camSmoothDampTime = .5f;
         }
 
@@ -360,6 +380,30 @@ public class ThirdPersonCamera : MonoBehaviour
 
                 targetPosition = characterOffset + followXform.up * distanceUp - lookDir * distanceAway;
 
+                break;
+            case CamStates.Front:
+                ResetCamera();
+                lookDir = -followXform.forward;
+                curLookDir = -followXform.forward;
+
+                targetPosition = characterOffset + followXform.up * distanceUp - lookDir * distanceAway;
+                camState = CamStates.Behind;
+                break;
+            case CamStates.Left:
+                ResetCamera();
+                lookDir = -followXform.right;
+                curLookDir = -followXform.right;
+
+                targetPosition = characterOffset + followXform.up * distanceUp - lookDir * distanceAway;
+                camState = CamStates.Behind;
+                break;
+            case CamStates.Right:
+                ResetCamera();
+                lookDir = followXform.right;
+                curLookDir = followXform.right;
+
+                targetPosition = characterOffset + followXform.up * distanceUp - lookDir * distanceAway;
+                camState = CamStates.Behind;
                 break;
 
             case CamStates.FirstPerson:

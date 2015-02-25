@@ -149,6 +149,7 @@ public class Room : MonoBehaviour
         if (Player.instance != null)
         {
             GameObject.Find("Main Camera").transform.parent = Player.instance.transform.parent;
+            GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
             Destroy(Player.instance.gameObject);
         }
         drawer.DestroyAll();

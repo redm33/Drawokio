@@ -26,6 +26,9 @@ public class Pen : Ink {
 		set {
 			//if( isRoot )
 			base.paused = value;
+            //makes pen not move or react to collision
+            if (isRoot)
+                rigidbody.isKinematic = true;
 		}
 	}
 
@@ -33,7 +36,7 @@ public class Pen : Ink {
 	{
 		if( isRoot ) {
 			AttachRigidbody();
-            rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
+            rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
             rigidbody.drag = 20f;
         }
 	}
