@@ -291,20 +291,21 @@ public class ThirdPersonCamera : MonoBehaviour
         // Determine camera state
         // * Targeting *
 
-        if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.W))//(leftTrigger > TARGETING_THRESHOLD)
+        /*
+        if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.S))//(leftTrigger > TARGETING_THRESHOLD)
         {
             barEffect.coverage = Mathf.SmoothStep(barEffect.coverage, widescreen, targetingTime);
             camState = CamStates.Target;
             camSmoothDampTime = .5f;
         }
-        else if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.S))//(leftTrigger > TARGETING_THRESHOLD)
+        else if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.W))//(leftTrigger > TARGETING_THRESHOLD)
         {
             barEffect.coverage = Mathf.SmoothStep(barEffect.coverage, widescreen, targetingTime);
-            camState = CamStates.Front;
-            Debug.Log("Front");
+            camState = CamStates.Target;
             camSmoothDampTime = .5f;
         }
-        else if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.A))//(leftTrigger > TARGETING_THRESHOLD)
+        */
+        if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.A))//(leftTrigger > TARGETING_THRESHOLD)
         {
             barEffect.coverage = Mathf.SmoothStep(barEffect.coverage, widescreen, targetingTime);
             camState = CamStates.Left;
@@ -391,16 +392,16 @@ public class ThirdPersonCamera : MonoBehaviour
                 break;
             case CamStates.Left:
                 ResetCamera();
-                lookDir = -followXform.right;
-                curLookDir = -followXform.right;
+                lookDir = this.transform.right;
+                curLookDir = this.transform.right;
 
                 targetPosition = characterOffset + followXform.up * distanceUp - lookDir * distanceAway;
                 camState = CamStates.Behind;
                 break;
             case CamStates.Right:
                 ResetCamera();
-                lookDir = followXform.right;
-                curLookDir = followXform.right;
+                lookDir = -this.transform.right;
+                curLookDir = -this.transform.right;
 
                 targetPosition = characterOffset + followXform.up * distanceUp - lookDir * distanceAway;
                 camState = CamStates.Behind;
