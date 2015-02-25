@@ -182,7 +182,7 @@ public class PlayerMovementController : MonoBehaviour
 	void CheckGrounded()
 	{
 		RaycastHit hit;
-		isGrounded = Physics.SphereCast(groundCastOrigin.position, groundCastRadius, Vector3.down, out hit, groundCastDistance, groundLayerMask);
+		isGrounded = (Physics.SphereCast(groundCastOrigin.position, groundCastRadius, Vector3.down, out hit, groundCastDistance, groundLayerMask));
 	}
 
   
