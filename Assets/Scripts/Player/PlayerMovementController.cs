@@ -17,6 +17,7 @@ public class PlayerMovementController : MonoBehaviour
 	Vector3 movementInput = Vector3.zero;
 	bool jumpInput = false;
     bool sprintInput = false;
+    bool airborneOff = false;
 
 	[HideInInspector]
 	public Vector3 startPosition; // For use with constraining to a plane.
@@ -46,7 +47,6 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (transformationController.in2D && ((Player.instance.transform.eulerAngles.y >= -1 && Player.instance.transform.eulerAngles.y <= 1) || (Player.instance.transform.eulerAngles.y >= 179 && Player.instance.transform.eulerAngles.y <= 181)))
         {
-            Debug.Log(Player.instance.transform.eulerAngles);
             movementInput = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"),0);
             rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
 
@@ -82,6 +82,7 @@ public class PlayerMovementController : MonoBehaviour
 	
 		if( isGrounded ) 
         {
+            Debug.Log("Grounded");
 			if( transformationController.in3D ) 
             {
 				CameraController camera = CameraController.instance;
@@ -117,7 +118,7 @@ public class PlayerMovementController : MonoBehaviour
 				{
 					if (movementInput.x > 0 || movementInput.z > 0)
 						animationController.direction = PlayerAnimationController.Direction.RIGHT;
-					else
+                    else if (movementInput.x < 0 || movementInput.z < 0)
 						animationController.direction = PlayerAnimationController.Direction.LEFT;
 				}
 			}
@@ -129,12 +130,13 @@ public class PlayerMovementController : MonoBehaviour
 
 		} 
         else 
-        {		
+        {
+            Debug.Log("Not Grounded");
 			rigidbody.velocity += transform.TransformDirection( Physics.gravity ) * dt;
 			
 			if (isGrounded)
 				player.state = Player.State.WALKING;
-			else
+		    else if(!airborneOff)
 				animationController.state = PlayerAnimationController.State.AIRBORNE;
 		}
 		
@@ -184,6 +186,18 @@ public class PlayerMovementController : MonoBehaviour
 		RaycastHit hit;
 		isGrounded = (Physics.SphereCast(groundCastOrigin.position, groundCastRadius, Vector3.down, out hit, groundCastDistance, groundLayerMask));
 	}
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.name == "BalloonBase")
+            airborneOff = true;
+    }
+    void OnTriggerExit(Collider col)
+    {
+        if (col.name == "BalloonBase")
+            airborneOff = false;
+    }
+
 
   
 }

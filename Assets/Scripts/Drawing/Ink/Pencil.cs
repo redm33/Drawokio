@@ -75,7 +75,6 @@ public class Pencil : Ink {
 		if( other.type == Type.PENCIL && ( parent == (other as Ink) || children.Contains( other as Ink ) ) )
 			return false;
 
-        Debug.Log(other.name);
 		BuildJoint( other.rigidbody );
 		if( other.type != Connector.Type.DEFAULT )
 			BuildJointOn( other.gameObject, rigidbody );

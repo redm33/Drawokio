@@ -131,7 +131,7 @@ public class Drawer : MonoBehaviour
             {
 				foreach( Collider hit in hits ) 
                 {
-                    if (hit.name != "Pencil(Clone)" && hit.tag == "Connector")
+                    if (hit.name != "Pencil" && hit.tag == "Connector")
                         hasConnector = true;
                     if (hit.tag == "Connector")
                     {
@@ -149,6 +149,7 @@ public class Drawer : MonoBehaviour
                             startConnector = connector;
                             connectStart = pos;
                             placeNew = false;
+                            CheckVaildDrawing();
                             lastNode = currentRoot = null;
                             break;
                         }
@@ -163,8 +164,19 @@ public class Drawer : MonoBehaviour
             //Ink node = Instantiate(inkTypes[3], pos, canvas.transform.rotation) as Ink;
             if(node.rigidbody != null)
 			    node.rigidbody.constraints = canvas.drawingConstraints;
-			if( node.type == Connector.Type.CHARCOAL )
-				node.rigidbody.constraints |= RigidbodyConstraints.FreezeRotation;
+            if (node.type == Connector.Type.CHARCOAL)
+            {
+                node.rigidbody.constraints |= RigidbodyConstraints.FreezeRotation;
+                node.name = "Charcoal";
+            }
+            if (node.type == Connector.Type.PENCIL)
+            {
+                node.name = "Pencil";
+            }
+            if (node.type == Connector.Type.PEN)
+            {
+                node.name = "Pen";
+            }
 
 			if( currentRoot == null ) {
 				node.transform.parent = drawingParent;
@@ -184,7 +196,9 @@ public class Drawer : MonoBehaviour
 			node.OnCreated();
 			
 			if( startConnector != null )
-				node.ConnectTo( startConnector );
+            {
+                node.ConnectTo(startConnector);
+            }
 			startConnector = null;
 
 			if( !audio.isPlaying && node.drawingSound != null ) 
@@ -204,17 +218,26 @@ public class Drawer : MonoBehaviour
         {
 			root.OnDrawEnd();
 		}
-		
+
 		drawing = false;
 		roots = new List<Ink>();
 
+        CheckVaildDrawing();
+
+		startConnector = null;
+        hasConnector = false;
+		audio.Stop ();
+
+	}
+
+    private void CheckVaildDrawing()
+    {
         //if the pencil isn't conneted to anything, remove it very quickly from the world.
-        Debug.Log(currentInkIndex);
         if (!hasConnector && currentInkIndex == 0)
         {
             float incrememnt = .02f;
             Ink last = lastNode;
-            while(currentRoot.gameObject != last.gameObject)
+            while (currentRoot.gameObject != last.gameObject)
             {
                 last.timeoutRemaining = incrememnt;
                 last.gameObject.GetComponent<Pencil>().climbable = false;
@@ -227,18 +250,8 @@ public class Drawer : MonoBehaviour
             last.gameObject.GetComponent<LineRenderer>().materials = mats;
         }
 
-        
 
-		lastNode = currentRoot = null;
-		startConnector = null;
-
-        
-		audio.Stop ();
-
-        hasConnector = false;
-
-	}
-
+    }
 	/**
 	 * Raycasting
 	 */
