@@ -220,7 +220,7 @@ public class Player: MonoBehaviour
 
         playerPosition = this.transform.localPosition;
 
-        if (Input.GetMouseButton(0) && this.transformationController.in3D)
+        if (Input.GetMouseButton(0) && this.transformationController.in3D && !this.rigidbody.isKinematic)
         {
             this.rigidbody.velocity = Vector3.zero;
             this.animationController.state = PlayerAnimationController.State.IDLE;

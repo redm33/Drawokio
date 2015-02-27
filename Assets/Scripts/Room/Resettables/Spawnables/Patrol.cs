@@ -30,7 +30,7 @@ public class Patrol : Spawnable
 	bool stopped = false;
 	float stopLeft = 0;
 
-	int cur = 0;
+	public int cur = 0;
 
 	Vector3 startPos;
 
@@ -68,7 +68,7 @@ public class Patrol : Spawnable
 
 			if( diff.sqrMagnitude < movement * movement ) 
             {
-				rigidbody.MovePosition( patrolPoints[cur].position );
+				//rigidbody.MovePosition( patrolPoints[cur].position );
 
 				cur++;
 
@@ -87,7 +87,7 @@ public class Patrol : Spawnable
 			} 
             else 
             {
-				rigidbody.MovePosition( transform.position + diff.normalized * movement );
+				//rigidbody.MovePosition( transform.position + diff.normalized * movement );
 			}
 		}
 	}

@@ -82,7 +82,6 @@ public class PlayerMovementController : MonoBehaviour
 	
 		if( isGrounded ) 
         {
-            Debug.Log("Grounded");
 			if( transformationController.in3D ) 
             {
 				CameraController camera = CameraController.instance;
@@ -131,7 +130,6 @@ public class PlayerMovementController : MonoBehaviour
 		} 
         else 
         {
-            Debug.Log("Not Grounded");
 			rigidbody.velocity += transform.TransformDirection( Physics.gravity ) * dt;
 			
 			if (isGrounded)

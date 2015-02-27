@@ -7,11 +7,10 @@ public class Plane : Patrol
 	public CameraFollowable cameraFollowable;
 	public Transform playerPosition;
 
-	void OnTriggerEnter( Collider other ) 
+	void OnTriggerStay( Collider other ) 
     {
 		Player.instance.StartTransport( playerPosition );
-
-		CameraController.instance.AddToQueue( cameraFollowable );
+		//CameraController.instance.AddToQueue( cameraFollowable );
 
 		running = true;
 	}
@@ -25,4 +24,11 @@ public class Plane : Patrol
 
 		base.PerformReset ();
 	}
+
+    void Update()
+    { 
+        if(running)
+            transform.position = Vector3.Lerp(this.transform.position, patrolPoints[cur].position, .5f*Time.deltaTime);
+
+    }
 }
