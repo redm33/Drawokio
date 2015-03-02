@@ -226,6 +226,7 @@ public class Drawer : MonoBehaviour
 
 		startConnector = null;
         hasConnector = false;
+        lastNode = currentRoot = null; 
 		audio.Stop ();
 
 	}

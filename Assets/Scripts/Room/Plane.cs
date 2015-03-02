@@ -6,15 +6,36 @@ public class Plane : Patrol
 
 	public CameraFollowable cameraFollowable;
 	public Transform playerPosition;
+    public GameObject camera;
 
-	void OnTriggerStay( Collider other ) 
+    //private variables
+    private Vector3 cameraPos;
+    private Vector3 cameraRot;
+
+    void Start()
     {
-		Player.instance.StartTransport( playerPosition );
-		//CameraController.instance.AddToQueue( cameraFollowable );
+        camera = GameObject.Find("Main Camera");
+        cameraPos = new Vector3(0, -5.6f, -5.86f);
+        cameraRot = new Vector3(300, 0, 8); 
 
-		running = true;
-	}
+    }
+    void Update()
+    {
+        if (running)
+        {
+            transform.position = Vector3.MoveTowards(this.transform.position, patrolPoints[cur].position, speed * Time.deltaTime);
+            camera.GetComponent<ThirdPersonCamera>().enabled = false;
+            camera.transform.parent = Player.instance.transform;
+            camera.transform.localPosition = cameraPos;
+            camera.transform.localEulerAngles = cameraRot;
+        }
+    }
 
+    void OnTriggerStay(Collider other)
+    {
+        Player.instance.StartTransport(playerPosition);
+        running = true;
+    }
 	public override void PerformReset ()
 	{
 		if( running ) 
@@ -25,10 +46,5 @@ public class Plane : Patrol
 		base.PerformReset ();
 	}
 
-    void Update()
-    { 
-        if(running)
-            transform.position = Vector3.Lerp(this.transform.position, patrolPoints[cur].position, .5f*Time.deltaTime);
-
-    }
+    
 }

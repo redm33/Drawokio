@@ -213,6 +213,19 @@ public class Player: MonoBehaviour
 			hats[index].SetActive(true);
 	}
 
+    public void Kill()
+    {
+        Instantiate(deathPoof, transform.position, transform.rotation);
+        GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
+        Destroy(gameObject);
+    }
+
+    public void StartTransport(Transform transport)
+    {
+        this.transport = transport;
+        state = State.TRANSPORTED;
+    }
+
 	void Update()
 	{
 		if( !paused && Input.GetButtonDown("Back") ) 
@@ -231,18 +244,6 @@ public class Player: MonoBehaviour
 
 	}
 
-	void FixedUpdate(){}
 
-	public void Kill()
-	{
-		Instantiate( deathPoof, transform.position, transform.rotation );
-        GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
-		Destroy ( gameObject );
-	}
 
-	public void StartTransport( Transform transport ) 
-    {
-		this.transport = transport;
-		state = State.TRANSPORTED;
-	}
 }

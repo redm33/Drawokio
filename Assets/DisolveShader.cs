@@ -58,5 +58,17 @@ public class DisolveShader : MonoBehaviour {
 			}
 		}
 		lastState = currentState;
+        
 	}
+
+    void OnTriggerStay(Collider col)
+    {
+        if (col.name == "RespawnTrigger")
+        {
+            time = 0;
+            delay = 0;
+            dissolveMaterial.SetFloat("_FadePosition", -1);
+            dissolveMaterialBlack.SetFloat("_FadePosition", -1);
+        }
+    }
 }
