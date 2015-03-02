@@ -8,6 +8,7 @@ public class Pencil : Ink {
 	public LineRenderer lineRenderer;
 
 	public static int layer = 12;
+    public static int inkAmount = 15;
     public bool climbable = true;
 
 	public override Type type {
@@ -76,8 +77,8 @@ public class Pencil : Ink {
 			return false;
 
 		BuildJoint( other.rigidbody );
-		if( other.type != Connector.Type.DEFAULT )
-			BuildJointOn( other.gameObject, rigidbody );
+        if (other.type != Connector.Type.DEFAULT)
+            BuildJointOn(other.gameObject, rigidbody);
 		return true;
 	}
 	

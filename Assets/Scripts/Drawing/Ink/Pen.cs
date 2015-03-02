@@ -5,6 +5,7 @@ using System.Collections;
 public class Pen : Ink {
 
 	public static int layer = 23;
+    public static int inkAmount = 15;
 
 	public override Type type {
 		get { return Type.PEN; }

@@ -50,7 +50,23 @@ public abstract class Ink : Connector {
 				child.transform.parent = Drawer.instance.drawingParent;
 		}
 
+        switch(gameObject.name)
+        {
+            case "Pencil":
+                Pencil.inkAmount++;
+                break;
+            case "Pen":
+                Pen.inkAmount++;
+                break;
+            case "Charcoal":
+               Charcoal.inkAmount++;
+                break;
+        }
+
 		Destroy ( gameObject ); 
+
+
+        
 	}
 
 	/**

@@ -6,6 +6,7 @@ using System.Collections;
 public class Charcoal : Ink {
 
 	public static int layer = 13;
+    public static int inkAmount = 15;
 
 	public override Type type {
 		get {

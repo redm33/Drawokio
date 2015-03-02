@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 [AddComponentMenu("Game/Ink/Drawer")]
 public class Drawer : MonoBehaviour 
 {
 	public static Drawer instance = null;
     bool hasConnector = false;
+    bool placeMoreInk = true;
 	/**
 	 * Generic
 	 */
@@ -53,6 +55,7 @@ public class Drawer : MonoBehaviour
 				bool isCanvas = ( hit.collider.gameObject.layer == DrawingCanvas.layer );
 				bool isConnector = ( hit.collider.tag == "Connector" );
 
+                Debug.Log(hit.collider.name);
 				if( drawing ) 
                 {
 					if( isCanvas ) 
@@ -136,7 +139,6 @@ public class Drawer : MonoBehaviour
                     if (hit.tag == "Connector")
                     {
                         Connector connector = hit.attachedRigidbody.GetComponent<Connector>();
-
                         if (lastNode == null)
                         {
                             startConnector = connector;
@@ -158,35 +160,49 @@ public class Drawer : MonoBehaviour
 			}
 		}
 
-		if( placeNew ) 
+        if (currentInk.type == Ink.Type.PENCIL && Pencil.inkAmount == 0)
+            placeMoreInk = false;
+        else if (currentInk.type == Ink.Type.PEN && Pen.inkAmount == 0)
+            placeMoreInk = false;
+        else if (currentInk.type == Ink.Type.CHARCOAL && Charcoal.inkAmount == 0)
+            placeMoreInk = false;
+        else
+            placeMoreInk = true;
+
+		if(placeNew && placeMoreInk) 
         {
 			Ink node = Instantiate( currentInk, pos, canvas.transform.rotation ) as Ink;
             //Ink node = Instantiate(inkTypes[3], pos, canvas.transform.rotation) as Ink;
             if(node.rigidbody != null)
 			    node.rigidbody.constraints = canvas.drawingConstraints;
+
             if (node.type == Connector.Type.CHARCOAL)
             {
                 node.rigidbody.constraints |= RigidbodyConstraints.FreezeRotation;
                 node.name = "Charcoal";
+                Charcoal.inkAmount--;
             }
-            if (node.type == Connector.Type.PENCIL)
+            else if (node.type == Connector.Type.PENCIL)
             {
                 node.name = "Pencil";
+                Pencil.inkAmount--;
             }
-            if (node.type == Connector.Type.PEN)
+            else if (node.type == Connector.Type.PEN)
             {
                 node.name = "Pen";
+                Pen.inkAmount--;
             }
 
-			if( currentRoot == null ) {
-				node.transform.parent = drawingParent;
-				currentRoot = node;
-				roots.Add( node );
+            if (currentRoot == null)
+            {
+                node.transform.parent = drawingParent;
+                currentRoot = node;
+                roots.Add(node);
 
-				node.timeoutRemaining = currentTimeout = node.baseTimeout;
-			} 
-            else 
-				node.timeoutRemaining = ( currentTimeout += node.timeoutIncrement );
+                node.timeoutRemaining = currentTimeout = node.baseTimeout;
+            }
+            else
+                node.timeoutRemaining = (currentTimeout += node.timeoutIncrement);
 
 			if( lastNode != null ) 
 				lastNode.AddChild( node );
@@ -234,7 +250,7 @@ public class Drawer : MonoBehaviour
     private void CheckVaildDrawing()
     {
         //if the pencil isn't conneted to anything, remove it very quickly from the world.
-        if (!hasConnector && currentInkIndex == 0)
+        if (!hasConnector && currentInkIndex == 0 && currentRoot != null && lastNode != null)
         {
             float incrememnt = .02f;
             Ink last = lastNode;
