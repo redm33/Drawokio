@@ -15,7 +15,7 @@ public class Car : MonoBehaviour {
 	    if(drivable && updateOnce)
         {
             Player.instance.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + .5f, this.transform.position.z);
-            transform.parent = Player.instance.transform;
+            Player.instance.transform.rotation = this.transform.rotation;
             updateOnce = false;
         }
         else if(updateOnce)
@@ -32,8 +32,16 @@ public class Car : MonoBehaviour {
             drivable = !drivable;
             updateOnce = true;
             Debug.Log("Tab Hit");
+        }     
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        Debug.Log(col.gameObject.name);
+        if(col.gameObject.name == "Player")
+        {
+            transform.parent = Player.instance.transform;
         }
-        
     }
 
 }
