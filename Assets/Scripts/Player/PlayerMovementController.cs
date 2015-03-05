@@ -13,6 +13,7 @@ public class PlayerMovementController : MonoBehaviour
     public float sprintSpeed = 1.5f;
 	public float jumpSpeed = 13.0f;
 	public float standingVerticalVelocity = 10;
+    public float fallLimit = 1.5f;
 
 	Vector3 movementInput = Vector3.zero;
 	bool jumpInput = false;
@@ -21,6 +22,7 @@ public class PlayerMovementController : MonoBehaviour
 
 	[HideInInspector]
 	public Vector3 startPosition; // For use with constraining to a plane.
+    public Vector3 spawnPosition;
     public string twoDAxis = "Z";
 
 	private bool _isActive = false;
@@ -82,6 +84,8 @@ public class PlayerMovementController : MonoBehaviour
 	
 		if( isGrounded ) 
         {
+            ResetFallTimer();
+            spawnPosition = this.transform.position;
 			if( transformationController.in3D ) 
             {
 				CameraController camera = CameraController.instance;
@@ -127,15 +131,19 @@ public class PlayerMovementController : MonoBehaviour
 			else
 				rigidbody.velocity -=  transform.up * standingVerticalVelocity;
 
+
+
 		} 
         else 
         {
 			rigidbody.velocity += transform.TransformDirection( Physics.gravity ) * dt;
-			
-			if (isGrounded)
-				player.state = Player.State.WALKING;
-		    else if(!airborneOff)
-				animationController.state = PlayerAnimationController.State.AIRBORNE;
+            StartFallTimer();
+
+            if (isGrounded)
+                player.state = Player.State.WALKING;
+            else if (!airborneOff)
+                animationController.state = PlayerAnimationController.State.AIRBORNE;
+
 		}
 		
 		rigidbody.MovePosition(rigidbody.position + forcedMovement);
@@ -184,6 +192,26 @@ public class PlayerMovementController : MonoBehaviour
 		RaycastHit hit;
 		isGrounded = (Physics.SphereCast(groundCastOrigin.position, groundCastRadius, Vector3.down, out hit, groundCastDistance, groundLayerMask));
 	}
+
+    void StartFallTimer()
+    {
+        fallLimit -= Time.deltaTime;
+        if(fallLimit <= 0)
+        {
+            Quaternion rot = this.transform.rotation;
+            Player.instance.Kill();
+            ResetFallTimer();
+            Player player = Instantiate(Room.instance.playerPrefab, spawnPosition, rot) as Player;
+            player.name = "Player";
+            Player.instance.transformationController.Become3D();
+		
+        }
+    }
+
+    void ResetFallTimer()
+    {
+        fallLimit = 1.5f;
+    }
 
     void OnTriggerEnter(Collider col)
     {
