@@ -21,6 +21,7 @@ public class Player: MonoBehaviour
 
 	public ParticleSystem deathPoof;
     public static Vector3 playerPosition;
+    public static char movement = 'M';
 
     public enum State
     {
@@ -217,6 +218,7 @@ public class Player: MonoBehaviour
     {
         Instantiate(deathPoof, transform.position, transform.rotation);
         GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
+        GameObject.Find("Main Camera").transform.parent = Player.instance.transform.parent;
         Destroy(gameObject);
     }
 
@@ -238,9 +240,12 @@ public class Player: MonoBehaviour
             this.rigidbody.velocity = Vector3.zero;
             this.animationController.state = PlayerAnimationController.State.IDLE;
             this.GetComponent<PlayerMovementController>().enabled = false;
+            this.GetComponent<PlayerDrivingController>().enabled = false;
         }
-        else
+        else if (Player.movement == 'M')
             this.GetComponent<PlayerMovementController>().enabled = true;
+        else if (Player.movement == 'D')
+            this.GetComponent<PlayerDrivingController>().enabled = true;
 
 	}
 

@@ -12,6 +12,8 @@ public class Plane : Patrol
     private Vector3 cameraPos;
     private Vector3 cameraRot;
 
+    public bool fly = false;
+
     void Start()
     {
         camera = GameObject.Find("Main Camera");
@@ -29,12 +31,17 @@ public class Plane : Patrol
             camera.transform.localPosition = cameraPos;
             camera.transform.localEulerAngles = cameraRot;
         }
+        else
+            fly = false;
     }
 
     void OnTriggerStay(Collider other)
     {
-        Player.instance.StartTransport(playerPosition);
-        running = true;
+        if (fly)
+        {
+            Player.instance.StartTransport(playerPosition);
+            running = true;
+        }
     }
 	public override void PerformReset ()
 	{

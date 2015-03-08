@@ -8,7 +8,7 @@ public class Pencil : Ink {
 	public LineRenderer lineRenderer;
 
 	public static int layer = 12;
-    public static int inkAmount = 15;
+    public static int inkAmount = 150;
     public bool climbable = true;
 
 	public override Type type {

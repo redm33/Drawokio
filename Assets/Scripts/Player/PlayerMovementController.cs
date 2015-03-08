@@ -13,7 +13,7 @@ public class PlayerMovementController : MonoBehaviour
     public float sprintSpeed = 1.5f;
 	public float jumpSpeed = 13.0f;
 	public float standingVerticalVelocity = 10;
-    public float fallLimit = 1.5f;
+    public float fallLimit = 2f;
 
 	Vector3 movementInput = Vector3.zero;
 	bool jumpInput = false;
@@ -195,8 +195,9 @@ public class PlayerMovementController : MonoBehaviour
 
     void StartFallTimer()
     {
-        fallLimit -= Time.deltaTime;
-        if(fallLimit <= 0)
+        if(transformationController.in3D)
+            fallLimit -= Time.deltaTime;
+        if (fallLimit <= 0)
         {
             Quaternion rot = this.transform.rotation;
             Player.instance.Kill();
@@ -210,7 +211,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void ResetFallTimer()
     {
-        fallLimit = 1.5f;
+        fallLimit = 2f;
     }
 
     void OnTriggerEnter(Collider col)

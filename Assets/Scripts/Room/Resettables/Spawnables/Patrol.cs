@@ -68,7 +68,7 @@ public class Patrol : Spawnable
 
 			if( diff.sqrMagnitude < movement * movement ) 
             {
-				//rigidbody.MovePosition( patrolPoints[cur].position );
+				rigidbody.MovePosition( patrolPoints[cur].position );
 
 				cur++;
 
@@ -87,7 +87,7 @@ public class Patrol : Spawnable
 			} 
             else 
             {
-				//rigidbody.MovePosition( transform.position + diff.normalized * movement );
+				rigidbody.MovePosition( transform.position + diff.normalized * movement );
 			}
 		}
 	}
