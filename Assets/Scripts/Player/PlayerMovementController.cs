@@ -84,8 +84,7 @@ public class PlayerMovementController : MonoBehaviour
 	
 		if( isGrounded ) 
         {
-            ResetFallTimer();
-            spawnPosition = this.transform.position;
+            
 			if( transformationController.in3D ) 
             {
 				CameraController camera = CameraController.instance;
@@ -131,12 +130,17 @@ public class PlayerMovementController : MonoBehaviour
 			else
 				rigidbody.velocity -=  transform.up * standingVerticalVelocity;
 
-
+            if (fallLimit > 0)
+            {
+                spawnPosition = this.transform.position;
+                ResetFallTimer();
+            }
+                
 
 		} 
         else 
         {
-			rigidbody.velocity += transform.TransformDirection( Physics.gravity ) * dt;
+			rigidbody.velocity += transform.TransformDirection( Physics.gravity ) * dt * rigidbody.mass;
             StartFallTimer();
 
             if (isGrounded)
@@ -195,9 +199,12 @@ public class PlayerMovementController : MonoBehaviour
 
     void StartFallTimer()
     {
-        if(transformationController.in3D)
+        if (transformationController.in3D)
+        {
             fallLimit -= Time.deltaTime;
-        if (fallLimit <= 0)
+            //Debug.Log(fallLimit);
+        }
+        /*if (fallLimit <= 0)
         {
             Quaternion rot = this.transform.rotation;
             Player.instance.Kill();
@@ -206,6 +213,21 @@ public class PlayerMovementController : MonoBehaviour
             player.name = "Player";
             Player.instance.transformationController.Become3D();
 		
+        }*/
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        Debug.Log(col.gameObject.name);
+        Debug.Log(fallLimit);
+        if(fallLimit <= 0)
+        {
+            Quaternion rot = this.transform.rotation;
+            Player.instance.Kill();
+            ResetFallTimer();
+            Player player = Instantiate(Room.instance.playerPrefab, spawnPosition, rot) as Player;
+            player.name = "Player";
+            Player.instance.transformationController.Become3D();
         }
     }
 
