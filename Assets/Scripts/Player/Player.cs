@@ -21,6 +21,7 @@ public class Player: MonoBehaviour
 
 	public ParticleSystem deathPoof;
     public static Vector3 playerPosition;
+    public static char movement = 'M';
 
     public enum State
     {
@@ -213,6 +214,20 @@ public class Player: MonoBehaviour
 			hats[index].SetActive(true);
 	}
 
+    public void Kill()
+    {
+        Instantiate(deathPoof, transform.position, transform.rotation);
+        GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
+        GameObject.Find("Main Camera").transform.parent = Player.instance.transform.parent;
+        Destroy(gameObject);
+    }
+
+    public void StartTransport(Transform transport)
+    {
+        this.transport = transport;
+        state = State.TRANSPORTED;
+    }
+
 	void Update()
 	{
 		if( !paused && Input.GetButtonDown("Back") ) 
@@ -225,24 +240,15 @@ public class Player: MonoBehaviour
             this.rigidbody.velocity = Vector3.zero;
             this.animationController.state = PlayerAnimationController.State.IDLE;
             this.GetComponent<PlayerMovementController>().enabled = false;
+            this.GetComponent<PlayerDrivingController>().enabled = false;
         }
-        else
+        else if (Player.movement == 'M')
             this.GetComponent<PlayerMovementController>().enabled = true;
+        else if (Player.movement == 'D')
+            this.GetComponent<PlayerDrivingController>().enabled = true;
 
 	}
 
-	void FixedUpdate(){}
 
-	public void Kill()
-	{
-		Instantiate( deathPoof, transform.position, transform.rotation );
-        GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
-		Destroy ( gameObject );
-	}
 
-	public void StartTransport( Transform transport ) 
-    {
-		this.transport = transport;
-		state = State.TRANSPORTED;
-	}
 }

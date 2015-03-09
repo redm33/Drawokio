@@ -113,6 +113,7 @@ public class EndingController : MonoBehaviour
 			return;
 		}
 
+        GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
 		index = 0;
 		steps[0].Start();
 

@@ -354,7 +354,6 @@ public class ThirdPersonCamera : MonoBehaviour
         {
             case CamStates.Behind:
                 ResetCamera();
-                Debug.Log("Behind");
                 // Only update camera look direction if moving //Marlee* not sure what this does, commented out things that didn't work.
                 if (Input.anyKeyDown)//follow.LocomotionThreshold && follow.IsInLocomotion() && !follow.IsInPivot())
                 {
@@ -376,7 +375,6 @@ public class ThirdPersonCamera : MonoBehaviour
                 break;
             case CamStates.Target:
                 ResetCamera();
-                Debug.Log("Target");
                 lookDir = followXform.forward;
                 curLookDir = followXform.forward;
 
@@ -443,7 +441,6 @@ public class ThirdPersonCamera : MonoBehaviour
                 lookAt = (Vector3.Lerp(this.transform.position + this.transform.forward, lookAt, Vector3.Distance(this.transform.position, firstPersonCamPos.XForm.position)));
                 break;
             case CamStates.Free:
-                Debug.Log("Free");
                 lookWeight = Mathf.Lerp(lookWeight, 0.0f, Time.deltaTime * firstPersonLookSpeed);
 
                 Vector3 rigToGoal = characterOffset - cameraXform.position;
@@ -470,6 +467,7 @@ public class ThirdPersonCamera : MonoBehaviour
                     distanceAwayFree = Mathf.Lerp(rigToGoal.magnitude, camMinDistFromChar.x, rightY);
                     targetPosition = characterOffset + followXform.up * distanceUpFree - RigToGoalDirection * distanceAwayFree;
                     lastStickMin = float.PositiveInfinity;
+
                 }
 
                 // Store direction only if right stick inactive
