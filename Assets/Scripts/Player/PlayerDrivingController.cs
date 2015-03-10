@@ -16,6 +16,7 @@ public class PlayerDrivingController : MonoBehaviour
     Vector3 movementInput = Vector3.zero;
     bool jumpInput = false;
 
+
     [HideInInspector]
     public Vector3 spawnPosition;
 
@@ -37,7 +38,8 @@ public class PlayerDrivingController : MonoBehaviour
     void Update()
     {
         movementInput = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-        jumpInput = Input.GetButton("Jump");
+        jumpInput = Input.GetButtonDown("Jump");
+
     }
 
     void FixedUpdate()
@@ -51,30 +53,11 @@ public class PlayerDrivingController : MonoBehaviour
         isActive = true;
     }
 
-    public Vector3 forcedMovement = Vector3.zero;
+    //public Vector3 forcedMovement = Vector3.zero;
     void Movement(float dt)
     {
         spawnPosition = this.transform.position;
-        if (transformationController.in3D)
-        {
-            CameraController camera = CameraController.instance;
-            rigidbody.velocity = camera.moveRight * movementInput.x + camera.moveForward * movementInput.y;
-        }
-      
-        rigidbody.velocity *= speed;
-
-
         animationController.state = PlayerAnimationController.State.IDLE;
-
-        if (rigidbody.velocity.sqrMagnitude > 0)
-            transform.rotation = Quaternion.LookRotation(rigidbody.velocity);
-
-        rigidbody.velocity -= transform.up * standingVerticalVelocity;
-        //rigidbody.velocity += transform.TransformDirection(Physics.gravity) * dt;
-
-
-        rigidbody.MovePosition(rigidbody.position + forcedMovement);
-        forcedMovement = Vector3.zero;
 
         if (jumpInput)
             Jump();
@@ -82,8 +65,12 @@ public class PlayerDrivingController : MonoBehaviour
 
     public void Jump()
     {
+        Player.instance.rigidbody.isKinematic = false;
+        Player.instance.GetComponent<PlayerMovementController>().isGrounded = false;
         animationController.state = PlayerAnimationController.State.JUMPING;
+
         rigidbody.velocity += transform.up * jumpSpeed;
+        jumpInput = false;
     }
 
     /**

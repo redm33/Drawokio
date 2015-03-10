@@ -4,9 +4,11 @@ using System.Collections;
 public class Car : MonoBehaviour {
 
     public bool drivable = false;
+    public GameObject car;
+
 	// Use this for initialization
 	void Start () {
-	
+        car = GameObject.Find("CarChild");
 	}
 	
 	// Update is called once per frame
@@ -15,10 +17,8 @@ public class Car : MonoBehaviour {
         {
             if (drivable)
             {
-                //Player.instance.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + .5f, this.transform.position.z);
-                //Player.instance.transform.rotation = this.transform.rotation;
-                this.transform.parent.transform.parent.transform.rotation = Player.instance.transform.rotation;
-                this.transform.parent.transform.parent.transform.position = new Vector3(Player.instance.transform.position.x, this.transform.parent.transform.parent.transform.position.y, Player.instance.transform.position.z);
+                Player.instance.transform.eulerAngles = new Vector3(car.transform.eulerAngles.x, car.transform.eulerAngles.y + 180, car.transform.eulerAngles.z); 
+                Player.instance.transform.position = new Vector3(car.transform.position.x, Player.instance.transform.position.y, car.transform.position.z);
             }
         }
 	}
@@ -27,12 +27,17 @@ public class Car : MonoBehaviour {
     {
         if (col.name == "Player")
         {
-            Debug.Log("Enter");
             drivable = true;
-            //col.gameObject.rigidbody.useGravity = true;
+            Player.instance.rigidbody.isKinematic = true;
+
             Player.instance.GetComponent<PlayerMovementController>().fallLimit = 2f;
             Player.instance.GetComponent<PlayerMovementController>().enabled = false;
+
             Player.instance.GetComponent<PlayerDrivingController>().enabled = true;
+
+            GameObject.Find("CarChild").GetComponent<PlayerCar_Script>().enabled = true;
+            GameObject.Find("CarChild").rigidbody.isKinematic = false;
+
             Player.movement = 'D';
 
         }     
@@ -40,12 +45,19 @@ public class Car : MonoBehaviour {
 
     void OnTriggerExit(Collider col)
     {
-        if (col.name == "Player")
+        if (col.name == "Player" && Input.GetButton("Jump"))
         {
-            Debug.Log("Exit");
             drivable = false;
+            Player.instance.rigidbody.isKinematic = false;
+
             Player.instance.GetComponent<PlayerMovementController>().enabled = true;
+            Player.instance.GetComponent<PlayerMovementController>().isGrounded = false;
+
+            GameObject.Find("CarChild").GetComponent<PlayerCar_Script>().enabled = false;
+
             Player.instance.GetComponent<PlayerDrivingController>().enabled = false;
+            GameObject.Find("CarChild").rigidbody.isKinematic = true;
+
             Player.movement = 'M';
 
         }

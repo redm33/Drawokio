@@ -298,6 +298,7 @@ public class ThirdPersonCamera : MonoBehaviour
             camState = CamStates.Target;
             camSmoothDampTime = .5f;
         }*/
+
         if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.W))//(leftTrigger > TARGETING_THRESHOLD)
         {
             barEffect.coverage = Mathf.SmoothStep(barEffect.coverage, widescreen, targetingTime);

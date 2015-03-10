@@ -140,7 +140,8 @@ public class PlayerMovementController : MonoBehaviour
 		} 
         else 
         {
-			rigidbody.velocity += transform.TransformDirection( Physics.gravity ) * dt * rigidbody.mass;
+            CameraController camera = CameraController.instance;
+			rigidbody.velocity += transform.TransformDirection( Physics.gravity ) * dt * rigidbody.mass + camera.moveRight * movementInput.x * dt + camera.moveForward * movementInput.y * dt;
             StartFallTimer();
 
             if (isGrounded)
@@ -218,8 +219,6 @@ public class PlayerMovementController : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        Debug.Log(col.gameObject.name);
-        Debug.Log(fallLimit);
         if(fallLimit <= 0)
         {
             Quaternion rot = this.transform.rotation;

@@ -241,11 +241,15 @@ public class Player: MonoBehaviour
             this.animationController.state = PlayerAnimationController.State.IDLE;
             this.GetComponent<PlayerMovementController>().enabled = false;
             this.GetComponent<PlayerDrivingController>().enabled = false;
+            GameObject.Find("CarChild").GetComponent<PlayerCar_Script>().enabled = false;
         }
         else if (Player.movement == 'M')
             this.GetComponent<PlayerMovementController>().enabled = true;
         else if (Player.movement == 'D')
+        {
+            GameObject.Find("CarChild").GetComponent<PlayerCar_Script>().enabled = true;
             this.GetComponent<PlayerDrivingController>().enabled = true;
+        }
 
 	}
 
