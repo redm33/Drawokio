@@ -17,8 +17,8 @@ public class Plane : Patrol
     void Start()
     {
         camera = GameObject.Find("Main Camera");
-        cameraPos = new Vector3(-2.7f, -54.34f, -41.14f);
-        cameraRot = new Vector3(320.19f, 10, 10); 
+        cameraPos = new Vector3(-2.1f, -10.4f, -10.4f);
+        cameraRot = new Vector3(310.131f, 10, 10); 
 
     }
     void Update()

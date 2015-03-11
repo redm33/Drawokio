@@ -50,8 +50,8 @@ void Update () {
 	// finally, apply the values to the wheels.	The torque applied is divided by the current gear, and
 	// multiplied by the user input variable.
 
-	FrontLeftWheel.motorTorque = -20 * Input.GetAxis("Vertical");
-	FrontRightWheel.motorTorque = -20 * Input.GetAxis("Vertical");
+	FrontLeftWheel.motorTorque = -50 * Input.GetAxis("Vertical");
+	FrontRightWheel.motorTorque = -50 * Input.GetAxis("Vertical");
     //BackLeftWheel.motorTorque = 50 * Input.GetAxis("Vertical");
     //BackRightWheel.motorTorque = 50 * Input.GetAxis("Vertical");
 		
@@ -89,5 +89,10 @@ void ShiftGears() {
 		
 		CurrentGear = AppropriateGear;
 	}
+}
+
+void OnCollisionEnter(Collision col)
+{
+    Debug.Log(col.gameObject.name);
 }
 }
