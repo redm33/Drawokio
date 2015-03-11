@@ -15,12 +15,12 @@ public class PlayerMovementController : MonoBehaviour
 	public float standingVerticalVelocity = 10;
     public float fallLimit = 2f;
 
-	Vector3 movementInput = Vector3.zero;
 	bool jumpInput = false;
     bool sprintInput = false;
     bool airborneOff = false;
 
 	[HideInInspector]
+    public Vector3 movementInput = Vector3.zero;
 	public Vector3 startPosition; // For use with constraining to a plane.
     public Vector3 spawnPosition;
     public string twoDAxis = "Z";
