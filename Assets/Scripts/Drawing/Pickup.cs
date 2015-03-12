@@ -7,7 +7,8 @@ public class Pickup : Resettable
 	public enum Type 
     {
 		PENCIL,
-		CHARCOAL
+		CHARCOAL,
+        PEN
 	}
 	public Type type;
 
@@ -17,6 +18,8 @@ public class Pickup : Resettable
 			Drawer.instance.hasPencil = true;
 		else if( type == Type.CHARCOAL )
 			Drawer.instance.hasCharcoal = true;
+        else if (type == Type.PEN)
+            Drawer.instance.hasPen = true;
 
 		gameObject.SetActive(false);
 		info.SetActive(true);
@@ -46,6 +49,8 @@ public class Pickup : Resettable
 			Drawer.instance.hasPencil = true;
 		else if( type == Type.CHARCOAL )
 			Drawer.instance.hasCharcoal = true;
+        else if (type == Type.PEN)
+            Drawer.instance.hasPen = true;
 		gameObject.SetActive(false);
 
 		pickedUp = true;

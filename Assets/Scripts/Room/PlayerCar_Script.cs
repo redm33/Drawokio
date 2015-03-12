@@ -25,16 +25,22 @@ public float MinEngineRPM = 1000.0f;
 private float EngineRPM  = 0.0f;
 
 private bool switchDir = false;
+private float originalY;
 
 
 
 void Start () {
 	// I usually alter the center of mass to make the car more stable. I'ts less likely to flip this way.
-rigidbody.centerOfMass += new Vector3(0, -.75f, .25f);
-    }
+    rigidbody.centerOfMass += new Vector3(0, -.75f, .25f);
+    originalY = transform.position.y;
+}
 
 void Update () {
-	
+
+    if (transform.position.y < originalY)
+    {
+        transform.position = new Vector3(transform.position.x, originalY, transform.position.z);
+    }
 		// Compute the engine RPM based on the average RPM of the two wheels, then call the shift gear function
 	//EngineRPM = (FrontLeftWheel.rpm + FrontRightWheel.rpm)/2 * GearRatio[CurrentGear];
 	//ShiftGears();
@@ -91,8 +97,5 @@ void ShiftGears() {
 	}
 }
 
-void OnCollisionEnter(Collision col)
-{
-    Debug.Log(col.gameObject.name);
-}
+
 }

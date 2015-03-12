@@ -7,7 +7,7 @@ public class Gate : Resettable
 	public static Gate instance;
 
 	public int gathered = 0;
-	public int total = 5;
+	public int total = 1;
 
 	void Awake() 
     {

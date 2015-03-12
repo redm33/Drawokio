@@ -93,7 +93,7 @@ public class CameraController : MonoBehaviour
             {
                 GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
                 transform.parent = Player.instance.transform;
-                transform.localPosition = new Vector3(0, 15f, -40f);
+                transform.localPosition = new Vector3(0, 25f, -45f);
 
                 var relativePos = Player.instance.transform.position - transform.position;
                 var rotation = Quaternion.LookRotation(relativePos);

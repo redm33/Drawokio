@@ -5,8 +5,8 @@ using System.Collections;
 public class Patrol : Spawnable 
 {
 
-	public bool startRunning = true;
-	public bool running = true;
+	public bool startRunning = false;
+	public bool running = false;
 
 	public float speed = 1.0f;
 

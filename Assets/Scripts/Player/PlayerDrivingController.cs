@@ -65,12 +65,27 @@ public class PlayerDrivingController : MonoBehaviour
 
     public void Jump()
     {
+        Player.instance.transform.parent = Room.instance.transform.parent;
         Player.instance.rigidbody.isKinematic = false;
         Player.instance.GetComponent<PlayerMovementController>().isGrounded = false;
         animationController.state = PlayerAnimationController.State.JUMPING;
 
         rigidbody.velocity += transform.up * jumpSpeed;
+
         jumpInput = false;
+
+        Player.instance.transform.parent = GameObject.Find("CarChild").transform;
+        Player.instance.rigidbody.isKinematic = false;
+
+        Player.instance.GetComponent<PlayerMovementController>().enabled = true;
+        Player.instance.GetComponent<PlayerMovementController>().isGrounded = false;
+
+        GameObject.Find("CarChild").GetComponent<PlayerCar_Script>().enabled = false;
+
+        Player.instance.GetComponent<PlayerDrivingController>().enabled = false;
+        GameObject.Find("CarChild").rigidbody.isKinematic = true;
+
+        Player.movement = 'M';
     }
 
     /**

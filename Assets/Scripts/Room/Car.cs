@@ -29,6 +29,7 @@ public class Car : MonoBehaviour {
         {
             drivable = true;
             Player.instance.rigidbody.isKinematic = true;
+            Player.instance.transform.parent = GameObject.Find("CarChild").transform;
 
             Player.instance.GetComponent<PlayerMovementController>().fallLimit = 2f;
             Player.instance.GetComponent<PlayerMovementController>().enabled = false;
@@ -48,6 +49,7 @@ public class Car : MonoBehaviour {
         if (col.name == "Player" && Input.GetButton("Jump"))
         {
             drivable = false;
+            /*
             Player.instance.rigidbody.isKinematic = false;
 
             Player.instance.GetComponent<PlayerMovementController>().enabled = true;
@@ -59,6 +61,7 @@ public class Car : MonoBehaviour {
             GameObject.Find("CarChild").rigidbody.isKinematic = true;
 
             Player.movement = 'M';
+             * */
 
         }
     }

@@ -28,7 +28,7 @@ public class Pen : Ink {
 			//if( isRoot )
 			base.paused = value;
             //makes pen not move or react to collision
-            if (isRoot)
+            if (isRoot && rigidbody != null)
                 rigidbody.isKinematic = true;
 		}
 	}
