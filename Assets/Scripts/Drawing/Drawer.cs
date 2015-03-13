@@ -53,9 +53,9 @@ public class Drawer : MonoBehaviour
             {
 				
 				bool isCanvas = ( hit.collider.gameObject.layer == DrawingCanvas.layer );
-				bool isConnector = ( hit.collider.tag == "Connector" );
+				bool isConnector = ( hit.collider.tag == "Connector");
 
-                Debug.Log(hit.collider.name);
+
 				if( drawing ) 
                 {
 					if( isCanvas ) 
@@ -89,6 +89,8 @@ public class Drawer : MonoBehaviour
 						if( lastNode != null && lastNode.ConnectTo( hit.collider.attachedRigidbody.GetComponent<Connector>() ) ) 
 							lastNode = currentRoot = null;
 						StopDrawing();
+
+                        Debug.Log("Hit Connector");
 					} 
                     else 
                     {

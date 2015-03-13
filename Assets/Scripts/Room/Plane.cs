@@ -14,10 +14,12 @@ public class Plane : Patrol
 
     //Wobble
     Vector3 previousAngle;
-    Vector3 angleDelta = new Vector3(0, 0, 10);
+    Vector3 angleDelta = new Vector3(0, 0, 40);
     Vector3 changing;
     float accelerationBuffer = 0.3f;
     float decelerationBuffer = 0.1f;
+    float wobbleTime = .3f;
+    bool switchWobbleDir = true;
 
     public bool fly = false;
 
@@ -34,6 +36,8 @@ public class Plane : Patrol
     {
         if (running)
         {
+            wobbleCounter();
+
             transform.position = Vector3.MoveTowards(this.transform.position, patrolPoints[cur].position, speed * Time.deltaTime);
             camera.GetComponent<ThirdPersonCamera>().enabled = false;
             camera.transform.parent = Player.instance.transform;
@@ -41,7 +45,7 @@ public class Plane : Patrol
             camera.transform.localEulerAngles = cameraRot;
 
             //If boat pointing to sky - reduce X
-            if (transform.eulerAngles.z < 45)
+            if (switchWobbleDir)
             {
                 changing = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z - angleDelta.z * Time.deltaTime);
                 //transform.rotation.x -= angleDelta.x * Time.deltaTime;
@@ -49,7 +53,7 @@ public class Plane : Patrol
 
             //If boat diving into ocean - increase X
             }
-            else if (transform.eulerAngles.z > 315)
+            else
             {
                 changing = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + angleDelta.z * Time.deltaTime);
                 //transform.eulerAngles.x += angleDelta.x * Time.deltaTime; //Must not forget to use deltaTime!
@@ -80,6 +84,17 @@ public class Plane : Patrol
         running = false;
 		base.PerformReset ();
 	}
+
+    public void wobbleCounter()
+    {
+        wobbleTime -= Time.deltaTime;
+        if(wobbleTime <= 0)
+        {
+            switchWobbleDir = !switchWobbleDir;
+            wobbleTime = Random.Range(.3f, .5f);
+        }
+
+    }
 
     
 }

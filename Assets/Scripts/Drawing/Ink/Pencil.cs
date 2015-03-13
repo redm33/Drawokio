@@ -67,8 +67,9 @@ public class Pencil : Ink {
 	}
 
 	public override bool ConnectTo( Connector other ) {
-		if( other.type == Type.CHARCOAL )
-			return false;
+
+        if( other.type == Type.CHARCOAL)
+            return false;
 
 		if( other == this )
 			return false;
@@ -78,7 +79,10 @@ public class Pencil : Ink {
 
 		BuildJoint( other.rigidbody );
         if (other.type != Connector.Type.DEFAULT)
+        {
             BuildJointOn(other.gameObject, rigidbody);
+            Debug.Log("Pen Connected");
+        }
 		return true;
 	}
 	
