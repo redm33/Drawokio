@@ -11,7 +11,8 @@
 
 CGINCLUDE
 #include "UnityCG.cginc"
- 
+#include "AutoLight.cginc"
+
  float4 _Color;
  float _FadePosition;
  float _FadeRange;
@@ -37,6 +38,7 @@ struct v2fOutline{
 struct v2fDiffuse {
 	float4 pos : SV_POSITION;
     float4 localPosition : TEXCOORD0;
+    LIGHTING_COORDS(1,2)
 };
 
 v2fOutline vert(appdataOutline v) {
@@ -70,19 +72,22 @@ Tags {"Queue" = "Transparent"}
 		v2fDiffuse vert(appdataDiffuse input) {
 			v2fDiffuse output; 
     		output.pos =  mul(UNITY_MATRIX_MVP, input.vertex);
-    		output.localPosition = mul(_Object2World, input.vertex);;
+    		output.localPosition = mul(_Object2World, input.vertex);
+    		TRANSFER_VERTEX_TO_FRAGMENT(o);
     		return output;
 		}
         
         float4 frag(v2fDiffuse input) : COLOR {
+         	float atten = LIGHT_ATTENUATION(input);
+
         	if (input.localPosition.y < _FadePosition + _ObjectPosition ) {
-            	return float4(_Color.r, _Color.g, _Color.b, 0); 
+            	return float4(_Color.r, _Color.g, _Color.b, 0) * atten; 
             }
             else if (input.localPosition.y < (_FadePosition + _ObjectPosition) + _FadeRange && _FadeRange > 0 && _FadePosition > 0) {
-            	return float4(_Color.r, _Color.g, _Color.b, (input.localPosition.y - (_FadePosition + _ObjectPosition))/_FadeRange);
+            	return float4(_Color.r, _Color.g, _Color.b, (input.localPosition.y - (_FadePosition + _ObjectPosition))/_FadeRange) * atten;
             }
             else {
-            	return float4(_Color.r, _Color.g, _Color.b, 1.0); 
+            	return float4(_Color.r, _Color.g, _Color.b, 1.0) * atten; 
             }
          }
          ENDCG  
@@ -90,6 +95,7 @@ Tags {"Queue" = "Transparent"}
       
 	Pass {
 		Name "BASE"
+		Tags { "LightMode" = "Always" }
 		Cull Back
 		Blend Zero One
 		// uncomment this to hide inner details:
@@ -128,5 +134,7 @@ Tags {"Queue" = "Transparent"}
 		}
 		ENDCG
 	}
+	
 }
+Fallback "VertexLit"
 }

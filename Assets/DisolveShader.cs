@@ -6,6 +6,8 @@ public class DisolveShader : MonoBehaviour {
 	public Material dissolveMaterial;
 	public Material dissolveMaterialBlack;
 
+	public ParticleSystem respawnParticles;
+
 	private PlayerTransformationController.State lastState;
 	private PlayerTransformationController.State currentState;
 	public float dissolveDelay = 5;
@@ -61,7 +63,7 @@ public class DisolveShader : MonoBehaviour {
         
 	}
 
-    void OnTriggerStay(Collider col)
+    void OnTriggerEnter(Collider col)
     {
         if (col.name == "RespawnTrigger")
         {
@@ -69,6 +71,7 @@ public class DisolveShader : MonoBehaviour {
             delay = 0;
             dissolveMaterial.SetFloat("_FadePosition", -1);
             dissolveMaterialBlack.SetFloat("_FadePosition", -1);
+			respawnParticles.Play();
         }
     }
 }
