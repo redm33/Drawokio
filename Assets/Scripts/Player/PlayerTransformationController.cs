@@ -69,7 +69,9 @@ public class PlayerTransformationController : MonoBehaviour
 
 	public void StartTransform( Transform target, bool to3D, bool ignoreX = false, bool ignoreY = false, bool ignoreZ = false ) 
     {
+		poof3D.Play();
 		player.state = Player.State.TRANSFORMING;
+		modelTransform.gameObject.SetActive(false);
 
 		targetPos = target.position;
 		if( to3D ) 
@@ -119,13 +121,13 @@ public class PlayerTransformationController : MonoBehaviour
 			    transformationProgress += Time.fixedDeltaTime*transformationSpeed;
 			    UpdateTransform();
 			    UpdatePosition();
-
 			    if( transformationProgress >= 1 ) 
                 {
 				    gameObject.layer = Player.layer3D;
 				    state = State.IN_3D;
 				    player.state = Player.State.WALKING;
-			    }
+					modelTransform.gameObject.SetActive(true);
+				}
 			    break;
 		    case State.TRANSFORMING_3D_TO_2D:
 			    transformationProgress -= Time.fixedDeltaTime*transformationSpeed;
@@ -136,7 +138,8 @@ public class PlayerTransformationController : MonoBehaviour
                 {
 				    gameObject.layer = Player.layer2D;
 				    state = State.IN_2D;
-				    player.state = Player.State.WALKING;
+				    player.state = Player.State.WALKING;					
+					modelTransform.gameObject.SetActive(true);
 			    }
 			    break;
 		}
