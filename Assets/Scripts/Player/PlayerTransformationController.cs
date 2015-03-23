@@ -8,6 +8,9 @@ public class PlayerTransformationController : MonoBehaviour
 	public Player player;
 	public PlayerMovementController movementController;
 	public ParticleSystem poof3D;
+	public ParticleSystem dissolveParticles;
+
+	public GameObject projectorShadow;
 
 	public enum TransformType 
 	{
@@ -70,8 +73,10 @@ public class PlayerTransformationController : MonoBehaviour
 	public void StartTransform( Transform target, bool to3D, bool ignoreX = false, bool ignoreY = false, bool ignoreZ = false ) 
     {
 		poof3D.Play();
+		projectorShadow.SetActive (false);
 		player.state = Player.State.TRANSFORMING;
 		modelTransform.gameObject.SetActive(false);
+		dissolveParticles.Stop ();
 
 		targetPos = target.position;
 		if( to3D ) 
@@ -127,6 +132,8 @@ public class PlayerTransformationController : MonoBehaviour
 				    state = State.IN_3D;
 				    player.state = Player.State.WALKING;
 					modelTransform.gameObject.SetActive(true);
+					projectorShadow.SetActive(true);
+					dissolveParticles.Play();
 				}
 			    break;
 		    case State.TRANSFORMING_3D_TO_2D:
