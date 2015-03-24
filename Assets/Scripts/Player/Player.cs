@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [AddComponentMenu("Game/Player/Player")]
-[RequireComponent(typeof(Rigidbody))]
+//[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
 public class Player: MonoBehaviour
 {
@@ -217,6 +217,17 @@ public class Player: MonoBehaviour
     public void Kill()
     {
         Instantiate(deathPoof, transform.position, transform.rotation);
+
+        if(rigidbody == null)
+        {
+            Player.instance.gameObject.AddComponent<Rigidbody>();
+            Player.instance.GetComponent<CapsuleCollider>().enabled = true;
+            Player.instance.rigidbody.useGravity = false;
+            Player.instance.rigidbody.isKinematic = false;
+            Player.instance.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            Player.instance.rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+            Player.instance.rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        }
         GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
         GameObject.Find("Main Camera").transform.parent = Player.instance.transform.parent;
         Destroy(gameObject);
@@ -234,21 +245,23 @@ public class Player: MonoBehaviour
 			Room.instance.state = Room.State.MENU_MAIN;
 
         playerPosition = this.transform.localPosition;
-
-        if (Input.GetMouseButton(0) && this.transformationController.in3D && !this.rigidbody.isKinematic)
+        if (rigidbody != null)
         {
-            this.rigidbody.velocity = Vector3.zero;
-            this.animationController.state = PlayerAnimationController.State.IDLE;
-            this.GetComponent<PlayerMovementController>().enabled = false;
-            this.GetComponent<PlayerDrivingController>().enabled = false;
-            GameObject.Find("CarChild").GetComponent<PlayerCar_Script>().enabled = false;
-        }
-        else if (Player.movement == 'M')
-            this.GetComponent<PlayerMovementController>().enabled = true;
-        else if (Player.movement == 'D')
-        {
-            GameObject.Find("CarChild").GetComponent<PlayerCar_Script>().enabled = true;
-            this.GetComponent<PlayerDrivingController>().enabled = true;
+            if (Input.GetMouseButton(0) && this.transformationController.in3D && !this.rigidbody.isKinematic)
+            {
+                this.rigidbody.velocity = Vector3.zero;
+                this.animationController.state = PlayerAnimationController.State.IDLE;
+                this.GetComponent<PlayerMovementController>().enabled = false;
+                this.GetComponent<PlayerDrivingController>().enabled = false;
+                GameObject.Find("CarChild").GetComponent<PlayerCar_Script>().enabled = false;
+            }
+            else if (Player.movement == 'M')
+                this.GetComponent<PlayerMovementController>().enabled = true;
+            else if (Player.movement == 'D')
+            {
+                GameObject.Find("CarChild").GetComponent<PlayerCar_Script>().enabled = true;
+                this.GetComponent<PlayerDrivingController>().enabled = true;
+            }
         }
 
 	}

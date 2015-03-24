@@ -28,16 +28,22 @@ public class Car : MonoBehaviour {
         if (col.name == "Player")
         {
             drivable = true;
-            Player.instance.rigidbody.isKinematic = true;
+            //Player.instance.rigidbody.isKinematic = true;
             Player.instance.transform.parent = GameObject.Find("CarChild").transform;
 
             Player.instance.GetComponent<PlayerMovementController>().fallLimit = 2f;
-            Player.instance.GetComponent<PlayerMovementController>().enabled = false;
-
+            if (Player.instance.GetComponent<PlayerMovementController>().enabled)
+            {
+                Player.instance.GetComponent<PlayerMovementController>().enabled = false;
+                Player.instance.GetComponent<PlayerMovementController>().isGrounded = true;
+            }
             Player.instance.GetComponent<PlayerDrivingController>().enabled = true;
 
             GameObject.Find("CarChild").GetComponent<PlayerCar_Script>().enabled = true;
             GameObject.Find("CarChild").rigidbody.isKinematic = false;
+
+            Player.instance.GetComponent<DisolveShader>().enabled = false;
+
 
             Player.movement = 'D';
 

@@ -26,6 +26,7 @@ private float EngineRPM  = 0.0f;
 
 private bool switchDir = false;
 private float originalY;
+private bool car_enabled;
 
 
 
@@ -36,6 +37,14 @@ void Start () {
 }
 
 void Update () {
+
+    car_enabled = GameObject.Find("CarChild").GetComponent<PlayerCar_Script>().enabled;
+    if(car_enabled && Player.instance != null)
+    {
+        //Debug.Log("Destory RigidBody");
+        Destroy(Player.instance.rigidbody);
+        Player.instance.GetComponent<CapsuleCollider>().enabled = false;
+    }
 
     if (transform.position.y < originalY)
     {
