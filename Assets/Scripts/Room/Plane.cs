@@ -8,6 +8,10 @@ public class Plane : Patrol
 	public Transform playerPosition;
     public GameObject camera;
 
+	public Material white;
+	public Material black;
+	private float fadeAmount = 0;
+
     //private variables
     private Vector3 cameraPos;
     private Vector3 cameraRot;
@@ -88,7 +92,10 @@ public class Plane : Patrol
                 Player.instance.StartTransport(playerPosition);
                 Player.instance.GetComponent<PlayerMovementController>().isGrounded = true;
                 Player.instance.GetComponent<PlayerMovementController>().fallLimit = 2f;
-
+				Player.instance.GetComponent<DisolveShader>().PauseDissolve();
+				fadeAmount = fadeAmount > 0 ? fadeAmount : white.GetFloat ("_FadePosition");
+				white.SetFloat ("_FadePosition", -1);
+				black.SetFloat ("_FadePosition", -1);
                 running = true;
             }
         }
@@ -101,7 +108,12 @@ public class Plane : Patrol
 		CameraController.instance.RemoveFromQueue( cameraFollowable );
         running = false;
         fly = false;
-        
+		Player.instance.GetComponent<DisolveShader>().UnPauseDissolve();
+
+		white.SetFloat ("_FadePosition", fadeAmount);
+		black.SetFloat ("_FadePosition", fadeAmount);
+		fadeAmount = 0;
+
 		base.PerformReset ();
 	}
 

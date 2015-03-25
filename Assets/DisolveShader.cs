@@ -13,6 +13,8 @@ public class DisolveShader : MonoBehaviour {
 	public float dissolveDelay = 5;
 	public float dissolveTime = 5;
 
+	private bool isPaused = false;
+
 	public AudioSource respawnSound;
 
 	private float delay;
@@ -37,6 +39,7 @@ public class DisolveShader : MonoBehaviour {
 
 		if (lastState.Equals (PlayerTransformationController.State.IN_3D)) {
 			if(currentState.Equals(PlayerTransformationController.State.IN_3D)) {
+				if(!isPaused) {
 				if(delay < dissolveDelay) {
 					delay += Time.deltaTime;
 				} else if(time/dissolveTime < .95) {
@@ -51,6 +54,7 @@ public class DisolveShader : MonoBehaviour {
 				} else {
 					Player.instance.Kill();
 				}
+			}
 			} else if(currentState.Equals(PlayerTransformationController.State.TRANSFORMING_3D_TO_2D)) {
 				dissolveMaterial.SetFloat ("_FadePosition", -1);
 				dissolveMaterialBlack.SetFloat ("_FadePosition", -1);
@@ -66,6 +70,14 @@ public class DisolveShader : MonoBehaviour {
 		}
 		lastState = currentState;
         
+	}
+
+	public void PauseDissolve() {
+		isPaused = true;
+	}
+
+	public void UnPauseDissolve() {
+		isPaused = false;
 	}
 
     void OnTriggerEnter(Collider col)
