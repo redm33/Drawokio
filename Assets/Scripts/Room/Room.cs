@@ -226,13 +226,13 @@ public class Room : MonoBehaviour
 		    case State.PLAYING:
 			    if( Player.instance == null && !EndingController.instance.running ) 
                 {
-				    deathText.SetActive(true);
+				    //deathText.SetActive(true);
 
-				    if( Input.GetButtonDown( "Back" ) ) 
-                    {
+				    //if( Input.GetButtonDown( "Back" ) ) 
+                    //{
 					    DestroyAll();
 					    SpawnAtLatestSpawn();
-				    }
+				    //}
 			    } 
                 else 
 				    deathText.SetActive(false);

@@ -254,7 +254,7 @@ public class PlayerMovementController : MonoBehaviour
         if(fallLimit <= 0)
         {
             Quaternion rot = this.transform.rotation;
-            Player.instance.FallKill(spawnPosition, rot);
+            Player.instance.Kill();
             ResetFallTimer();
             /*
             Player player = Instantiate(Room.instance.playerPrefab, spawnPosition, rot) as Player;
