@@ -39,7 +39,7 @@ public class DisolveShader : MonoBehaviour {
 			if(currentState.Equals(PlayerTransformationController.State.IN_3D)) {
 				if(delay < dissolveDelay) {
 					delay += Time.deltaTime;
-				} else if(time < dissolveTime) {
+				} else if(time/dissolveTime < .95) {
 					time += Time.deltaTime;
 					if (!dissolveTutorial && time/dissolveTime > .1f) {
 						dissolveTutorial = true;
@@ -48,7 +48,7 @@ public class DisolveShader : MonoBehaviour {
 					dissolveMaterial.SetFloat ("_FadePosition", (time/dissolveTime)/2);
 					dissolveMaterialBlack.SetFloat ("_FadePosition", (time/dissolveTime)/2);
 
-				} else if(time >= dissolveTime) {
+				} else {
 					Player.instance.Kill();
 				}
 			} else if(currentState.Equals(PlayerTransformationController.State.TRANSFORMING_3D_TO_2D)) {

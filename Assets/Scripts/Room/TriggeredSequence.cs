@@ -13,6 +13,8 @@ public class TriggeredSequence : Resettable
 		public Transform toMove;
 		public Transform moveTo;
 
+		public bool freezePlayer = true;
+
 		public Resettable objectToEnable;
 
 		Vector3 startPos = Vector3.zero;
@@ -102,13 +104,14 @@ public class TriggeredSequence : Resettable
 
 	void OnTriggerEnter( Collider other ) 
     {
-		if( triggered )
-			return;
+		if (other.tag.Equals ("Player")) {
+						if (triggered)
+								return;
 
-		triggered = true;
-		sequences[0].Start();
-
-		Player.instance.paused = true;
+						triggered = true;
+						sequences [0].Start ();
+						Player.instance.paused = sequences [0].freezePlayer;
+				}
 	}
 
 	void Update()

@@ -6,6 +6,7 @@ using System;
 [AddComponentMenu("Game/Ink/Drawer")]
 public class Drawer : MonoBehaviour 
 {
+	public Material[] redPencil;
 	public static Drawer instance = null;
     bool hasConnector = false;
     bool placeMoreInk = true;
@@ -263,10 +264,10 @@ public class Drawer : MonoBehaviour
                 last = last.gameObject.transform.parent.GetComponent<Pencil>();
                 incrememnt += .02f;
             }
-            Material[] mats = { last.gameObject.GetComponent<LineRenderer>().materials[1] };
+            //Material[] mats = { last.gameObject.GetComponent<LineRenderer>().materials[1] };
             last.timeoutRemaining = incrememnt;
             last.gameObject.GetComponent<Pencil>().climbable = false;
-            last.gameObject.GetComponent<LineRenderer>().materials = mats;
+            last.gameObject.GetComponent<LineRenderer>().materials = redPencil;
         }
 
 
