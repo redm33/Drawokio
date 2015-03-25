@@ -13,6 +13,8 @@ public class DisolveShader : MonoBehaviour {
 	public float dissolveDelay = 5;
 	public float dissolveTime = 5;
 
+	public AudioSource respawnSound;
+
 	private float delay;
 	private float time;
 
@@ -75,6 +77,7 @@ public class DisolveShader : MonoBehaviour {
             dissolveMaterial.SetFloat("_FadePosition", -1);
             dissolveMaterialBlack.SetFloat("_FadePosition", -1);
 			respawnParticles.Play();
+			respawnSound.Play();
         }
     }
 }

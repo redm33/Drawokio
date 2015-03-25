@@ -9,6 +9,10 @@ public class PlayerMovementController : MonoBehaviour
 	public PlayerTransformationController transformationController;
 	public PlayerAnimationController animationController;
 
+	public AudioSource walkSoundStart;
+	public AudioSource walkSoundLooping;
+	private bool playedStart = false;
+
 	public float speed = 20.0f;
     public float sprintSpeed = 1.5f;
 	public float jumpSpeed = 13.0f;
@@ -102,15 +106,36 @@ public class PlayerMovementController : MonoBehaviour
                 rigidbody.velocity *= speed;
 			    
 
-			if (rigidbody.velocity.sqrMagnitude == 0)
+			if (rigidbody.velocity.sqrMagnitude == 0){
 				animationController.state = PlayerAnimationController.State.IDLE;
+				walkSoundStart.Stop();
+				walkSoundLooping.Stop();
+				playedStart = false;
+			}
 			else 
             {
-                if (sprintInput)
+                if (sprintInput){
                     animationController.state = PlayerAnimationController.State.RUNNING;
-                else
+					if(!walkSoundStart.isPlaying && !walkSoundLooping.isPlaying && !playedStart) {
+						walkSoundStart.Play();
+						walkSoundStart.pitch = 0.5f;
+						playedStart = true;
+					} else if(!walkSoundStart.isPlaying && !walkSoundLooping.isPlaying) {
+						walkSoundLooping.Play();
+						walkSoundLooping.pitch = 0.5f;
+					}
+				}
+                else {
                     animationController.state = PlayerAnimationController.State.WALKING;
-
+					if(!walkSoundStart.isPlaying && !walkSoundLooping.isPlaying && !playedStart) {
+						walkSoundStart.Play();
+						walkSoundStart.pitch = 0.45f;
+						playedStart = true;
+					} else if(!walkSoundStart.isPlaying && !walkSoundLooping.isPlaying) {
+						walkSoundLooping.Play();
+						walkSoundLooping.pitch = 0.45f;
+					}
+				}
 				if (transformationController.in3D)
 				{
 					if( rigidbody.velocity.sqrMagnitude > 0 )
@@ -146,8 +171,12 @@ public class PlayerMovementController : MonoBehaviour
 
             if (isGrounded)
                 player.state = Player.State.WALKING;
-            else if (!airborneOff)
+            else if (!airborneOff) {
                 animationController.state = PlayerAnimationController.State.AIRBORNE;
+				walkSoundStart.Stop();
+				walkSoundLooping.Stop();
+				playedStart = false;
+			}
 
 		}
 		
@@ -157,7 +186,10 @@ public class PlayerMovementController : MonoBehaviour
 
 	public void Jump()
 	{
-		animationController.state = PlayerAnimationController.State.JUMPING;	
+		animationController.state = PlayerAnimationController.State.JUMPING;
+		walkSoundStart.Stop();
+		walkSoundLooping.Stop();
+		playedStart = false;
 		rigidbody.velocity += transform.up * jumpSpeed;
 	}
 	
