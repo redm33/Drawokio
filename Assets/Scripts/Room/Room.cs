@@ -317,7 +317,6 @@ public class Room : MonoBehaviour
 
 		if (point.spawnIn3D) {
 						player.transformationController.Become3D ();
-			Debug.Log("Spawned");
 						player.transform.Find ("DissolveParticles").gameObject.SetActive (true);
 						player.transform.Find ("Blob Shadow Projector").gameObject.SetActive (true);
 				} else {
