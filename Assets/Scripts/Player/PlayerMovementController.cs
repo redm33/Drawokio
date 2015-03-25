@@ -254,14 +254,16 @@ public class PlayerMovementController : MonoBehaviour
         if(fallLimit <= 0)
         {
             Quaternion rot = this.transform.rotation;
-            Player.instance.Kill();
+            Player.instance.FallKill(spawnPosition, rot);
             ResetFallTimer();
+            /*
             Player player = Instantiate(Room.instance.playerPrefab, spawnPosition, rot) as Player;
             player.name = "Player";
             Player.instance.transformationController.Become3D();
 			ParticleSystem temp = (ParticleSystem)player.transform.Find ("DissolveParticles").gameObject.particleSystem;
 			temp.Play ();
 			player.transform.Find ("Blob Shadow Projector").gameObject.SetActive (true);
+             * */
         }
     }
 

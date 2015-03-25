@@ -75,27 +75,22 @@ public class Plane : Patrol
             previousAngle = transform.eulerAngles;
             running_on = true;
         }
-        else
-        {
-            fly = false;
-            if(running_on)
-            {
-                running_on = false;
-            }
-            
 
-        }
     }
 
     void OnTriggerStay(Collider other)
     {
-        if (fly)
+        if (other.name == "Player")
         {
-            Player.instance.StartTransport(playerPosition);
-            Player.instance.GetComponent<PlayerMovementController>().isGrounded = true;
-            Player.instance.GetComponent<PlayerMovementController>().fallLimit = 2f;
+            if (fly)
+            {
+                Debug.Log("In Plane Trigger");
+                Player.instance.StartTransport(playerPosition);
+                Player.instance.GetComponent<PlayerMovementController>().isGrounded = true;
+                Player.instance.GetComponent<PlayerMovementController>().fallLimit = 2f;
 
-            running = true;
+                running = true;
+            }
         }
     }
 	public override void PerformReset ()
@@ -105,7 +100,7 @@ public class Plane : Patrol
 
 		CameraController.instance.RemoveFromQueue( cameraFollowable );
         running = false;
-
+        fly = false;
         
 		base.PerformReset ();
 	}

@@ -228,11 +228,35 @@ public class Player: MonoBehaviour
             Player.instance.rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
             Player.instance.rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
         }
+
         GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
         GameObject.Find("Main Camera").transform.parent = Player.instance.transform.parent;
         Destroy(gameObject);
     }
 
+    public void FallKill(Vector3 spawnPosition, Quaternion rot)
+    {
+        GameObject.Find("Model Parent").SetActive(false);
+        Destroy((ParticleSystem)this.transform.Find("DissolveParticles").gameObject.particleSystem);
+        Instantiate(deathPoof, transform.position, transform.rotation);
+        StartCoroutine(DelayRespawn(spawnPosition, rot));
+
+        GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
+        GameObject.Find("Main Camera").transform.parent = Player.instance.transform.parent;
+    }
+
+    IEnumerator DelayRespawn(Vector3 spawnPosition, Quaternion rot)
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+        Player player = Instantiate(Room.instance.playerPrefab, spawnPosition, rot) as Player;
+        player.name = "Player";
+        Player.instance.transformationController.Become3D();
+        ParticleSystem temp = (ParticleSystem)player.transform.Find("DissolveParticles").gameObject.particleSystem;
+        temp.Play();
+        player.transform.Find("Blob Shadow Projector").gameObject.SetActive(true);
+
+    }
     public void StartTransport(Transform transport)
     {
         this.transport = transport;

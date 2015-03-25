@@ -4,8 +4,9 @@ using System.Collections;
 public class FlyPlane : MonoBehaviour 
 {
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider col)
     {
-       this.transform.parent.transform.parent.GetComponent<Plane>().fly = true;
+        Debug.Log(col.name);
+        this.transform.parent.transform.parent.GetComponent<Plane>().fly = true;
     }
 }
