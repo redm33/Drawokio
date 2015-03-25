@@ -220,8 +220,11 @@ public class Room : MonoBehaviour
 			    }
 			    break;
 		    case State.MENU_CONTROLS:
-			    if( Input.GetMouseButtonDown( 0 ) || Input.GetButtonDown( "Back" ) ) 
-				    state = State.MENU_MAIN;
+                if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Back"))
+                {
+                    state = State.MENU_MAIN;
+                    Player.instance.GetComponent<PlayerDrivingController>().Jump();
+                }
 			    break;
 		    case State.PLAYING:
 			    if( Player.instance == null && !EndingController.instance.running ) 

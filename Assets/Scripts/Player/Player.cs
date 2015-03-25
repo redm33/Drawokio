@@ -270,8 +270,12 @@ public class Player: MonoBehaviour
 
 	void Update()
 	{
-		if( !paused && Input.GetButtonDown("Back") ) 
-			Room.instance.state = Room.State.MENU_MAIN;
+        if (!paused && Input.GetButtonDown("Back"))
+        {
+            Room.instance.state = Room.State.MENU_MAIN;
+            Player.instance.GetComponent<PlayerDrivingController>().Jump();
+
+        }
 
         playerPosition = this.transform.localPosition;
         if (rigidbody != null)

@@ -65,11 +65,12 @@ public class PlayerDrivingController : MonoBehaviour
 
     public void Jump()
     {
+        GameObject.Find("Transformer_Car").GetComponent<BoxCollider>().enabled = false;
         Player.instance.transform.parent = Room.instance.transform.parent;
         Player.instance.GetComponent<PlayerMovementController>().isGrounded = false;
         animationController.state = PlayerAnimationController.State.JUMPING;
 
-        Player.instance.transform.parent = GameObject.Find("CarChild").transform;
+        Player.instance.transform.parent = GameObject.Find("Room").transform.parent;
         Player.instance.GetComponent<DisolveShader>().enabled = true;
 
         Player.instance.GetComponent<PlayerMovementController>().enabled = true;
@@ -88,8 +89,17 @@ public class PlayerDrivingController : MonoBehaviour
         Player.instance.rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
         Player.instance.rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
         rigidbody.velocity += transform.up * jumpSpeed;
+        GameObject.Find("Transformer_Car").GetComponent<Car>().drivable = false;
 
+        StartCoroutine(DisableDriveTrigger());
         jumpInput = false;
+
+    }
+
+    IEnumerator DisableDriveTrigger()
+    {
+        yield return new WaitForSeconds(3f);
+        GameObject.Find("Transformer_Car").GetComponent<BoxCollider>().enabled = true;
 
     }
 
