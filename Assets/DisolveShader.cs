@@ -7,7 +7,7 @@ public class DisolveShader : MonoBehaviour {
 	public Material dissolveMaterialBlack;
 
 	public ParticleSystem respawnParticles;
-
+	private static bool dissolveTutorial = false;
 	private PlayerTransformationController.State lastState;
 	private PlayerTransformationController.State currentState;
 	public float dissolveDelay = 5;
@@ -39,7 +39,10 @@ public class DisolveShader : MonoBehaviour {
 					delay += Time.deltaTime;
 				} else if(time < dissolveTime) {
 					time += Time.deltaTime;
-
+					if (!dissolveTutorial && time/dissolveTime > .1f) {
+						dissolveTutorial = true;
+						PopupController.QueuePopup(4, 0.0f, 6.0f);
+					}
 					dissolveMaterial.SetFloat ("_FadePosition", (time/dissolveTime)/2);
 					dissolveMaterialBlack.SetFloat ("_FadePosition", (time/dissolveTime)/2);
 

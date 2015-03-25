@@ -10,6 +10,8 @@ public class PlayerTransformationController : MonoBehaviour
 	public ParticleSystem poof3D;
 	public ParticleSystem dissolveParticles;
 
+	private static bool movementTutorial3D = false;
+
 	public GameObject projectorShadow;
 
 	public enum TransformType 
@@ -62,7 +64,9 @@ public class PlayerTransformationController : MonoBehaviour
 	public void Become3D()
 	{
 		poof3D.Play ();
-		Debug.Log ("triggered particles");
+
+
+		//Debug.Log ("triggered particles");
 		state = State.IN_3D;
 
 		gameObject.layer = Player.layer3D;
@@ -134,6 +138,12 @@ public class PlayerTransformationController : MonoBehaviour
 					modelTransform.gameObject.SetActive(true);
 					projectorShadow.SetActive(true);
 					dissolveParticles.Play();
+					if (!movementTutorial3D) {
+						movementTutorial3D = true;
+						PopupController.QueuePopup(2, 3.0f, 5.0f);
+						PopupController.QueuePopup(3, 3.0f, 5.0f);
+
+					}
 				}
 			    break;
 		    case State.TRANSFORMING_3D_TO_2D:

@@ -70,6 +70,8 @@ public class Room : MonoBehaviour
 					PlayerPrefs.SetString("Pickups","" );
 					PlayerPrefs.SetInt("Hat", -1);
 					StartAt( spawnPoints[0] );
+					PopupController.QueuePopup(0, 0.5f, 5.0f);
+					PopupController.QueuePopup(1, 0.5f, 5.0f);
 				}
 
 				return;
@@ -312,12 +314,15 @@ public class Room : MonoBehaviour
 		
 		Player player = Instantiate( playerPrefab, point.transform.position, point.transform.rotation ) as Player;
         player.name = "Player";
-		
-		if( point.spawnIn3D ) 
-			player.transformationController.Become3D();
-		else 
-			player.movementController.ApplyLockType( point.lockType );
 
+		if (point.spawnIn3D) {
+						player.transformationController.Become3D ();
+			Debug.Log("Spawned");
+						player.transform.Find ("DissolveParticles").gameObject.SetActive (true);
+						player.transform.Find ("Blob Shadow Projector").gameObject.SetActive (true);
+				} else {
+						player.movementController.ApplyLockType (point.lockType);
+				}
 		SetHat(-1);
 
 		drawer.gameObject.SetActive(true);

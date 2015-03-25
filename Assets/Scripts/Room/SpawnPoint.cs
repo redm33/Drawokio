@@ -9,7 +9,7 @@ public class SpawnPoint : MonoBehaviour
 
 	public bool spawnIn3D = false;
 	public DrawingCanvas.LockType lockType;
-
+	private static bool spawnTutorial = false;
 	public bool hasPencil = false;
 	public bool hasCharcoal = false;
 
@@ -18,7 +18,10 @@ public class SpawnPoint : MonoBehaviour
 	{
 		Room.instance.ResetSpawnPoints();
 		isLatestSpawn = true;
-
+		if (!spawnTutorial) {
+			spawnTutorial = true;
+			PopupController.QueuePopup(5, 0.0f, 5.0f);
+		}
 		if( Room.instance.Save( index ) )
 			CheckpointText.instance.Show();
 	}
