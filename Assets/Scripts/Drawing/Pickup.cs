@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Pickup : Resettable 
 {
-
 	public enum Type 
     {
 		PENCIL,

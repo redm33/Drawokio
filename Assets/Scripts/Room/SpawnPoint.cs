@@ -22,7 +22,10 @@ public class SpawnPoint : MonoBehaviour
 			spawnTutorial = true;
 			PopupController.QueuePopup(5, 0.0f, 5.0f);
 		}
-		if( Room.instance.Save( index ) )
+		if( Room.instance.Save( index ) ){
 			CheckpointText.instance.Show();
+		} else {
+			CheckpointText.instance.Show();
+		}
 	}
 }
