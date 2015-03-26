@@ -410,15 +410,18 @@ public class Room : MonoBehaviour
 
     void SkipStopVideo()
     {
-        playOpening = false;
-        onlyOnce = true;
-        openingCutscene.Stop();
+        if (Player.instance == null)
+        {
+            playOpening = false;
+            onlyOnce = true;
+            openingCutscene.Stop();
 
-        PlayerPrefs.SetInt("SpawnPoint", 0);
-        PlayerPrefs.SetString("Pickups", "");
-        PlayerPrefs.SetInt("Hat", -1);
-        StartAt(spawnPoints[0]);
-        PopupController.QueuePopup(0, 0.5f, 5.0f);
-        PopupController.QueuePopup(1, 0.5f, 5.0f);
+            PlayerPrefs.SetInt("SpawnPoint", 0);
+            PlayerPrefs.SetString("Pickups", "");
+            PlayerPrefs.SetInt("Hat", -1);
+            StartAt(spawnPoints[0]);
+            PopupController.QueuePopup(0, 0.5f, 5.0f);
+            PopupController.QueuePopup(1, 0.5f, 5.0f);
+        }
     }
 }

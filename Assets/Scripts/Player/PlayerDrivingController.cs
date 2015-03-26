@@ -70,7 +70,7 @@ public class PlayerDrivingController : MonoBehaviour
         Player.instance.GetComponent<PlayerMovementController>().isGrounded = false;
         animationController.state = PlayerAnimationController.State.JUMPING;
 
-        Player.instance.transform.parent = GameObject.Find("Room").transform.parent;
+        Player.instance.transform.parent = null;
         Player.instance.GetComponent<DisolveShader>().enabled = true;
 
         Player.instance.GetComponent<PlayerMovementController>().enabled = true;

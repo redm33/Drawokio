@@ -8,8 +8,12 @@ public class VideoAutoPlay : MonoBehaviour {
 
     void Start() {
         text = (MovieTexture)gameObj.renderer.material.mainTexture;
-        text.loop = true;
-        text.Play();
+        if(text != null)
+        {
+            text.loop = true;
+            text.Play();
+        }
+        
     }
 
 }
