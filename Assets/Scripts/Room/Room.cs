@@ -10,6 +10,9 @@ public class Room : MonoBehaviour
 
 	public Player playerPrefab;
 	public SpawnPoint[] spawnPoints;
+    public MovieTexture openingCutscene;
+    public bool playOpening;
+    public bool onlyOnce = true;
 	public void ResetSpawnPoints()
 	{
 		foreach( SpawnPoint obj in spawnPoints )
@@ -66,12 +69,8 @@ public class Room : MonoBehaviour
             {
 				if( _state == State.MENU_MAIN ) 
                 {
-					PlayerPrefs.SetInt("SpawnPoint", 0);
-					PlayerPrefs.SetString("Pickups","" );
-					PlayerPrefs.SetInt("Hat", -1);
-					StartAt( spawnPoints[0] );
-					PopupController.QueuePopup(0, 0.5f, 5.0f);
-					PopupController.QueuePopup(1, 0.5f, 5.0f);
+                    playOpening = true;
+
 				}
 
 				return;
@@ -382,4 +381,44 @@ public class Room : MonoBehaviour
 			}
 		}
 	}
+
+    void OnGUI()
+    {
+        if(playOpening)
+        {
+            openingCutscene.Play();
+            GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), openingCutscene, ScaleMode.StretchToFill, false, 0.0f);
+
+            if (onlyOnce)
+            {
+                StartCoroutine(StopVideo());
+                onlyOnce = false;
+            }
+
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                SkipStopVideo();
+            }
+        }
+    }
+
+    IEnumerator StopVideo()
+    {
+        yield return new WaitForSeconds(50f);
+        SkipStopVideo();
+    }
+
+    void SkipStopVideo()
+    {
+        playOpening = false;
+        onlyOnce = true;
+        openingCutscene.Stop();
+
+        PlayerPrefs.SetInt("SpawnPoint", 0);
+        PlayerPrefs.SetString("Pickups", "");
+        PlayerPrefs.SetInt("Hat", -1);
+        StartAt(spawnPoints[0]);
+        PopupController.QueuePopup(0, 0.5f, 5.0f);
+        PopupController.QueuePopup(1, 0.5f, 5.0f);
+    }
 }

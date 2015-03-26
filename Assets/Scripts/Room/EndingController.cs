@@ -35,7 +35,13 @@ public class EndingController : MonoBehaviour
 			}
 
 			foreach( GameObject obj in gameObjectsToEnable )
-				obj.SetActive(false);
+            {
+                obj.SetActive(false);
+                if (obj.name == "Desktop")
+                {
+                    ((MovieTexture)obj.GetComponent<Renderer>().material.mainTexture).Stop();
+                }
+            }
 		}
 
 		public void Start()
@@ -49,8 +55,14 @@ public class EndingController : MonoBehaviour
 			if( animation != null ) 
 				animation.Play();
 
-			foreach( GameObject obj in gameObjectsToEnable )
-				obj.SetActive(true);
+            foreach (GameObject obj in gameObjectsToEnable)
+            {
+                obj.SetActive(true);
+                if(obj.name == "Desktop")
+                {
+                    ((MovieTexture)obj.GetComponent<Renderer>().material.mainTexture).Play();
+                }
+            }
 		}
 
 		public void Stop()
@@ -63,9 +75,15 @@ public class EndingController : MonoBehaviour
 				animation.Rewind();
 				animation.Stop();
 			}
-			
-			foreach( GameObject obj in gameObjectsToEnable )
-				obj.SetActive(false);
+
+            foreach (GameObject obj in gameObjectsToEnable)
+            {
+                obj.SetActive(false);
+                if (obj.name == "Desktop")
+                {
+                    ((MovieTexture)obj.GetComponent<Renderer>().material.mainTexture).Stop();
+                }
+            }
 		}
 
 		public bool Update( float dt )
@@ -138,6 +156,7 @@ public class EndingController : MonoBehaviour
 				else {
 					steps[index-1].Stop();
 					steps[index].Start();
+
 				}
 
 			}
