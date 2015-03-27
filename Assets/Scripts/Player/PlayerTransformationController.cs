@@ -12,6 +12,8 @@ public class PlayerTransformationController : MonoBehaviour
 
 	private static bool movementTutorial3D = false;
 
+	private bool isHidden;
+
 	public GameObject projectorShadow;
 
 	public enum TransformType 
@@ -77,9 +79,12 @@ public class PlayerTransformationController : MonoBehaviour
 	public void StartTransform( Transform target, bool to3D, bool ignoreX = false, bool ignoreY = false, bool ignoreZ = false ) 
     {
 		poof3D.Play();
-		projectorShadow.SetActive (false);
+
+		if (isHidden) {
+			projectorShadow.SetActive (false);
+			modelTransform.gameObject.SetActive (false);
+		}
 		player.state = Player.State.TRANSFORMING;
-		modelTransform.gameObject.SetActive(false);
 		dissolveParticles.Stop ();
 
 		targetPos = target.position;
@@ -190,6 +195,7 @@ public class PlayerTransformationController : MonoBehaviour
 				Debug.LogWarning( "Entered a non-transformer object in the transformer layer!" );
 				return;
 			}
+				isHidden = transformer.isHidden;
 
 			if( state == State.IN_2D ) 
             {
