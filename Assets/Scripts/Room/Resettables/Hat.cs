@@ -14,9 +14,11 @@ public class Hat : Resettable
 
 	void OnTriggerEnter( Collider other ) 
     {
+
 		Room.instance.SetHat( hatIndex );
 		gameObject.SetActive(false);
 		other.GetComponent<Player>().SetHat(hatIndex);
+
 
 		pickedUp = true;
 	}

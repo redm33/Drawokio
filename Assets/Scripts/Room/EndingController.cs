@@ -7,7 +7,7 @@ public class EndingController : MonoBehaviour
 	public static EndingController instance;
 
 	public bool runAtStartup = false;
-
+    public static bool topHatSet = false;
 	public TextMesh text;
 
 	[System.Serializable]
@@ -37,10 +37,10 @@ public class EndingController : MonoBehaviour
 			foreach( GameObject obj in gameObjectsToEnable )
             {
                 obj.SetActive(false);
-                if (obj.name == "Desktop")
-                {
+                if (obj.name == "BasicEnding" && !topHatSet)
                     ((MovieTexture)obj.GetComponent<Renderer>().material.mainTexture).Stop();
-                }
+                if (obj.name == "TopHatEnding" && topHatSet)
+                    ((MovieTexture)obj.GetComponent<Renderer>().material.mainTexture).Stop();
             }
 		}
 
@@ -57,11 +57,20 @@ public class EndingController : MonoBehaviour
 
             foreach (GameObject obj in gameObjectsToEnable)
             {
-                obj.SetActive(true);
-                if(obj.name == "Desktop")
+                if (obj.name == "BasicEnding" && !topHatSet)
                 {
                     ((MovieTexture)obj.GetComponent<Renderer>().material.mainTexture).Play();
+                    obj.SetActive(true);
                 }
+                else if (obj.name == "TopHatEnding" && topHatSet)
+                {
+                    ((MovieTexture)obj.GetComponent<Renderer>().material.mainTexture).Play();
+                    obj.SetActive(true);
+                }
+                else if(obj.name != "BasicEnding" && obj.name != "TopHatEnding")
+                    obj.SetActive(true);
+
+                
             }
 		}
 
@@ -79,10 +88,10 @@ public class EndingController : MonoBehaviour
             foreach (GameObject obj in gameObjectsToEnable)
             {
                 obj.SetActive(false);
-                if (obj.name == "Desktop")
-                {
+                if (obj.name == "BasicEnding" && !topHatSet)
                     ((MovieTexture)obj.GetComponent<Renderer>().material.mainTexture).Stop();
-                }
+                if (obj.name == "TopHatEnding" && topHatSet)
+                    ((MovieTexture)obj.GetComponent<Renderer>().material.mainTexture).Stop();
             }
 		}
 
@@ -141,6 +150,7 @@ public class EndingController : MonoBehaviour
 	void OnTriggerEnter( Collider other )
 	{
 		Run ();
+        topHatSet = Player.instance.hats[2].active;
 		Destroy ( other.gameObject );
 	}
 
