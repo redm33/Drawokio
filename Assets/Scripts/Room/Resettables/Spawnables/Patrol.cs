@@ -27,12 +27,12 @@ public class Patrol : Spawnable
 	}
 	public Stop[] stops;
 
-	bool stopped = false;
-	float stopLeft = 0;
+	protected bool stopped = false;
+	protected float stopLeft = 0;
 
 	public int cur = 0;
 
-	Vector3 startPos;
+	protected Vector3 startPos;
 
 	void Awake()
 	{
@@ -92,7 +92,7 @@ public class Patrol : Spawnable
 		}
 	}
 
-	void OnEnd()
+	public void OnEnd()
 	{
 		if( cur == patrolPoints.Length ) 
         {

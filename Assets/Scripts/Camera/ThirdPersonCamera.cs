@@ -113,7 +113,7 @@ public class ThirdPersonCamera : MonoBehaviour
     private Vector3 lookDir;
     private Vector3 curLookDir;
     private BarsEffect barEffect;
-    private CamStates camState = CamStates.Behind;
+    public CamStates camState = CamStates.Behind;
     private float xAxisRot = 0.0f;
     private CameraPosition firstPersonCamPos;
     private float lookWeight;

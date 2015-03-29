@@ -18,10 +18,14 @@ public class PlayerMovementController : MonoBehaviour
 	public float jumpSpeed = 13.0f;
 	public float standingVerticalVelocity = 10;
     public float fallLimit = 2f;
+    public float slideForce = 0;
 
 	bool jumpInput = false;
     bool sprintInput = false;
     bool airborneOff = false;
+    bool canMoveUp = true;
+
+    float maxWalkSloap = 45;
 
 	[HideInInspector]
     public Vector3 movementInput = Vector3.zero;
@@ -160,16 +164,28 @@ public class PlayerMovementController : MonoBehaviour
                 spawnPosition = this.transform.position;
                 ResetFallTimer();
             }
+
+
+            if (!canMoveUp)
+            {
+                rigidbody.AddForce(Vector3.down * slideForce * Time.deltaTime);
+                Player.instance.animationController.state = PlayerAnimationController.State.T;
+            }
                 
 
 		} 
-        else 
+        else
         {
             CameraController camera = CameraController.instance;
 			rigidbody.velocity += transform.TransformDirection( Physics.gravity ) * dt * rigidbody.mass + camera.moveRight * movementInput.x * dt + camera.moveForward * movementInput.y * dt;
             StartFallTimer();
 
-            if (isGrounded)
+            if (!canMoveUp)
+            {
+                rigidbody.AddForce(Vector3.down * slideForce * Time.deltaTime);
+                Player.instance.animationController.state = PlayerAnimationController.State.T;
+            }
+            else if (isGrounded)
                 player.state = Player.State.WALKING;
             else if (!airborneOff) {
                 animationController.state = PlayerAnimationController.State.AIRBORNE;
@@ -266,6 +282,27 @@ public class PlayerMovementController : MonoBehaviour
              * */
         }
     }
+
+    void OnCollisionStay (Collision collision)
+    {
+        
+        //Recieve the info on the current collision
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            Debug.Log(Vector3.Angle(contact.normal, Vector3.up));
+            //If the "constactpoints" angle is lower than maxWalkSloap
+            if(Vector3.Angle(contact.normal, Vector3.up) < maxWalkSloap)
+             //Don't do anything
+             canMoveUp = true;
+        }
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            if(Vector3.Angle(contact.normal, Vector3.up) > maxWalkSloap)
+             //Else slide the player down
+             canMoveUp = false;
+        }
+ }
+ 
 
     void ResetFallTimer()
     {

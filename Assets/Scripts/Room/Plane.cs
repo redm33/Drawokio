@@ -32,8 +32,8 @@ public class Plane : Patrol
     void Start()
     {
         camera = GameObject.Find("Main Camera");
-        cameraPos = new Vector3(-2.1f, -10.4f, -10.4f);
-        cameraRot = new Vector3(310.131f, 10, 10);
+        cameraPos = new Vector3(78f, 55.5f, 2.4f);
+        cameraRot = new Vector3(46,270,0);
         previousAngle = this.transform.eulerAngles;
         changing_plane = this.transform.eulerAngles;
 
@@ -42,21 +42,22 @@ public class Plane : Patrol
     {
         if (running)
         {
+
+            Quaternion turnTo = Quaternion.LookRotation(patrolPoints[cur].transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, turnTo, Time.deltaTime*2);
             wobbleCounter();
 
-            transform.position = Vector3.MoveTowards(this.transform.position, patrolPoints[cur].position, speed * Time.deltaTime);
             camera.GetComponent<ThirdPersonCamera>().enabled = false;
-            camera.transform.parent = Player.instance.transform;
+            Player.instance.transform.parent = this.transform;
+            camera.transform.parent = this.transform;
 
             camera.transform.localPosition = cameraPos;
             camera.transform.localEulerAngles = cameraRot;
 
-            //Player.instance.transform.parent = this.transform;
-
             //If boat pointing to sky - reduce X
             if (switchWobbleDir)
             {
-                changing_plane = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z - angleDelta.z * Time.deltaTime);
+                changing_plane = new Vector3(transform.eulerAngles.x - angleDelta.z * Time.deltaTime, transform.eulerAngles.y, transform.eulerAngles.z);
                 //changing_player = new Vector3(Player.instance.transform.eulerAngles.x, Player.instance.transform.eulerAngles.y - angleDelta.z * Time.deltaTime, Player.instance.transform.eulerAngles.z);
 
                 //transform.rotation.x -= angleDelta.x * Time.deltaTime;
@@ -66,16 +67,13 @@ public class Plane : Patrol
             }
             else
             {
-                changing_plane = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + angleDelta.z * Time.deltaTime);
+                changing_plane = new Vector3(transform.eulerAngles.x + angleDelta.z * Time.deltaTime, transform.eulerAngles.y, transform.eulerAngles.z);
                 //changing_player = new Vector3(Player.instance.transform.eulerAngles.x, Player.instance.transform.eulerAngles.y + angleDelta.z * Time.deltaTime, Player.instance.transform.eulerAngles.z);
 
                 //transform.eulerAngles.x += angleDelta.x * Time.deltaTime; //Must not forget to use deltaTime!
             }
 
             transform.eulerAngles = changing_plane;
-            //Debug.Log(Player.instance.transform.eulerAngles);
-            //Player.instance.transform.eulerAngles = new Vector3(Player.instance.transform.eulerAngles.x, Player.instance.transform.eulerAngles.y, Player.instance.transform.eulerAngles.z);
-            //record rotation for next update
             previousAngle = transform.eulerAngles;
             running_on = true;
         }
@@ -110,6 +108,9 @@ public class Plane : Patrol
         fly = false;
 		Player.instance.GetComponent<DisolveShader>().UnPauseDissolve();
 
+        Player.instance.transform.parent = null;
+        Player.instance.transform.localScale = new Vector3(.1f, .1f, .1f);
+
 		white.SetFloat ("_FadePosition", fadeAmount);
 		black.SetFloat ("_FadePosition", fadeAmount);
 		fadeAmount = 0;
@@ -119,7 +120,7 @@ public class Plane : Patrol
 
     public void wobbleCounter()
     {
-        wobbleTime -= Time.deltaTime;
+        wobbleTime -= Time.deltaTime*.5f;
         if(wobbleTime <= 0)
         {
             switchWobbleDir = !switchWobbleDir;
