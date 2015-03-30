@@ -19,5 +19,11 @@ public abstract class Resettable : MonoBehaviour
     {
 		get {return false;}
 	}
+
+	public virtual bool isProgress 
+	{
+		get {return false;}
+	}
+
     public virtual void ForcePickup() { pickedUp = true; }
 }

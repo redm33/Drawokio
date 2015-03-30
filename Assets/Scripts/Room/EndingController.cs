@@ -143,7 +143,7 @@ public class EndingController : MonoBehaviour
         GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
 		index = 0;
 		steps[0].Start();
-
+		Debug.Log ("Completion: " + Room.instance.completionPercentage + "%");
 		text.text = "Completion: " + Room.instance.completionPercentage + "%";
 	}
 

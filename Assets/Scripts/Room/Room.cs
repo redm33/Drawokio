@@ -44,6 +44,7 @@ public class Room : MonoBehaviour
 	public float chooseCameraSpinSpeed = 10;
 
 	public Resettable[] resettables;
+	
 	public Pickup pencilPickup, charcoalPickup;
 
 	public GameObject deathText;
@@ -242,6 +243,7 @@ public class Room : MonoBehaviour
 		}
 	}
 
+	//
 	public int completionPercentage 
     {
 		get 
@@ -250,7 +252,7 @@ public class Room : MonoBehaviour
 
 			foreach( Resettable obj in resettables ) 
             {
-				if( obj.isPickup ) 
+				if( obj.isProgress ) 
                 {
 					total++;
 					if( obj.pickedUp )
