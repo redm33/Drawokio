@@ -289,7 +289,7 @@ public class PlayerMovementController : MonoBehaviour
         //Recieve the info on the current collision
         foreach (ContactPoint contact in collision.contacts)
         {
-            Debug.Log(Vector3.Angle(contact.normal, Vector3.up));
+            //Debug.Log(Vector3.Angle(contact.normal, Vector3.up));
             //If the "constactpoints" angle is lower than maxWalkSloap
             if(Vector3.Angle(contact.normal, Vector3.up) < maxWalkSloap)
              //Don't do anything
