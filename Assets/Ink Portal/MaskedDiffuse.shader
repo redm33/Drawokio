@@ -11,7 +11,7 @@
 }
  
  SubShader {
- Tags { "SHADOWSUPPORT"="true" "QUEUE"="Transparent" "RenderType"="Transparent" }
+ Tags { "SHADOWSUPPORT"="true" "QUEUE"="Transparent+1" "RenderType"="Transparent" }
      LOD 300
  	 Pass {
         ZWrite On

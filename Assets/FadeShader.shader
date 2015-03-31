@@ -48,12 +48,14 @@ struct v2fDiffuse {
 ENDCG
  
 SubShader {
-Tags {"Queue" = "Transparent"}
-
+Tags {"SHADOWSUPPORT"="true" "Queue" = "Transparent+1" "RenderType"="Transparent"}
+	LOD 300
 	Pass {
     	Cull Back
-    	Blend SrcAlpha OneMinusSrcAlpha 
-
+    	Blend SrcAlpha OneMinusSrcAlpha
+		ZWrite Off
+		Lighting On
+ 
         CGPROGRAM
         #pragma vertex vert  
         #pragma fragment frag 
@@ -98,12 +100,9 @@ Tags {"Queue" = "Transparent"}
 		Name "OUTLINE"
 		Tags { "LightMode" = "Always" }
 		Cull Front
- 		// you can choose what kind of blending mode you want for the outline
-		Blend SrcAlpha OneMinusSrcAlpha // Normal
-		//Blend One One // Additive
-		//Blend One OneMinusDstColor // Soft Additive
-		//Blend DstColor Zero // Multiplicative
-		//Blend DstColor SrcColor // 2x Multiplicative
+ 		Blend SrcAlpha OneMinusSrcAlpha
+		ZWrite Off
+		Lighting On
  
 		CGPROGRAM
 		#pragma vertex vert
@@ -124,9 +123,7 @@ Tags {"Queue" = "Transparent"}
 		}
 		
  		half4 frag(v2fOutline input) :COLOR {
- 		
- 			
- 	
+
 	
 			if (input.localPosition.y < _FadePosition + _ObjectPosition ) {
             	return float4(input.color.r, input.color.g, input.color.b, 0); 
