@@ -285,7 +285,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void OnCollisionStay (Collision collision)
     {
-        
+        /**
         //Recieve the info on the current collision
         foreach (ContactPoint contact in collision.contacts)
         {
@@ -300,7 +300,7 @@ public class PlayerMovementController : MonoBehaviour
             if(Vector3.Angle(contact.normal, Vector3.up) > maxWalkSloap)
              //Else slide the player down
              canMoveUp = false;
-        }
+        }**/
  }
  
 

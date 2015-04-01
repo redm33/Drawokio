@@ -50,4 +50,21 @@ public class FadingText : MonoBehaviour {
 		isDisplaying = true;
 		text.color = new Color(text.color.r, text.color.g, text.color.b, 0.0f);
 	}
+
+	public void QueueShardPopup(float delay, float length, string info) {
+		Resettable[] collectable = Room.instance.collectables;
+		int total = 0;
+		int found = 0;
+		foreach( Resettable obj in collectable) {
+			total++;
+			if( obj.pickedUp )
+				found++;
+		}
+
+		text.text = ("Found " + found + " of " + total + " Magic 8-Ball Pieces");
+		delayTime = delay;
+		displayTime = length;
+		isDisplaying = true;
+		text.color = new Color(text.color.r, text.color.g, text.color.b, 0.0f);
+	}
 }

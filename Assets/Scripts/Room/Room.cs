@@ -44,7 +44,9 @@ public class Room : MonoBehaviour
 	public float chooseCameraSpinSpeed = 10;
 
 	public Resettable[] resettables;
-	
+	public Resettable[] discoverableAreas;
+	public Resettable[] collectables;
+
 	public Pickup pencilPickup, charcoalPickup;
 
 	public GameObject deathText;
@@ -137,6 +139,16 @@ public class Room : MonoBehaviour
 		for( int i = 0; i < resettables.Length; i++ ) 
         {
 			resettables[i].index = i;
+		}
+
+		for( int i = 0; i < discoverableAreas.Length; i++ ) 
+		{
+			discoverableAreas[i].index = i;
+		}
+
+		for( int i = 0; i < collectables.Length; i++ ) 
+		{
+			collectables[i].index = i;
 		}
 	}
 
@@ -268,6 +280,7 @@ public class Room : MonoBehaviour
     {
 		StartAt( spawnPoints[PlayerPrefs.GetInt( "SpawnPoint", 0 )] );
 
+		//Loading the resettables
 		string pickupsStr = PlayerPrefs.GetString( "Pickups", "" );
 		for( int i = 0; i < pickupsStr.Length; i++ ) 
         {
@@ -275,6 +288,23 @@ public class Room : MonoBehaviour
 			resettables[index-33].ForcePickup();
 		}
 
+		//Loading the discoverable areas
+		string areasStr = PlayerPrefs.GetString( "Areas", "" );
+		for( int i = 0; i < areasStr.Length; i++ ) 
+		{
+			int index = (int)areasStr[i];
+			discoverableAreas[index-33].ForcePickup();
+		}
+
+		//Loading the collectables
+		string collectStr = PlayerPrefs.GetString( "Collectables", "" );
+		for( int i = 0; i < collectStr.Length; i++ ) 
+		{
+			int index = (int)collectStr[i];
+			collectables[index-33].ForcePickup();
+		}
+
+		//Loading the hat
 		int hat = PlayerPrefs.GetInt("Hat",-1);
 		if( hat >= 0 ) 
         {
@@ -295,6 +325,7 @@ public class Room : MonoBehaviour
 			changed = true;
 		PlayerPrefs.SetInt( "Hat", currentHat );
 
+		//Saving the resettables
 		string pickupsStr = "";
 		for( int i = 0; i < resettables.Length; i++ ) 
         {
@@ -306,6 +337,34 @@ public class Room : MonoBehaviour
 			changed = true;
 
 		PlayerPrefs.SetString( "Pickups", pickupsStr );
+
+		//Saving the discoverable areas
+		string areasStr = "";
+		for( int i = 0; i < discoverableAreas.Length; i++ ) 
+		{
+			if( discoverableAreas[i].pickedUp )
+				areasStr += (char)(i+33);
+		}
+		
+		if( !changed && PlayerPrefs.GetString( "Areas", "" ) != areasStr )
+			changed = true;
+		
+		PlayerPrefs.SetString( "Areas", areasStr );
+
+		//Saving the collectables
+		string collectStr = "";
+		for( int i = 0; i < collectables.Length; i++ ) 
+		{
+			if( collectables[i].pickedUp )
+				collectStr += (char)(i+33);
+		}
+		
+		if( !changed && PlayerPrefs.GetString( "Collectables", "" ) != collectStr )
+			changed = true;
+		
+		PlayerPrefs.SetString( "Collectables", collectStr );
+
+
 
 		return changed;
 	}
