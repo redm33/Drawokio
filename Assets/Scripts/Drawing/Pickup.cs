@@ -15,14 +15,14 @@ public class Pickup : Resettable
     {
 				if (type == Type.PENCIL) {
 						Drawer.instance.hasPencil = true;
-						PopupController.QueuePopup(7, 0.0f, 5.0f);
+						PopupController.QueuePopup(7, 0.0f, 10.0f);
 			Debug.Log("Picked up");
 				} else if (type == Type.CHARCOAL) {
 						Drawer.instance.hasCharcoal = true;
-						PopupController.QueuePopup(8, 0.0f, 5.0f);
+						PopupController.QueuePopup(8, 0.0f, 10.0f);
 				} else if (type == Type.PEN) {
 						Drawer.instance.hasPen = true;
-						PopupController.QueuePopup(6, 0.0f, 5.0f);
+						PopupController.QueuePopup(6, 0.0f, 10.0f);
 				}
 
 		gameObject.SetActive(false);

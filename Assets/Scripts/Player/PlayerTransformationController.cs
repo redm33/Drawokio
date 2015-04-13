@@ -146,7 +146,7 @@ public class PlayerTransformationController : MonoBehaviour
 					if (!movementTutorial3D) {
 						movementTutorial3D = true;
 						PopupController.QueuePopup(2, 3.0f, 5.0f);
-						PopupController.QueuePopup(3, 3.0f, 5.0f);
+						//PopupController.QueuePopup(3, 3.0f, 5.0f);
 
 					}
 				}

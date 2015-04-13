@@ -447,7 +447,7 @@ public class Room : MonoBehaviour
     {
         if(playOpening)
         {
-            openingCutscene.Play();
+            //openingCutscene.Play();
             GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), openingCutscene, ScaleMode.StretchToFill, false, 0.0f);
 
             if (onlyOnce)
@@ -475,14 +475,14 @@ public class Room : MonoBehaviour
         {
             playOpening = false;
             onlyOnce = true;
-            openingCutscene.Stop();
+            //openingCutscene.Stop();
 
             PlayerPrefs.SetInt("SpawnPoint", 0);
             PlayerPrefs.SetString("Pickups", "");
             PlayerPrefs.SetInt("Hat", -1);
             StartAt(spawnPoints[0]);
-            PopupController.QueuePopup(0, 0.5f, 5.0f);
-            PopupController.QueuePopup(1, 0.5f, 5.0f);
+            //PopupController.QueuePopup(0, 0.5f, 5.0f);
+            //PopupController.QueuePopup(1, 0.5f, 5.0f);
         }
     }
 }
