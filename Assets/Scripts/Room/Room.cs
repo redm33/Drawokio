@@ -62,6 +62,11 @@ public class Room : MonoBehaviour
 		QUITTING
 	}
 
+    public void SetState( int state )
+    {
+        this.state = (State)state;
+    }
+
 	private State _state = State.NONE;
 	public State state 
     {
@@ -447,7 +452,7 @@ public class Room : MonoBehaviour
     {
         if(playOpening)
         {
-            //openingCutscene.Play();
+            openingCutscene.Play();
             GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), openingCutscene, ScaleMode.StretchToFill, false, 0.0f);
 
             if (onlyOnce)
@@ -475,7 +480,7 @@ public class Room : MonoBehaviour
         {
             playOpening = false;
             onlyOnce = true;
-            //openingCutscene.Stop();
+            openingCutscene.Stop();
 
             PlayerPrefs.SetInt("SpawnPoint", 0);
             PlayerPrefs.SetString("Pickups", "");

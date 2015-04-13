@@ -1,0 +1,344 @@
+fileFormatVersion: 2
+guid: d7b39d4fa492d2843957ae249de03e3c
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: stalagtiteAnimation_0
+    21300002: stalagtiteAnimation_1
+    21300004: stalagtiteAnimation_2
+    21300006: stalagtiteAnimation_3
+    21300008: stalagtiteAnimation_4
+    21300010: stalagtiteAnimation_5
+    21300012: stalagtiteAnimation_6
+    21300014: stalagtiteAnimation_7
+    21300016: stalagtiteAnimation_8
+    21300018: stalagtiteAnimation_9
+    21300020: stalagtiteAnimation_10
+    21300022: stalagtiteAnimation_11
+    21300024: stalagtiteAnimation_12
+    21300026: stalagtiteAnimation_13
+    21300028: stalagtiteAnimation_14
+    21300030: stalagtiteAnimation_15
+    21300032: stalagtiteAnimation_16
+    21300034: stalagtiteAnimation_17
+    21300036: stalagtiteAnimation_18
+    21300038: stalagtiteAnimation_19
+    21300040: stalagtiteAnimation_20
+    21300042: stalagtiteAnimation_21
+    21300044: stalagtiteAnimation_22
+    21300046: stalagtiteAnimation_23
+    21300048: stalagtiteAnimation_24
+    21300050: stalagtiteAnimation_25
+    21300052: stalagtiteAnimation_26
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: stalagtiteAnimation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 957
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_1
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 957
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_2
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 957
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_3
+      rect:
+        serializedVersion: 2
+        x: 1488
+        y: 957
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_4
+      rect:
+        serializedVersion: 2
+        x: 1984
+        y: 957
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_5
+      rect:
+        serializedVersion: 2
+        x: 2480
+        y: 957
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_6
+      rect:
+        serializedVersion: 2
+        x: 2976
+        y: 957
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_7
+      rect:
+        serializedVersion: 2
+        x: 3472
+        y: 957
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 638
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_9
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 638
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_10
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 638
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_11
+      rect:
+        serializedVersion: 2
+        x: 1488
+        y: 638
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_12
+      rect:
+        serializedVersion: 2
+        x: 1984
+        y: 638
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_13
+      rect:
+        serializedVersion: 2
+        x: 2480
+        y: 638
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_14
+      rect:
+        serializedVersion: 2
+        x: 2976
+        y: 638
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_15
+      rect:
+        serializedVersion: 2
+        x: 3472
+        y: 638
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 319
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_17
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 319
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_18
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 319
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_19
+      rect:
+        serializedVersion: 2
+        x: 1488
+        y: 319
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_20
+      rect:
+        serializedVersion: 2
+        x: 1984
+        y: 319
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_21
+      rect:
+        serializedVersion: 2
+        x: 2480
+        y: 319
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_22
+      rect:
+        serializedVersion: 2
+        x: 2976
+        y: 319
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_23
+      rect:
+        serializedVersion: 2
+        x: 3472
+        y: 319
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_25
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 0
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stalagtiteAnimation_26
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 0
+        width: 496
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

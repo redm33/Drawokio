@@ -133,6 +133,8 @@ public class ThirdPersonCamera : MonoBehaviour
 
     #region Properties (public)
 
+    public LayerMask ignoreLayers;
+
     public Transform CameraXform
     {
         get
@@ -526,7 +528,7 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         // Compensate for walls between camera
         RaycastHit wallHit = new RaycastHit();
-        if (Physics.Linecast(fromObject, toTarget, out wallHit))
+        if (Physics.Linecast(fromObject, toTarget, out wallHit, ignoreLayers))
         {
             Debug.DrawRay(wallHit.point, wallHit.normal, Color.red);
             toTarget = wallHit.point;
