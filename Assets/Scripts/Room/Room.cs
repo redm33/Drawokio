@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Room : MonoBehaviour 
 {
@@ -43,14 +44,47 @@ public class Room : MonoBehaviour
 
 	public float chooseCameraSpinSpeed = 10;
 
+	/// <summary>
+	/// Items that reset on level reset
+	/// </summary>
 	public Resettable[] resettables;
+	/// <summary>
+	/// The discoverable zones in the room.
+	/// </summary>
 	public Resettable[] discoverableAreas;
+	/// <summary>
+	/// The collectable items that go towards game progress. eg eight ball pieces.
+	/// </summary>
 	public Resettable[] collectables;
-
+	/// <summary>
+	/// Items carried by and useable by the player.
+	/// </summary>
+	private List<Transform> carriedItems;
+	/// <summary>
+	/// The currently equipped useable item.
+	/// </summary>
+	private int equippedItem;
+	/// <summary>
+	/// The drawing material pickups.
+	/// </summary>
 	public Pickup pencilPickup, charcoalPickup;
-
+	/// <summary>
+	/// The death message.
+	/// </summary>
 	public GameObject deathText;
+	/// <summary>
+	/// The quit start.
+	/// </summary>
+	float quitStart = 0;
+	//bool firstDrag = true;
 
+	/// <summary>
+	/// The drag start.
+	/// </summary>
+	Vector3 dragStart;
+	/// <summary>
+	/// Game states.
+	/// </summary>
 	public enum State 
     {
 		NONE,
@@ -61,13 +95,22 @@ public class Room : MonoBehaviour
 		PLAYING,
 		QUITTING
 	}
-
+	/// <summary>
+	/// Sets the state of the game.
+	/// </summary>
+	/// <param name="state">New state of the game</param>
     public void SetState( int state )
     {
         this.state = (State)state;
     }
-
+	/// <summary>
+	/// The pointer to the game state object.
+	/// </summary>
 	private State _state = State.NONE;
+	/// <summary>
+	/// Gets or sets the state.
+	/// </summary>
+	/// <value>The state.</value>
 	public State state 
     {
 		get { return _state; }
@@ -131,7 +174,9 @@ public class Room : MonoBehaviour
 				cameraController.AddToQueue( cameraFollowables[(int)_state] );
 		}
 	}
-
+	/// <summary>
+	/// Awake this instance.
+	/// </summary>
 	void Awake()
 	{
 		instance = this;
@@ -156,12 +201,16 @@ public class Room : MonoBehaviour
 			collectables[i].index = i;
 		}
 	}
-
+	/// <summary>
+	/// Start this instance.
+	/// </summary>
 	void Start()
 	{
 		state = State.MENU_MAIN;
 	}
-
+	/// <summary>
+	/// Destroys all.
+	/// </summary>
 	public void DestroyAll()
 	{
 
@@ -177,9 +226,6 @@ public class Room : MonoBehaviour
 		Drawer.instance.uiOpen = false;
 	}
 
-	float quitStart = 0;
-	//bool firstDrag = true;
-	Vector3 dragStart;
 	void Update() 
     {
 		switch( state ) 
@@ -452,7 +498,7 @@ public class Room : MonoBehaviour
     {
         if(playOpening)
         {
-            openingCutscene.Play();
+            //openingCutscene.Play();
             GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), openingCutscene, ScaleMode.StretchToFill, false, 0.0f);
 
             if (onlyOnce)
@@ -480,7 +526,7 @@ public class Room : MonoBehaviour
         {
             playOpening = false;
             onlyOnce = true;
-            openingCutscene.Stop();
+            //openingCutscene.Stop();
 
             PlayerPrefs.SetInt("SpawnPoint", 0);
             PlayerPrefs.SetString("Pickups", "");

@@ -7,6 +7,8 @@ using System.Collections.Generic;
 [RequireComponent(typeof(CapsuleCollider))]
 public class Player: MonoBehaviour
 {
+	//Items such as the minigun or the fire-pen
+
 	public static Player instance;
     public static int layer3D = 9, layer2D = 8;
     public static bool IsPlayerLayer(int layer)
@@ -197,6 +199,10 @@ public class Player: MonoBehaviour
     {
 		instance = this;
 		state = State.WALKING;
+
+		//Initialize the items list
+		carriedItems = new List<Transform>();
+		equippedItem = -1;
     }
 
 	
@@ -268,6 +274,10 @@ public class Player: MonoBehaviour
         state = State.TRANSPORTED;
     }
 
+	void Start() {
+
+	}
+
 	void Update()
 	{
         if (!paused && Input.GetButtonDown("Back"))
@@ -280,14 +290,17 @@ public class Player: MonoBehaviour
         playerPosition = this.transform.localPosition;
         if (rigidbody != null)
         {
-            if (Input.GetMouseButton(0) && this.transformationController.in3D && !this.rigidbody.isKinematic)
+            /**if (Input.GetMouseButton(0) && this.transformationController.in3D && !this.rigidbody.isKinematic)
             {
                 this.rigidbody.velocity = Vector3.zero;
                 this.animationController.state = PlayerAnimationController.State.IDLE;
                 this.GetComponent<PlayerMovementController>().enabled = false;
                 this.GetComponent<PlayerDrivingController>().enabled = false;
                 GameObject.Find("CarChild").GetComponent<PlayerCar_Script>().enabled = false;
-            }
+            }**/
+			if(Input.GetMouseButton(0) && this.transformationController.in3D && !this.rigidbody.isKinematic && this.equippedItem != -1) {
+
+			}
             else if (Player.movement == 'M')
                 this.GetComponent<PlayerMovementController>().enabled = true;
             else if (Player.movement == 'D')
