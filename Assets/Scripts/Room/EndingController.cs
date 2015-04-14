@@ -132,19 +132,18 @@ public class EndingController : MonoBehaviour
 		Room.instance.state = Room.State.MENU_MAIN;
 	}
 
-	public void Run()
-	{
-		if( running ) 
-        {
+    //Start an ending
+	public void Run() {
+		if( running ) { //If an ending is already running
 			Debug.LogWarning( "Tried to start the ending when it was already running!" );
 			return;
-		}
-
-        GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
-		index = 0;
-		steps[0].Start();
-		Debug.Log ("Completion: " + Room.instance.completionPercentage + "%");
-		text.text = "Completion: " + Room.instance.completionPercentage + "%";
+        } else { 
+            GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>().enabled = false;
+		    index = 0;
+		    steps[0].Start();
+		    Debug.Log ("Completion: " + Room.instance.GetCompletionPercentage() + "%");
+		    text.text = "Completion: " + Room.instance.GetCompletionPercentage() + "%";
+        }
 	}
 
 	void OnTriggerEnter( Collider other )

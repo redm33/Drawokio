@@ -199,10 +199,6 @@ public class Player: MonoBehaviour
     {
 		instance = this;
 		state = State.WALKING;
-
-		//Initialize the items list
-		carriedItems = new List<Transform>();
-		equippedItem = -1;
     }
 
 	
@@ -298,9 +294,9 @@ public class Player: MonoBehaviour
                 this.GetComponent<PlayerDrivingController>().enabled = false;
                 GameObject.Find("CarChild").GetComponent<PlayerCar_Script>().enabled = false;
             }**/
-			if(Input.GetMouseButton(0) && this.transformationController.in3D && !this.rigidbody.isKinematic && this.equippedItem != -1) {
+			if(Input.GetMouseButton(0) && this.transformationController.in3D && !this.rigidbody.isKinematic && Room.instance.GetEquippedItem() != null) {
 
-			}
+			} 
             else if (Player.movement == 'M')
                 this.GetComponent<PlayerMovementController>().enabled = true;
             else if (Player.movement == 'D')

@@ -2,99 +2,96 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Room : MonoBehaviour 
-{
-
+public class Room : MonoBehaviour {
 	public static Room instance;
-
 	public Drawer drawer;
-
 	public Player playerPrefab;
 	public SpawnPoint[] spawnPoints;
     public MovieTexture openingCutscene;
     public bool playOpening;
     public bool onlyOnce = true;
-	public void ResetSpawnPoints()
-	{
-		foreach( SpawnPoint obj in spawnPoints )
-			obj.isLatestSpawn = false;
-	}
-	public void SpawnAtLatestSpawn()
-	{
-		if( Player.instance != null ) 
-        {
-			Debug.LogWarning( "Don't spawn more than one player!" );
-			return;
-		}
-
-		Continue();
-		/*pawnPoint point = spawnPoints[0];
-		for( int i = 1; i < spawnPoints.Length; i++ )
-			if( spawnPoints[i].isLatestSpawn )
-				point = spawnPoints[i];
-		StartAt(point);*/
-	}
-
-	public GameObject[] disableDuringMenuObjects;
-
-	public GameObject[] menuGameObjects;
-
-	public CameraController cameraController;
+    public GameObject[] disableDuringMenuObjects;
+    public GameObject[] menuGameObjects;
+    public CameraController cameraController;
 	public CameraFollowable[] cameraFollowables;
-
-	public float chooseCameraSpinSpeed = 10;
-
-	/// <summary>
-	/// Items that reset on level reset
-	/// </summary>
-	public Resettable[] resettables;
-	/// <summary>
-	/// The discoverable zones in the room.
-	/// </summary>
-	public Resettable[] discoverableAreas;
-	/// <summary>
-	/// The collectable items that go towards game progress. eg eight ball pieces.
-	/// </summary>
-	public Resettable[] collectables;
-	/// <summary>
-	/// Items carried by and useable by the player.
-	/// </summary>
-	private List<Transform> carriedItems;
-	/// <summary>
-	/// The currently equipped useable item.
-	/// </summary>
-	private int equippedItem;
-	/// <summary>
-	/// The drawing material pickups.
-	/// </summary>
-	public Pickup pencilPickup, charcoalPickup;
-	/// <summary>
-	/// The death message.
-	/// </summary>
-	public GameObject deathText;
-	/// <summary>
-	/// The quit start.
-	/// </summary>
-	float quitStart = 0;
+    public float chooseCameraSpinSpeed = 10;
+    public Resettable[] resettables; // Items that reset on level reset
+	public Resettable[] discoverableAreas; // The discoverable zones in the room.
+    public Resettable[] collectables; // The collectable items that go towards game progress. eg eight ball pieces.
+    private List<Transform> carriedItems; // Items carried by and useable by the player.
+    private int equippedItem; // The currently equipped useable item.
+    public Pickup pencilPickup, charcoalPickup; // The drawing material pickups.
+    public GameObject deathText; // The death message.
+    float quitStart = 0;// The quit start.
 	//bool firstDrag = true;
-
-	/// <summary>
-	/// The drag start.
-	/// </summary>
 	Vector3 dragStart;
-	/// <summary>
-	/// Game states.
-	/// </summary>
-	public enum State 
+    //private int completionPercentage;
+
+    public Transform GetEquippedItem()
     {
+        if (equippedItem == -1 || equippedItem >= carriedItems.Count)
+        {
+            return null;
+        }
+        else
+        {
+            return carriedItems[equippedItem];
+        }
+    }
+
+    public int GetCompletionPercentage() {
+        int found = 0, total = 0;
+
+        foreach (Resettable obj in resettables)
+        {
+            if (obj.isProgress)
+            {
+                total++;
+                if (obj.pickedUp)
+                    found++;
+            }
+        }
+
+        return 100 * found / total;
+    }
+
+	public enum State  { //The game states
 		NONE,
-		MENU_MAIN,
-		MENU_CHOOSE, // Holdover from when you could choose levels...don't want to change it all over...this is the state it will enter when you continue
-		MENU_CONTROLS,
-		MENU_QUIT,
-		PLAYING,
+		MENU_MAIN, //This is the state for the main menu and then if it is selected again it will start the game
+        MENU_STARTING, //Implementing this state as you want to start the game
+		MENU_CONTINUE, //This is the state it will enter when you continue
+		MENU_OPTIONS, // Now the options menu
+		MENU_QUIT, //Quit menu state
+		PLAYING, //Playing the game state
 		QUITTING
 	}
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void ResetSpawnPoints() {
+        foreach (SpawnPoint obj in spawnPoints)
+            obj.isLatestSpawn = false;
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    public void SpawnAtLatestSpawn() {
+        if (Player.instance != null)
+        {
+            Debug.LogWarning("Don't spawn more than one player!");
+            return;
+        }
+
+        Continue();
+        /*pawnPoint point = spawnPoints[0];
+        for( int i = 1; i < spawnPoints.Length; i++ )
+            if( spawnPoints[i].isLatestSpawn )
+                point = spawnPoints[i];
+        StartAt(point);*/
+    }
+
 	/// <summary>
 	/// Sets the state of the game.
 	/// </summary>
@@ -114,22 +111,16 @@ public class Room : MonoBehaviour
 	public State state 
     {
 		get { return _state; }
-		set 
-        {
-			if( _state == value ) 
-            {
-				if( _state == State.MENU_MAIN ) 
-                {
+		set {
+            //if the it is already set to main_menu, the start the game
+		    if( _state == value ) {
+				if( _state == State.MENU_MAIN ) {
                     playOpening = true;
-
 				}
-
 				return;
 			}
-
-			switch( _state ) 
-            {
-			    case State.MENU_CHOOSE:
+			switch( _state ) {
+			    case State.MENU_CONTINUE:
 				    /*foreach( SpawnPoint point in spawnPoints )
 					    point.particleSystem.Stop();*/
 				    break;
@@ -147,7 +138,7 @@ public class Room : MonoBehaviour
 
 			switch( _state ) 
             {
-			    case State.MENU_CHOOSE:
+			    case State.MENU_CONTINUE:
 				    /*foreach( SpawnPoint point in spawnPoints )
 					    point.particleSystem.Play();*/
 				    Continue ();
@@ -180,6 +171,9 @@ public class Room : MonoBehaviour
 	void Awake()
 	{
 		instance = this;
+        
+        carriedItems = new List<Transform>();
+        equippedItem = -1;
 
 		for( int i = 0; i < spawnPoints.Length; i++ ) 
         {
@@ -234,7 +228,7 @@ public class Room : MonoBehaviour
 			    if( Time.time - quitStart > 1.0f ) 
 				    Application.Quit();
 			    break;
-		    case State.MENU_CHOOSE:
+		    case State.MENU_CONTINUE:
 			    // Deprecated...MENU_CHOOSE is an old thing that I am now using for continue.
 			    /*if( Input.GetMouseButtonDown( 0 ) ) {
 				    RaycastHit hit;
@@ -282,7 +276,7 @@ public class Room : MonoBehaviour
 				    }
 			    }
 			    break;
-		    case State.MENU_CONTROLS:
+		    case State.MENU_OPTIONS:
                 if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Back"))
                 {
                     state = State.MENU_MAIN;
@@ -306,26 +300,7 @@ public class Room : MonoBehaviour
 		}
 	}
 
-	//
-	public int completionPercentage 
-    {
-		get 
-        {
-			int found = 0, total = 0;
 
-			foreach( Resettable obj in resettables ) 
-            {
-				if( obj.isProgress ) 
-                {
-					total++;
-					if( obj.pickedUp )
-						found++;
-				}
-			}
-
-			return 100 * found / total;
-		}
-	}
 
 	void Continue() 
     {
