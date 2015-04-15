@@ -16,16 +16,18 @@ public class SpawnPoint : MonoBehaviour
 	public bool isLatestSpawn = false;
 	void OnTriggerEnter()
 	{
-		Room.instance.ResetSpawnPoints();
+		SpawnPointController.instance.ResetSpawnPoints();
 		isLatestSpawn = true;
 		if (!spawnTutorial) {
 			spawnTutorial = true;
 			PopupController.QueuePopup(5, 0.0f, 5.0f);
 		}
 		if( Room.instance.Save( index ) ){
-			CheckpointText.instance.Show();
+            FadingText.instance.QueueGeneralPopup(0, 5, "Spawnpoint Set!");
+            //CheckpointText.instance.Show();
 		} else {
-			CheckpointText.instance.Show();
+            FadingText.instance.QueueGeneralPopup(0, 5, "Spawnpoint Set!");
+            //CheckpointText.instance.Show();
 		}
 	}
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class FadingText : MonoBehaviour {
+    public static FadingText instance;
 	public UnityEngine.UI.Text text;
 	private bool isDisplaying = false;
 	private bool hasFadedIn = false;
@@ -11,6 +12,9 @@ public class FadingText : MonoBehaviour {
 	private float fadeAmount = 0;
 	private float fadeSpeed = 4f;
 
+    void Awake() {
+        instance = this;
+    }
 	// Update is called once per frame
 	void Update () {
 		if(isDisplaying){
@@ -50,6 +54,14 @@ public class FadingText : MonoBehaviour {
 		isDisplaying = true;
 		text.color = new Color(text.color.r, text.color.g, text.color.b, 0.0f);
 	}
+
+    public void QueueGeneralPopup(float delay, float length, string info) {
+        text.text = info;
+        delayTime = delay;
+        displayTime = length;
+        isDisplaying = true;
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 0.0f);
+    }
 
 	public void QueueShardPopup(float delay, float length, string info) {
 		Resettable[] collectable = Room.instance.collectables;
