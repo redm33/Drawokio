@@ -39,6 +39,9 @@ public class Car : MonoBehaviour {
             }
             Player.instance.GetComponent<PlayerDrivingController>().enabled = true;
 
+            Camera.main.transform.parent = GameObject.Find("CarChild").transform;
+
+
             GameObject.Find("CarChild").GetComponent<PlayerCar_Script>().enabled = true;
             GameObject.Find("CarChild").rigidbody.isKinematic = false;
 
@@ -55,6 +58,7 @@ public class Car : MonoBehaviour {
         if (col.name == "Player" && Input.GetButton("Jump"))
         {
             drivable = false;
+            camera.transform.parent = null;
             /*
             Player.instance.rigidbody.isKinematic = false;
 

@@ -23,10 +23,13 @@ public float EngineTorque = 230.0f;
 public float MaxEngineRPM = 3000.0f;
 public float MinEngineRPM = 1000.0f;
 private float EngineRPM  = 0.0f;
-
+public float torque = -4;
 private bool switchDir = false;
 private float originalY;
 private bool car_enabled;
+public Vector3 cameraPos;
+public Vector3 cameraRot;
+public GameObject camera;
 
 
 
@@ -35,6 +38,7 @@ void Start () {
     rigidbody.centerOfMass += new Vector3(0, -.75f, .25f);
     originalY = transform.position.y;
 }
+
 
 void Update () {
 
@@ -65,14 +69,21 @@ void Update () {
 	// finally, apply the values to the wheels.	The torque applied is divided by the current gear, and
 	// multiplied by the user input variable.
 
-	FrontLeftWheel.motorTorque = -50 * Input.GetAxis("Vertical");
-	FrontRightWheel.motorTorque = -50 * Input.GetAxis("Vertical");
-    //BackLeftWheel.motorTorque = 50 * Input.GetAxis("Vertical");
-    //BackRightWheel.motorTorque = 50 * Input.GetAxis("Vertical");
+    FrontLeftWheel.motorTorque = torque * Input.GetAxis("Vertical");
+    FrontRightWheel.motorTorque = torque * Input.GetAxis("Vertical");
+    BackLeftWheel.motorTorque = torque * Input.GetAxis("Vertical");
+    BackRightWheel.motorTorque = torque * Input.GetAxis("Vertical");
 		
 	// the steer angle is an arbitrary value multiplied by the user input.
 	FrontLeftWheel.steerAngle = 10 * Input.GetAxis("Horizontal");
 	FrontRightWheel.steerAngle = 10 * Input.GetAxis("Horizontal");
+
+
+    camera.GetComponent<ThirdPersonCamera>().enabled = false;
+
+    camera.transform.parent = this.transform;
+    camera.transform.localEulerAngles = cameraRot;
+    camera.transform.localPosition = cameraPos;
 }
 
 void ShiftGears() {

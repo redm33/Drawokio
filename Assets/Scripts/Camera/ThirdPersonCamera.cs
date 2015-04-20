@@ -157,6 +157,9 @@ public class ThirdPersonCamera : MonoBehaviour
         {
             return this.camState;
         }
+        set {
+            CamState = value;
+        }
     }
 
     public enum CamStates
