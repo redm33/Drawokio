@@ -82,7 +82,7 @@ public class DisolveShader : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.name == "RespawnTrigger")
+        if (col.gameObject.layer == 17) 
         {
             time = 0;
             delay = 0;
