@@ -6,6 +6,8 @@ public class Collectable : Resettable {
 	public string objectTitle;
 	public FadingText text;
 	public ParticleSystem collected;
+    public GameObject shard;
+    public ParticleSystem shardParticles;
 
 	void OnTriggerEnter( Collider other ) 
 	{
@@ -13,7 +15,8 @@ public class Collectable : Resettable {
 			if (!pickedUp) {
 				pickedUp = true;
 				text.QueueShardPopup (0, 5, objectTitle);
-				gameObject.renderer.enabled = false;
+				shard.renderer.enabled = false;
+                shardParticles.Stop();
 				collected.Play();
 			}
 		}
@@ -22,7 +25,7 @@ public class Collectable : Resettable {
 	public override void PerformReset ()
 	{
 		pickedUp = false;
-		gameObject.renderer.enabled = true;
+		shard.renderer.enabled = true;
 	}
 	
 	public override bool isProgress 

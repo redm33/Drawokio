@@ -75,8 +75,8 @@ void Update () {
     BackRightWheel.motorTorque = torque * Input.GetAxis("Vertical");
 		
 	// the steer angle is an arbitrary value multiplied by the user input.
-	FrontLeftWheel.steerAngle = 10 * Input.GetAxis("Horizontal");
-	FrontRightWheel.steerAngle = 10 * Input.GetAxis("Horizontal");
+	FrontLeftWheel.steerAngle = 20 * Input.GetAxis("Horizontal");
+	FrontRightWheel.steerAngle = 20 * Input.GetAxis("Horizontal");
 
 
     camera.GetComponent<ThirdPersonCamera>().enabled = false;

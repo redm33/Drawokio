@@ -55,4 +55,12 @@ public class MenuController : MonoBehaviour {
         Player.instance.GetComponent<PlayerDrivingController>().Jump();
     }
 
+    public void TempReturnToMain() {
+        Application.LoadLevel("Game");
+    }
+
+    public void EndGame() {
+        Application.Quit();
+    }
+
 }

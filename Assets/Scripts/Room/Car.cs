@@ -3,8 +3,10 @@ using System.Collections;
 
 public class Car : MonoBehaviour {
 
-    public bool drivable = false;
+    public static bool drivable = false;
     public GameObject car;
+    public Transform driverPosition;
+    public Transform ejectPosition;
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +20,7 @@ public class Car : MonoBehaviour {
             if (drivable)
             {
                 Player.instance.transform.eulerAngles = new Vector3(car.transform.eulerAngles.x, car.transform.eulerAngles.y + 180, car.transform.eulerAngles.z); 
-                Player.instance.transform.position = new Vector3(car.transform.position.x, Player.instance.transform.position.y, car.transform.position.z);
+                Player.instance.transform.position = driverPosition.position;
             }
         }
 	}
