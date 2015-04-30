@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Pickup : Resettable 
 {
+    public ParticleSystem pickup;
 	public enum Type 
     {
 		PENCIL,
@@ -15,6 +16,7 @@ public class Pickup : Resettable
     {
 				if (type == Type.PENCIL) {
 						Drawer.instance.hasPencil = true;
+                        pickup.Play();
 						PopupController.QueuePopup(7, 0.0f, 10.0f);
 			Debug.Log("Picked up");
 				} else if (type == Type.CHARCOAL) {
