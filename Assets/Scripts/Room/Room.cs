@@ -160,7 +160,6 @@ public class Room : MonoBehaviour {
         carriedItems = new List<Transform>();
         equippedItem = -1;
 
-        SpawnPointController.instance.SetSpawnIndex();
 
         for(int i = 0; i < resettables.Length; i++) {
             resettables[i].index = i;
@@ -176,6 +175,8 @@ public class Room : MonoBehaviour {
     /// Start this instance.
     /// </summary>
     void Start() {
+        SpawnPointController.instance.SetSpawnIndex();
+
         state = State.MENU_MAIN;
     }
     /// <summary>

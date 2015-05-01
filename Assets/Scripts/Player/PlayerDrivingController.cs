@@ -90,6 +90,7 @@ public class PlayerDrivingController : MonoBehaviour
         Player.instance.rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
         //rigidbody.velocity += transform.up * jumpSpeed;
         Player.instance.transform.position = GameObject.Find("Transformer_Car").GetComponent<Car>().ejectPosition.position;
+        Player.instance.transform.eulerAngles = Vector3.up;
         Player.instance.transform.localScale = new Vector3(.1f, .1f, .1f);
         Car.drivable = false;
 
