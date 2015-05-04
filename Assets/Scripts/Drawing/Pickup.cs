@@ -4,6 +4,8 @@ using System.Collections;
 public class Pickup : Resettable 
 {
     public ParticleSystem pickup;
+	public GameObject toDisable;
+	private bool collected = false;
 	public enum Type 
     {
 		PENCIL,
@@ -14,21 +16,25 @@ public class Pickup : Resettable
 
 	void OnTriggerEnter( Collider other ) 
     {
-				if (type == Type.PENCIL) {
-						Drawer.instance.hasPencil = true;
-                        pickup.Play();
-						PopupController.QueuePopup(7, 0.0f, 10.0f);
-			Debug.Log("Picked up");
-				} else if (type == Type.CHARCOAL) {
-						Drawer.instance.hasCharcoal = true;
-						PopupController.QueuePopup(8, 0.0f, 10.0f);
-				} else if (type == Type.PEN) {
-						Drawer.instance.hasPen = true;
-						PopupController.QueuePopup(6, 0.0f, 10.0f);
+		if (!collected) {
+						if (type == Type.PENCIL) {
+								Drawer.instance.hasPencil = true;
+								pickup.Play ();
+								//PopupController.QueuePopup (7, 0.0f, 10.0f);
+								//Debug.Log ("Picked up");
+						} else if (type == Type.CHARCOAL) {
+								pickup.Play ();
+								Drawer.instance.hasCharcoal = true;
+								//PopupController.QueuePopup (8, 0.0f, 10.0f);
+						} else if (type == Type.PEN) {
+								Drawer.instance.hasPen = true;
+								pickup.Play ();
+
+								//PopupController.QueuePopup (6, 0.0f, 10.0f);
+						}
+						collected = true;
+						toDisable.SetActive (false);
 				}
-
-		gameObject.SetActive(false);
-
 
 
 		//info.SetActive(true);

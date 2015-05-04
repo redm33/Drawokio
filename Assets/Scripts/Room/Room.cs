@@ -165,7 +165,6 @@ public class Room : MonoBehaviour {
             resettables[i].index = i;
         }
 
-        DiscoverableAreasController.instance.SetAreaIndex();
 
         for(int i = 0; i < collectables.Length; i++) {
             collectables[i].index = i;
@@ -176,6 +175,7 @@ public class Room : MonoBehaviour {
     /// </summary>
     void Start() {
         SpawnPointController.instance.SetSpawnIndex();
+		DiscoverableAreasController.instance.SetAreaIndex();
 
         state = State.MENU_MAIN;
     }
