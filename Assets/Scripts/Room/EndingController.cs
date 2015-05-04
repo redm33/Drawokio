@@ -206,8 +206,8 @@ public class EndingController : MonoBehaviour
 		index = -1;
 		foreach( Step step in steps )
 			step.Reset();
-
-		Room.instance.state = Room.State.MENU_MAIN;
+        Application.LoadLevel("Game");
+		//Room.instance.state = Room.State.MENU_MAIN;
 	}
 
     //Start an ending

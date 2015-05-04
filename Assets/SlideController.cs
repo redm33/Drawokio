@@ -118,8 +118,9 @@ public class SlideController : MonoBehaviour {
                 fadeAmount = fadeAmount > 0 ? fadeAmount : white.GetFloat("_FadePosition");
                 white.SetFloat("_FadePosition", -1);
                 black.SetFloat("_FadePosition", -1);
-
-                StartFlying();
+                if(!isFlying) {
+                    StartFlying();
+                }
             }
         }
         hasFlown = true;
