@@ -6,6 +6,13 @@ public class EndingController : MonoBehaviour
 
 	public static EndingController instance;
 
+	public static bool endingrunning = false;
+
+	private static bool foundBalloon = false;
+	private static bool foundRC = false;
+	private static bool foundToy = false;
+	private static bool foundTree = false;
+
 	public bool runAtStartup = false;
     public static bool topHatSet = false;
 	public TextMesh text;
@@ -21,7 +28,9 @@ public class EndingController : MonoBehaviour
 		public Animation animation;
 
 		public GameObject[] gameObjectsToEnable;
-
+		public GameObject[] videosToPlay;
+		public GameObject[] videosToMaybePlay;
+		public bool playEndingVideos = false;
 		public bool skipStop = false;
 
 		public void Reset()
@@ -54,6 +63,59 @@ public class EndingController : MonoBehaviour
 
 			if( animation != null ) 
 				animation.Play();
+
+			if (playEndingVideos) {
+				foreach(GameObject vid in videosToPlay) {
+					vid.SetActive(true);
+					vid.GetComponent<movieController_script>().PlayVideos();
+				}
+
+
+
+				if(foundTree) {
+					videosToMaybePlay[0].GetComponent<movieController_script>().PlayVideos();
+					videosToMaybePlay[0].SetActive(true);
+				}
+				if(foundBalloon) {
+					if(foundRC) {
+						if(foundToy) {
+							videosToMaybePlay[7].GetComponent<movieController_script>().PlayVideos();
+							videosToMaybePlay[7].SetActive(true);
+
+						} else {
+							videosToMaybePlay[6].GetComponent<movieController_script>().PlayVideos();
+							videosToMaybePlay[6].SetActive(true);
+
+						}
+					} else if(foundToy) {
+						videosToMaybePlay[8].GetComponent<movieController_script>().PlayVideos();
+						videosToMaybePlay[8].SetActive(true);
+
+					} else {
+						videosToMaybePlay[4].GetComponent<movieController_script>().PlayVideos();
+						videosToMaybePlay[4].SetActive(true);
+
+					}
+				} else if(foundRC) {
+					if(foundToy) {
+						videosToMaybePlay[5].GetComponent<movieController_script>().PlayVideos();
+						videosToMaybePlay[5].SetActive(true);
+
+					} else {
+						videosToMaybePlay[2].GetComponent<movieController_script>().PlayVideos();
+						videosToMaybePlay[2].SetActive(true);
+
+					}
+				} else if(foundToy) {
+					videosToMaybePlay[3].GetComponent<movieController_script>().PlayVideos();
+					videosToMaybePlay[3].SetActive(true);
+
+				} else {
+					videosToMaybePlay[1].GetComponent<movieController_script>().PlayVideos();
+					videosToMaybePlay[1].SetActive(true);
+
+				}
+			}
 
             foreach (GameObject obj in gameObjectsToEnable)
             {
@@ -103,7 +165,7 @@ public class EndingController : MonoBehaviour
 
 			return true;
 		}
-	}
+	} //End of class Step
 
 	public Step[] steps;
 
@@ -114,6 +176,22 @@ public class EndingController : MonoBehaviour
 			Run();
 	}
 
+	public static void FindTree() {
+		foundTree = true;
+	}
+
+	public static void FindRC() {
+		foundRC = true;
+	}
+
+	public static void FindToy() {
+		foundToy = true;
+	}
+
+	public static void FindBalloon() {
+		foundBalloon = true;
+	}
+	
 	int index = -1;
 	public bool running 
     {
@@ -149,6 +227,7 @@ public class EndingController : MonoBehaviour
 	void OnTriggerEnter( Collider other )
 	{
 		Run ();
+		endingrunning = true;
         topHatSet = Player.instance.hats[2].active;
 		Destroy ( other.gameObject );
 	}

@@ -48,6 +48,14 @@ public class Room : MonoBehaviour {
             }
         }
 
+		foreach(Resettable area in DiscoverableAreasController.instance.discoverableAreas) {
+			if(area.isProgress) {
+				total++;
+				if(area.pickedUp)
+					found++;
+			}
+		}
+
         return 100 * found / total;
     }
 
@@ -445,7 +453,7 @@ public class Room : MonoBehaviour {
     }
 
     void SkipStopVideo() {
-        if(Player.instance == null) {
+        if(Player.instance == null && !EndingController.endingrunning) {
             playOpening = false;
             onlyOnce = true;
             if(openingCutscene != null) {

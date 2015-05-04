@@ -29,6 +29,7 @@ public class Car : MonoBehaviour {
     {
         if (col.name == "Player")
         {
+			EndingController.FindRC();
             drivable = true;
             //Player.instance.rigidbody.isKinematic = true;
             Player.instance.transform.parent = GameObject.Find("CarChild").transform;
