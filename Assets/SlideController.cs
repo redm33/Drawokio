@@ -91,8 +91,9 @@ public class SlideController : MonoBehaviour {
         black.SetFloat("_FadePosition", fadeAmount);
         fadeAmount = 0;
 
-
-        airplane.gameObject.SetActive(false);
+        hasFlown = false;
+        Reset();
+        //airplane.gameObject.SetActive(false);
         //Rigidbody gameObjectsRigidBody = airplane.gameObject.AddComponent<Rigidbody>();
         //gameObjectsRigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         //gameObjectsRigidBody.mass = 100;
